@@ -25,6 +25,12 @@
     border: none;
 }
 
+#dataTable td{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .text-right {
     align-items: right;
     justify-content: right;

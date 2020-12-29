@@ -29,17 +29,20 @@ $(document).ready(function() {
     "columnDefs": [{
         // "targets": -2,
         "orderable": false,
-        // width: '4.5%',
+        // "width": '%',
         "sClass": 'options'
     }]
   });
 
   var trIndex = null;
-  var salary = 200000;
+  var salary = 20000000;
   $("#dataTable tr td").mouseenter(function () {
     trIndex = $(this).parent();
     $(trIndex).find("td:last-child")
-      .html(`<span>${salary}</span>&nbsp;&nbsp;<a href="#"><i class="far fa-edit"></i></a>
+      .html(`
+        <span>${salary}</span>
+        &nbsp;&nbsp;
+        <a href="#"><i class="far fa-edit"></i></a>
         &nbsp;&nbsp;
         <a href="#"><i class="far fa-trash-alt"></i></a>
         &nbsp;&nbsp;
