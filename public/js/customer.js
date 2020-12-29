@@ -27,7 +27,7 @@ $(document).ready(function() {
       },
     },
     "columnDefs": [{
-        "targets": -1,
+        // "targets": -2,
         "orderable": false,
         width: '4.5%',
         "sClass": 'options'
@@ -35,14 +35,31 @@ $(document).ready(function() {
   });
 
   var trIndex = null;
+  var salary = 200000;
   $("#dataTable tr td").mouseenter(function () {
     trIndex = $(this).parent();
-    $(trIndex).find("td:last-child").html('<a href="#"><i class="far fa-edit"></i></a>&nbsp;&nbsp;<a href="#"><i class="far fa-trash-alt"></i></a>');
+    $(trIndex).find("td:last-child")
+      .html(`<a href="#"><i class="far fa-edit"></i></a>
+        &nbsp;&nbsp;
+        <a href="#"><i class="far fa-trash-alt"></i></a>
+        &nbsp;&nbsp;
+        <a href="#"><i class="far fa-plus-square"></i></a>
+      `);
   });
 
   // remove button on tr mouseleave
 
   $("#dataTable tr td").mouseleave(function () {
-    $(trIndex).find('td:last-child').html("&nbsp;");
+    $(trIndex).find('td:last-child').html(`${salary}`);
   });
+  // $("#dataTable tr").hover(
+  //   function(){
+  //     $(this).append(
+  //       $("<span><a href='#'><i class='far fa-edit'></i></a>&nbsp;&nbsp;<a href='#'><i class='far fa-trash-alt'></i></a></span>")
+  //     );
+  //   },
+  //   function(){
+  //     $(this).find("span").last().remove();
+  //   }
+  // );
 })
