@@ -1,40 +1,48 @@
-// $(document).ready(function () {
-//   var table = $('#dataTable').DataTable({
-//     'columnDefs': [
-//       {
-//         'targets': 0,
-//         'checkboxes': {
-//           'selectRow': true
-//         }
-//       }
-//     ],
-//     'select': {
-//       'style': 'multi'
-//     },
-//     'order': [[1, 'asc']]
+// $('#dataTable').DataTable({
+
+//   columnDefs: [{
+//   orderable: false,
+//   className: 'select-checkbox',
+//   targets: 0
+//   }],
+//   select: {
+//   style: 'os',
+//   selector: 'td:first-child'
+//   }
 //   });
+$(document).ready(function() {
+  var myTable = $('#dataTable').DataTable({
+    replace: true,
+    fixedColumns: true,
+    responsive: true,
+    pageLength: 10,
+    language: {
+      processing: "Processing...",
+      loadingRecords: "Loading...",
+      paginate: {
+        first: "<",
+        last: ">",
+        next: ">>",
+        previous: "<<",
+      },
+    },
+    "columnDefs": [{
+        "targets": -1,
+        "orderable": false,
+        width: '4.5%',
+        "sClass": 'options'
+    }]
+  });
 
-//   // Handle form submission event
-//   $('#frm-example').on('submit', function (e) {
-//     var form = this;
+  var trIndex = null;
+  $("#dataTable tr td").mouseenter(function () {
+    trIndex = $(this).parent();
+    $(trIndex).find("td:last-child").html('<a href="#"><i class="far fa-edit"></i></a>&nbsp;&nbsp;<a href="#"><i class="far fa-trash-alt"></i></a>');
+  });
 
-//     var rows_selected = table.column(0).checkboxes.selected();
+  // remove button on tr mouseleave
 
-//     // Iterate over all selected checkboxes
-//     $.each(rows_selected, function (index, rowId) {
-//       // Create a hidden element
-//       $(form).append(
-//         $('<input>')
-//           .attr('type', 'hidden')
-//           .attr('name', 'id[]')
-//           .val(rowId)
-//       );
-//     });
-
-//     // Remove added elements
-//     $('input[name="id\[\]"]', form).remove();
-
-//     // Prevent actual form submission
-//     e.preventDefault();
-//   });
-// });
+  $("#dataTable tr td").mouseleave(function () {
+    $(trIndex).find('td:last-child').html("&nbsp;");
+  });
+})
