@@ -2,13 +2,28 @@
     filter: invert();
 }
 
+.table-responsive {
+    overflow-x: hidden;
+}
+
 #dataTable {
     border-bottom: none;
 }
 
-#dataTable tr:last-child td:not(.options) {
-    border-bottom: 1px solid;
+#dataTable tr {
+    user-select: none;
+    -webkit-user-drag: auto;
 }
+
+#dataTable tr:hover {
+    box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0, 0 1px 2px 0 rgba(60, 64, 67, .3), 0 1px 3px 1px rgba(60, 64, 67, .15);
+    z-index: 1;
+}
+
+
+/* #dataTable tr:last-child td:not(.options) {
+    border-bottom: 1px solid;
+} */
 
 #dataTable .options {
     background: white;
@@ -17,12 +32,4 @@
 
 #dataTable_wrapper {
     width: 100%;
-}
-
-.left {
-    float: left;
-}
-
-.right {
-    float: right;
 }
