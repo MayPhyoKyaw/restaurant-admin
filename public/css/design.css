@@ -25,7 +25,7 @@
     border: none;
 }
 
-.text-right{
+.text-right {
     align-items: right;
     justify-content: right;
 }
@@ -42,4 +42,8 @@
 
 #dataTable_wrapper {
     width: 100%;
+}
+
+.actions {
+    background: transparent !important;
 }
