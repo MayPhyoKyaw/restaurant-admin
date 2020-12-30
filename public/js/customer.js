@@ -27,11 +27,19 @@ $(document).ready(function() {
       },
     },
     "columnDefs": [{
-        // "targets": -2,
+        "className": 'select-checkbox',
+        "targets": 0,
         "orderable": false,
+      },{
         // "width": '%',
-        "sClass": 'options'
-    }]
+        "sClass": 'options',
+      }
+    ],
+    select: {
+      style: 'multi',
+      // selector: 'td:first-child'
+    },
+    order: [[ 1, 'asc' ]]
   });
 
   var trIndex = null;

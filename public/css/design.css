@@ -25,7 +25,8 @@
     border: none;
 }
 
-#dataTable td{
+#dataTable td:last-child{
+    /* max-width: 50px; */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
