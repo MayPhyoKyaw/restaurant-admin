@@ -20,24 +20,29 @@ $(document).ready(function() {
       processing: "Processing...",
       loadingRecords: "Loading...",
       paginate: {
-        first: "<",
-        last: ">",
-        next: ">>",
-        previous: "<<",
+        first: "&lsaquo;",
+        last: "&rsaquo;",
+        next: "&raquo;",
+        previous: "&laquo;",
       },
     },
-    "columnDefs": [{
+    // "order":[[2, asc], [3, asc], [4, asc], [5, asc], [6, asc], [7, asc]],
+    "columnDefs": [
+      {
         "className": 'select-checkbox',
-        "targets": 0,
-        "orderable": false,
-      },{
+        "targets": 0
+      },
+      {
         // "width": '%',
         "sClass": 'options',
+      },{
+        "targets": [0,1],
+        "orderable": false,
       }
     ],
     select: {
       style: 'multi',
-      // selector: 'td:first-child'
+      selector: 'td:first-child'
     },
     order: [[ 1, 'asc' ]]
   });

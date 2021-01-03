@@ -54,3 +54,17 @@
 .actions {
     background: transparent !important;
 }
+
+
+.star-o::before{
+    content: "\2606";
+    color: rgb(221, 200, 118);
+    font-size: 25px;
+    font-weight: bolder;
+}
+.star-active::before{
+    content: "\2605";
+    color: rgb(255, 203, 0);
+    font-size: 25px;
+    font-weight: bolder;
+}
