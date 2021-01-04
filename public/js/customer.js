@@ -9,6 +9,17 @@ $(document).ready(function() {
       $(".submit-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
   })
 
+  //select all
+  // var  DT1 = $('#dataTable').DataTable();
+  $(".selectAll").on( "click", function(e) {
+      if ($(this).is( ":checked" )) {
+        myTable.rows(  ).select();        
+      } else {
+        myTable.rows(  ).deselect(); 
+      }
+  });
+
+  //datatable
   var myTable = $('#dataTable').DataTable({
     replace: true,
     fixedColumns: true,
@@ -24,7 +35,6 @@ $(document).ready(function() {
         previous: "&laquo;",
       },
     },
-    // "order":[[2, asc], [3, asc], [4, asc], [5, asc], [6, asc], [7, asc]],
     "columnDefs": [
       {
         "className": 'select-checkbox',
@@ -93,4 +103,3 @@ $(document).ready(function() {
   })
 
 })
-
