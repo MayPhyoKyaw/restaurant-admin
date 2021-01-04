@@ -95,15 +95,27 @@ div.dataTables_wrapper div.dataTables_length select {
     flex-direction: initial;
     margin: 0.3em;
     margin-bottom: 0.7em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid #ddd;
 }
 
-.fa-plus-circle {
+.fa-plus-circle,
+.fa-copy,
+.fa-eye,
+.fa-pencil-alt,
+.fa-trash {
     margin-right: 5px;
 }
 
-.create-btn {
+.create-btn,
+.copy-btn,
+.detail-btn,
+.edit-btn,
+.delete-btn {
     font-size: 15px;
     border-radius: 8px;
+    color: #ffffff !important;
+    margin-right: 10px;
 }
 
 .btn-primary {
