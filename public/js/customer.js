@@ -1,15 +1,3 @@
-// $('#dataTable').DataTable({
-
-//   columnDefs: [{
-//   orderable: false,
-//   className: 'select-checkbox',
-//   targets: 0
-//   }],
-//   select: {
-//   style: 'os',
-//   selector: 'td:first-child'
-//   }
-//   });
 $(document).ready(function() {
   var myTable = $('#dataTable').DataTable({
     replace: true,
@@ -33,18 +21,19 @@ $(document).ready(function() {
         "targets": 0
       },
       {
-        // "width": '%',
         "sClass": 'options',
-      },{
+      },
+      {
         "targets": [0,1],
         "orderable": false,
-      }
+        "width": "1%",
+      },
     ],
     select: {
-      style: 'multi',
+      style: 'os',
       selector: 'td:first-child'
     },
-    order: [[ 1, 'asc' ]]
+    order: [[ 2, 'asc' ]]
   });
 
   var trIndex = null;

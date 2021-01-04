@@ -25,7 +25,11 @@
     border: none;
 }
 
-#dataTable td:last-child{
+table.dataTable tbody>tr.selected {
+    background-color: #c1cbdfd5 !important;
+}
+
+#dataTable td:last-child {
     /* max-width: 50px; */
     white-space: nowrap;
     overflow: hidden;
@@ -55,16 +59,28 @@
     background: transparent !important;
 }
 
-
-.star-o::before{
+.star-o::before {
     content: "\2606";
-    color: rgb(221, 200, 118);
+    /* color: rgb(221, 200, 118); */
+    color: #dadce0;
     font-size: 25px;
     font-weight: bolder;
 }
-.star-active::before{
+
+.star-active::before {
     content: "\2605";
-    color: rgb(255, 203, 0);
+    /* color: rgb(255, 203, 0); */
+    color: #007bff;
     font-size: 25px;
     font-weight: bolder;
+}
+
+.select-checkbox {
+    padding-top: 2px !important;
+    cursor: pointer;
+}
+
+.selection {
+    padding-top: 2px !important;
+    cursor: pointer;
 }
