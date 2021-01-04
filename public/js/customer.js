@@ -30,22 +30,22 @@ $(document).ready(function() {
       },
     ],
     select: {
-      // style: 'multi',
-      style: 'os',
+      style: 'multi',
+      // style: 'os',
       selector: 'td:first-child'
     },
     order: [[ 2, 'asc' ]]
   });
 
-  $('#dataTable tbody').on('click', 'tr', function () {
-    if ($(this).hasClass('selected')) {
-      $(this).removeClass('selected');
-    }
-    else {
-      myTable.$('tr.selected').removeClass('selected');
-      $(this).addClass('selected');
-    }
-  })
+  // $('#dataTable tbody').on('click', 'tr', function () {
+  //   if ($(this).hasClass('selected')) {
+  //     $(this).removeClass('selected');
+  //   }
+  //   else {
+  //     myTable.$('tr.selected').removeClass('selected');
+  //     $(this).addClass('selected');
+  //   }
+  // })
   // edit and del button
   var trIndex = null;
   var salary = 20000000;
