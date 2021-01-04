@@ -1,4 +1,14 @@
 $(document).ready(function() {
+
+  // create data
+  $("#create_button, #detail_button, #edit_button, #delete_button").click(function() {
+    var buttonValue = $(this).attr("value")
+    console.log(buttonValue)
+      $(".heading").text(`${buttonValue} Customer`);
+      // $(".submit-button").text(`${buttonValue}`);
+      $(".submit-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
+  })
+
   var myTable = $('#dataTable').DataTable({
     replace: true,
     fixedColumns: true,
@@ -55,11 +65,12 @@ $(document).ready(function() {
       .html(`
         <span>${salary}</span>
         &nbsp;&nbsp;
-        <a href="#"><i class="far fa-edit"></i></a>
+        <a href="#"><span class="detail-icon"><i class="far fa-eye fa-fw"></i></span></a>
         &nbsp;&nbsp;
-        <a href="#"><i class="far fa-trash-alt"></i></a>
+        <a href="#"><span class="edit-icon"><i class="far fa-edit fa-fw"></i></span></a>
         &nbsp;&nbsp;
-        <a href="#"><i class="far fa-plus-square"></i></a>
+        <a href="#"><span class="delete-icon"><i class="far fa-trash-alt fa-fw"></i></span></a>
+
       `);
   });
 
@@ -68,4 +79,18 @@ $(document).ready(function() {
     $(trIndex).find('td:last-child').html(`${salary}`);
   });
 
+  // change input field style in modal
+  if ($(".text-box").val() != "") {
+    console.log("Have")
+    $(".text-box").css('cssText', 'border-bottom: 2px solid #3f51b5 !important;');
+  } else {
+    console.log("no")
+  }
+
+  // close cancel button to reset modal
+  $("#customerModal").on("hidden.bs.modal", function() {
+    document.getElementById("customer_form").reset();
+  })
+
 })
+
