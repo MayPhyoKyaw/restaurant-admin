@@ -2,9 +2,19 @@
     filter: invert();
 }
 
+
+/* card style */
+
+.mb-4 {
+    margin-top: 1.5rem !important;
+}
+
 .table-responsive {
     overflow-x: hidden;
 }
+
+
+/* datatable style */
 
 #dataTable th {
     border: none;
@@ -41,11 +51,6 @@ table.dataTable tbody>tr.selected {
     justify-content: right;
 }
 
-
-/* #dataTable tr:last-child td:not(.options) {
-    border-bottom: 1px solid;
-} */
-
 #dataTable .options {
     background: transparent;
     border: none;
@@ -54,6 +59,78 @@ table.dataTable tbody>tr.selected {
 #dataTable_wrapper {
     width: 100%;
 }
+
+div.dataTables_wrapper div.dataTables_filter input {
+    outline: none;
+    box-shadow: none;
+}
+
+div.dataTables_wrapper div.dataTables_length select {
+    outline: none;
+    box-shadow: none;
+}
+
+.page-item.active .page-link {
+    background-color: #3f51b5;
+    border-color: #3f51b5;
+    outline: none;
+    box-shadow: none;
+}
+
+.page-link {
+    color: #3f51b5;
+    outline: none;
+    box-shadow: none;
+}
+
+
+/* action buttons in datatable */
+
+.action-buttons {
+    display: flex;
+    flex-direction: initial;
+    margin: 0.3em;
+    margin-bottom: 0.7em;
+}
+
+.fa-plus-circle {
+    margin-right: 5px;
+}
+
+.create-btn {
+    font-size: 15px;
+    border-radius: 8px;
+}
+
+.btn-primary {
+    border-color: #3f51b5;
+    background-color: #3f51b5;
+    color: #ffffff;
+    outline: none;
+    box-shadow: none;
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary:visited {
+    background-color: #3f51b5 !important;
+    border-color: #3f51b5 !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+
+/* fa fa icon style */
+
+.fa-edit,
+.fa-trash-alt,
+.fa-plus-square {
+    color: #3f51b5;
+}
+
+
+/* action buttons on datatable's column */
 
 .actions {
     background: transparent !important;
@@ -70,7 +147,7 @@ table.dataTable tbody>tr.selected {
 .star-active::before {
     content: "\2605";
     /* color: rgb(255, 203, 0); */
-    color: #007bff;
+    color: #3f51b5;
     font-size: 25px;
     font-weight: bolder;
 }
