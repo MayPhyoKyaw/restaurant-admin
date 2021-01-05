@@ -1,13 +1,4 @@
-$(document).ready(function() {
-
-  // create data
-  $("#create_button, #detail_button, #edit_button, #delete_button").click(function() {
-    var buttonValue = $(this).attr("value")
-    console.log(buttonValue)
-      $(".heading").text(`${buttonValue} Customer`);
-      // $(".submit-button").text(`${buttonValue}`);
-      $(".submit-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
-  })
+$(document).ready(function () {
 
   //select all
   // var  DT1 = $('#dataTable').DataTable();
@@ -44,7 +35,7 @@ $(document).ready(function() {
         "sClass": 'options',
       },
       {
-        "targets": [0,1],
+        "targets": [0, 1],
         "orderable": false,
         "width": "1%",
       },
@@ -54,7 +45,7 @@ $(document).ready(function() {
       // style: 'os',
       selector: 'td:first-child'
     },
-    order: [[ 2, 'asc' ]]
+    order: [[2, 'asc']]
   });
 
   // $('#dataTable tbody').on('click', 'tr', function () {
@@ -75,13 +66,23 @@ $(document).ready(function() {
       .html(`
         <span>${salary}</span>
         &nbsp;&nbsp;
-        <a href="#"><span class="detail-icon"><i class="far fa-eye fa-fw"></i></span></a>
+        <a href="#" id="copy_btn" value="Copy" data-toggle="modal" data-target="#customerConfirmation"><span class="copy-icon"><i class="fas fa-copy fa-fw"></i></span></a>
         &nbsp;&nbsp;
-        <a href="#"><span class="edit-icon"><i class="far fa-edit fa-fw"></i></span></a>
+        <a href="#" id="edit_btn" value="Edit" data-toggle="modal" data-target="#customerModal"><span class="edit-icon"><i class="far fa-edit fa-fw"></i></span></a>
         &nbsp;&nbsp;
-        <a href="#"><span class="delete-icon"><i class="far fa-trash-alt fa-fw"></i></span></a>
-
+        <a href="#" id="delete_btn" value="Delete" data-toggle="modal" data-target="#customerConfirmation"><span class="delete-icon"><i class="far fa-trash-alt fa-fw"></i></span></a>
       `);
+
+    // click button
+    $("#copy_btn, #edit_btn, #delete_btn").click(function () {
+      var buttonValue = $(this).attr("value");
+      $(".heading").text(`${buttonValue} Customer`);
+      $(".submit-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
+      $(".danger-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
+      $(".confirmation-msg").html(`<div class="text-center">
+      <p>Are you sure want to ${buttonValue}?</p>
+      </div>`);
+    })
   });
 
   // remove button on tr mouseleave
@@ -98,7 +99,7 @@ $(document).ready(function() {
   }
 
   // close cancel button to reset modal
-  $("#customerModal").on("hidden.bs.modal", function() {
+  $("#customerModal").on("hidden.bs.modal", function () {
     document.getElementById("customer_form").reset();
   })
 
