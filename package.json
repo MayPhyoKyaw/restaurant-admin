@@ -35,7 +35,8 @@
         "bootstrap": "^4.5.3",
         "express": "^4.17.1",
         "http-server": "^0.12.3",
-        "jquery": "^3.5.1"
+        "jquery": "^3.5.1",
+        "mongodb": "^3.6.3"
     },
     "devDependencies": {
         "autoprefixer": "10.0.1",

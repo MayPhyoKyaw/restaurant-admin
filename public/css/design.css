@@ -102,7 +102,6 @@ div.dataTables_wrapper div.dataTables_length select {
 
 .fa-plus-circle,
 .fa-copy,
-.fa-eye,
 .fa-pencil-alt,
 .fa-trash,
 .fa-check,
@@ -112,10 +111,10 @@ div.dataTables_wrapper div.dataTables_length select {
 
 .create-button,
 .copy-button,
-.detail-button,
 .edit-button,
 .delete-button,
 .submit-button,
+.danger-button,
 .cancel-button {
     border-radius: 8px;
     margin-right: 10px;
@@ -123,15 +122,25 @@ div.dataTables_wrapper div.dataTables_length select {
 
 .create-button:hover,
 .copy-button:hover,
-.detail-button:hover,
 .edit-button:hover,
-.delete-button:hover {
+.delete-button:hover,
+.submit-button:hover,
+.danger-button:hover {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
 .btn-primary {
     border-color: #3f51b5;
     background-color: #3f51b5;
+    color: #ffffff;
+    outline: none;
+    padding: 3px 9px;
+    font-size: 14px;
+}
+
+.btn-danger {
+    border-color: #c95959;
+    background-color: #c95959;
     color: #ffffff;
     outline: none;
     padding: 3px 9px;
@@ -168,10 +177,20 @@ div.dataTables_wrapper div.dataTables_length select {
     box-shadow: none !important;
 }
 
+.btn-danger:hover,
+.btn-danger:active,
+.btn-danger:focus,
+.btn-danger:visited {
+    background-color: #c95959 !important;
+    border-color: #c95959 !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 
 /* fa fa icon style */
 
-.detail-icon,
+.copy-icon,
 .edit-icon,
 .delete-icon {
     color: #3f51b5;

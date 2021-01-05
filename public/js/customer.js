@@ -1,64 +1,5 @@
 $(document).ready(function () {
 
-  // create data
-  $("#create_button, #detail_button, #edit_button, #delete_button, #detail_btn").click(function () {
-    var buttonValue = $(this).attr("value")
-    console.log(buttonValue)
-    $(".heading").text(`${buttonValue} Customer`);
-    $(".submit-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
-
-    // if (buttonValue === "Create") {
-    //   $(".submit-button").click(function () {
-    //     console.log("Yah")
-    //     // var { MongoClient } = require("mongodb");
-    //     var dbKey = require("../route/database/dangerousKey.json");
-    //     console.log(dbKey)
-
-    //     // // Replace the following with your Atlas connection string
-    //     // var url = dbKey.key;
-    //     // var client = new MongoClient(url);
-
-    //     // // The database to use
-    //     // var dbName = "test-kk";
-
-    //     // async function run() {
-    //     //   try {
-    //     //     await client.connect();
-    //     //     console.log("Connected correctly to server");
-    //     //     var db = client.db(dbName);
-    //     //     // Use the collection "people"
-    //     //     var col = db.collection("people");
-    //     //     // Construct a document
-    //     //     var personDocument = {
-    //     //       "docid": "_id",
-    //     //       "name": { "first": "KaungSett", "last": "Paing" },
-    //     //       "birth": new Date(1912, 5, 23), // June 23, 191
-    //     //       "work": ["IT", "translate", "Engineer"],
-    //     //       "views": 1250000
-    //     //     }
-    //     //     // Insert a single document, wait for promise so we can read it back
-    //     //     var p = await col.insertOne(personDocument);
-    //     //     // Find one document
-    //     //     var myDoc = await col.findOne();
-    //     //     // Print to the console
-    //     //     console.log(myDoc);
-    //     //   } catch (err) {
-    //     //     console.log(err.stack);
-    //     //   }
-
-    //     //   finally {
-    //     //     await client.close();
-    //     //   }
-    //     // }
-    //     // run().catch(console.dir);
-    //   })
-    // }
-  })
-
-  $(".detail_btn").click(function () {
-    console.log("Yahh")
-  })
-
   var myTable = $('#dataTable').DataTable({
     replace: true,
     fixedColumns: true,
@@ -115,12 +56,23 @@ $(document).ready(function () {
       .html(`
         <span>${salary}</span>
         &nbsp;&nbsp;
-        <a href="#" data-toggle="modal" data-target="#customerModal"><span class="detail-icon"><i class="far fa-eye fa-fw"></i></span></a>
+        <a href="#" id="copy_btn" value="Copy" data-toggle="modal" data-target="#customerConfirmation"><span class="copy-icon"><i class="fas fa-copy fa-fw"></i></span></a>
         &nbsp;&nbsp;
-        <a href="#" data-toggle="modal" data-target="#customerModal"><span class="edit-icon"><i class="far fa-edit fa-fw"></i></span></a>
+        <a href="#" id="edit_btn" value="Edit" data-toggle="modal" data-target="#customerModal"><span class="edit-icon"><i class="far fa-edit fa-fw"></i></span></a>
         &nbsp;&nbsp;
-        <a href="#" data-toggle="modal" data-target="#customerModal"><span class="delete-icon"><i class="far fa-trash-alt fa-fw"></i></span></a>
+        <a href="#" id="delete_btn" value="Delete" data-toggle="modal" data-target="#customerConfirmation"><span class="delete-icon"><i class="far fa-trash-alt fa-fw"></i></span></a>
       `);
+
+    // click button
+    $("#copy_btn, #edit_btn, #delete_btn").click(function () {
+      var buttonValue = $(this).attr("value");
+      $(".heading").text(`${buttonValue} Customer`);
+      $(".submit-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
+      $(".danger-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
+      $(".confirmation-msg").html(`<div class="text-center">
+      <p>Are you sure want to ${buttonValue}?</p>
+      </div>`);
+    })
   });
 
   // remove button on tr mouseleave
