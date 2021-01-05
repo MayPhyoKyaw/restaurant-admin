@@ -1,3 +1,8 @@
+// const MongoClient = require('mongodb').MongoClient;
+
+// Replace the uri string with your MongoDB deployment's connection string.
+// const uri = "mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/<dbname>?retryWrites=true&w=majority";
+
 $(document).ready(function () {
 
   //select all
@@ -74,7 +79,7 @@ $(document).ready(function () {
       `);
 
     // click button
-    $("#copy_btn, #edit_btn, #delete_btn").click(function () {
+    $("").click(function () {
       var buttonValue = $(this).attr("value");
       $(".heading").text(`${buttonValue} Customer`);
       $(".submit-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
@@ -82,7 +87,7 @@ $(document).ready(function () {
       $(".confirmation-msg").html(`<div class="text-center">
       <p>Are you sure want to ${buttonValue}?</p>
       </div>`);
-    })
+    });
   });
 
   // remove button on tr mouseleave
@@ -103,4 +108,25 @@ $(document).ready(function () {
     document.getElementById("customer_form").reset();
   })
 
+  // const db = require("../db");
+  // // const dbName = "mydb";
+  // // const collectionName = "customers";
+
+  // db.initialize("mydb", "customers", function(dbCollection) { // successCallback
+  //     // get all items
+  //     dbCollection.find().toArray(function(err, result) {
+  //         if (err) throw err;
+  //           console.log(result);
+  //     });
+    
+  //     // << db CRUD routes >>
+    
+  //   }, function(err) { // failureCallback
+  //     throw (err);
+  // });
+
 })
+
+// function create_New(){
+  
+// }

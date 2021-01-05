@@ -3,10 +3,31 @@
 // include all required modules
 var http = require ('http');
 const express = require('express');
+var bodyParser = require('body-parser');
+// var mongodb = require('mongodb');
+// var router = express.Router();
+// const mongoose = require('mongoose');
+const MongoClient = require("mongodb").MongoClient;
+
+const dbConnectionUrl = "mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/<dbname>?retryWrites=true&w=majority";
+
+MongoClient.connect(dbConnectionUrl, function(err, dbInstance) {
+    if (err) {
+        console.log(`[MongoDB connection] ERROR: ${err}`);
+        failureCallback(err); // this should be "caught" by the calling function
+    } else {
+        const dbObject = dbInstance.db("mydb");
+        const dbCollection = dbObject.collection("customers");
+        console.log("[MongoDB connection] SUCCESS");
+
+        // successCallback(dbCollection);
+    }
+});
 
 // server details
 const app = express();
 const port = 5000;
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Static Files
 app.use(express.static('public'));
@@ -102,5 +123,35 @@ app.get('/snacks.html', (req, res) => {
     res.sendFile(__dirname + '/route/snacks/snacks.html')
 })
 
+// << db setup >>
+const db = require("./db");
+// app.use('/db', db);
+// const dbName = "mydb";
+// const collectionName = "customers";
+
+// db.initialize("mydb", "customers", function(dbCollection) { // successCallback
+//     // get all items
+//     dbCollection.find().toArray(function(err, result) {
+//         if (err) throw err;
+//           console.log(result);
+//     });
+  
+//     // << db CRUD routes >>
+  
+//   }, function(err) { // failureCallback
+//     throw (err);
+// });
+
 // Listen on port
 app.listen(port , () => console.info(`Listening on port ${port}`))
+
+// Connect with Mongo DB
+// const uri = "mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/<dbname>?retryWrites=true&w=majority";
+// mongoose.connect(uri, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// })
+// .then(() => {
+//   console.log('MongoDB Connected…')
+// })
+// .catch(err => console.log(err))
