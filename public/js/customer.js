@@ -9,9 +9,9 @@ $(document).ready(function () {
   // var  DT1 = $('#dataTable').DataTable();
   $(".selectAll").on( "click", function(e) {
       if ($(this).is( ":checked" )) {
-        myTable.rows(  ).select();        
+        myTable.rows(  ).select();
       } else {
-        myTable.rows(  ).deselect(); 
+        myTable.rows(  ).deselect();
       }
   });
 
@@ -79,7 +79,7 @@ $(document).ready(function () {
       `);
 
     // click button
-    $("").click(function () {
+    $("#copy_btn, #edit_btn, #delete_btn").click(function () {
       var buttonValue = $(this).attr("value");
       $(".heading").text(`${buttonValue} Customer`);
       $(".submit-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
@@ -118,9 +118,9 @@ $(document).ready(function () {
   //         if (err) throw err;
   //           console.log(result);
   //     });
-    
+
   //     // << db CRUD routes >>
-    
+
   //   }, function(err) { // failureCallback
   //     throw (err);
   // });
@@ -128,5 +128,5 @@ $(document).ready(function () {
 })
 
 // function create_New(){
-  
+
 // }
