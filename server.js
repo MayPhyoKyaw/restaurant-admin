@@ -135,9 +135,9 @@ const db = require("./db");
 //         if (err) throw err;
 //           console.log(result);
 //     });
-  
+
 //     // << db CRUD routes >>
-  
+
 //   }, function(err) { // failureCallback
 //     throw (err);
 // });

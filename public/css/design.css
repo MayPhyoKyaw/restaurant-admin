@@ -88,6 +88,99 @@ div.dataTables_wrapper div.dataTables_length select {
     box-shadow: none;
 }
 
+.hiddenData {
+    display: none;
+}
+
+
+/* badges */
+
+.badge-pork {
+    display: inline-block;
+    font-family: inherit;
+    font-weight: bolder;
+    font-size: 12px;
+    border-radius: 3px;
+    background: lightcoral;
+    color: rgb(255, 255, 255);
+    padding: 6px 6px 3px 6px;
+    margin-left: 5px;
+    cursor: default;
+}
+
+.badge-chicken {
+    display: inline-block;
+    font-family: inherit;
+    font-weight: bolder;
+    font-size: 12px;
+    border-radius: 3px;
+    background: rgb(102, 182, 102);
+    color: rgb(255, 255, 255);
+    padding: 6px 6px 3px 6px;
+    margin-left: 5px;
+    cursor: default;
+}
+
+.badge-seafood {
+    display: inline-block;
+    font-family: inherit;
+    font-weight: bolder;
+    font-size: 12px;
+    border-radius: 3px;
+    background: rgb(128, 163, 240);
+    color: rgb(255, 255, 255);
+    padding: 6px 6px 3px 6px;
+    margin-left: 5px;
+    cursor: default;
+}
+
+.badge-beef {
+    display: inline-block;
+    font-family: inherit;
+    font-weight: bolder;
+    font-size: 12px;
+    border-radius: 3px;
+    background: rgb(194, 194, 75);
+    color: rgb(255, 255, 255);
+    padding: 6px 6px 3px 6px;
+    margin-left: 5px;
+    cursor: default;
+}
+
+.badge-size-small {
+    color: #fff;
+    width: 20px;
+    height: 19px;
+    display: inline-block;
+    overflow: hidden;
+    text-align: center;
+    font-weight: 700;
+    font-size: 12px;
+    margin-right: 5px;
+    border-radius: 18px;
+    vertical-align: middle;
+    background-color: #dfb238;
+    margin-left: 5px;
+    cursor: default;
+}
+
+.badge-size-large {
+    color: #fff;
+    width: 20px;
+    height: 19px;
+    display: inline-block;
+    overflow: hidden;
+    text-align: center;
+    font-weight: 700;
+    font-size: 12px;
+    margin-right: 5px;
+    border-radius: 18px;
+    vertical-align: middle;
+    background-color: #3747d8;
+    margin-left: 5px;
+    cursor: default;
+}
+
 
 /* action buttons in card header */
 
@@ -247,4 +340,53 @@ div.dataTables_wrapper div.dataTables_length select {
 .text-box:focus,
 .text-box:visited {
     border-bottom: 2px solid #3f51b5 !important;
+}
+
+
+/* dish menu */
+
+.dish-menu,
+.meat,
+.size {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 50%;
+}
+
+.dish-menu-outline,
+.meat-outline,
+.size-outline {
+    border-bottom: 2px solid #ced4da;
+    min-height: 55px;
+}
+
+.size-outline {
+    margin-top: 5px;
+}
+
+.dish-menu-btn,
+.meat-btn {
+    color: #212529;
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.file {
+    visibility: hidden;
+    position: absolute;
+}
+
+.upload-dish-image {
+    margin-top: 3.5rem !important;
+}
+
+.img-thumbnail {
+    max-width: 100%;
+}
+
+.dropdown-toggle {
+    max-width: 80%;
+    margin-right: 24px;
 }
