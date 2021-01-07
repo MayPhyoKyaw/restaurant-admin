@@ -2,6 +2,7 @@ $(document).ready(function () {
   // create data
   $("#create_button").click(function () {
     var buttonValue = $(this).attr("value");
+    console.log(buttonValue)
     var header = $(".card-header").attr("value");
     $(".heading").text(`${buttonValue} ${header}`);
     $(".submit-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
@@ -37,3 +38,20 @@ $(document).ready(function () {
       </div>`);
   })
 })
+
+var button = document.getElementById('create_button');
+button.addEventListener('click', function(e) {
+  console.log('button was clicked');
+
+  fetch('/clicked', {method: 'POST'})
+  .then(function(response) {
+    if(response.ok) {
+      console.log('clicked!!');
+      return;
+    }
+    throw new Error('Failed!!');
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+});

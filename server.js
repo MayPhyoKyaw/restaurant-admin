@@ -1,7 +1,7 @@
 /*server.js*/
 
 // include all required modules
-var http = require ('http');
+var http = require('http');
 const express = require('express');
 var bodyParser = require('body-parser');
 // var mongodb = require('mongodb');
@@ -9,20 +9,20 @@ var bodyParser = require('body-parser');
 // const mongoose = require('mongoose');
 const MongoClient = require("mongodb").MongoClient;
 
-const dbConnectionUrl = "mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/<dbname>?retryWrites=true&w=majority";
+// const dbConnectionUrl = "mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/<dbname>?retryWrites=true&w=majority/clicks";
 
-MongoClient.connect(dbConnectionUrl, function(err, dbInstance) {
-    if (err) {
-        console.log(`[MongoDB connection] ERROR: ${err}`);
-        failureCallback(err); // this should be "caught" by the calling function
-    } else {
-        const dbObject = dbInstance.db("mydb");
-        const dbCollection = dbObject.collection("customers");
-        console.log("[MongoDB connection] SUCCESS");
+// MongoClient.connect(dbConnectionUrl, function(err, dbInstance) {
+//     if (err) {
+//         console.log(`[MongoDB connection] ERROR: ${err}`);
+//         failureCallback(err); // this should be "caught" by the calling function
+//     } else {
+//         const dbObject = dbInstance.db("mydb");
+//         const dbCollection = dbObject.collection("customers");
+//         console.log("[MongoDB connection] SUCCESS");
 
-        // successCallback(dbCollection);
-    }
-});
+//         // successCallback(dbCollection);
+//     }
+// });
 
 // server details
 const app = express();
@@ -31,9 +31,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Static Files
 app.use(express.static('public'));
-app.use('/css' , express.static(__dirname + 'public/css'))
-app.use('/js' , express.static(__dirname + 'public/js'))
-app.use('/assets' , express.static(__dirname + 'public/assets'))
+app.use('/css', express.static(__dirname + 'public/css'))
+app.use('/js', express.static(__dirname + 'public/js'))
+app.use('/assets', express.static(__dirname + 'public/assets'))
+
+// let db;
+// MongoClient.connect(url, (err, database) => {
+//     if (err) {
+//         return console.log(err);
+//     }
+//     db = database;
+//     // start the express web server listening on 5000
+//     app.listen(port, () => console.info(`Listening on port ${port}`))
+// });
 
 app.get('', (req, res) => {
     res.sendFile(__dirname + '/route/index.html')
@@ -124,7 +134,7 @@ app.get('/snacks.html', (req, res) => {
 })
 
 // << db setup >>
-const db = require("./db");
+// const db = require("./db");
 // app.use('/db', db);
 // const dbName = "mydb";
 // const collectionName = "customers";
@@ -155,3 +165,52 @@ app.listen(port , () => console.info(`Listening on port ${port}`))
 //   console.log('MongoDB Connected…')
 // })
 // .catch(err => console.log(err))
+
+// add a document to the DB collection recording the click event
+app.post('/clicked', (req, res) => {
+    // const click = { clickTime: new Date() };
+    // console.log(click);
+    // console.log(db);
+
+    // db.collection('clicks').save(click, (err, result) => {
+    //     if (err) {
+    //         return console.log(err);
+    //     }
+    //     console.log('click added to db');
+    //     res.sendStatus(201);
+    // });
+    const url = 'mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/testinggg?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true';
+    const client = new MongoClient(url);
+    const dbName = "testinggg"
+
+    async function run() {
+        try {
+             await client.connect();
+             console.log("Connected correctly to server");
+             const db = client.db(dbName);
+             // Use the collection "people"
+             const col = db.collection("people");
+             // Construct a document
+             let personDocument = {
+                 "docid": "_id",
+                 "name": { "first": "KaungSett", "last": "Paing" },
+                 "birth": new Date(1912, 5, 23), // June 23, 191
+                 "work": [ "IT", "translate", "Engineer" ],
+                 "views": 1250000
+             }
+             // Insert a single document, wait for promise so we can read it back
+             const p = await col.insertOne(personDocument);
+             // Find one document
+             const myDoc = await col.findOne();
+             // Print to the console
+             console.log(myDoc);
+            } catch (err) {
+             console.log(err.stack);
+         }
+
+         finally {
+            await client.close();
+        }
+    }
+    run().catch(console.dir);
+});

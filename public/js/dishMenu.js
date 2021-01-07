@@ -170,7 +170,3 @@ $(document).ready(function () {
   // });
 
 })
-
-// function create_New(){
-
-// }
