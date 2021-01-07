@@ -35,15 +35,6 @@ app.use('/css', express.static(__dirname + 'public/css'))
 app.use('/js', express.static(__dirname + 'public/js'))
 app.use('/assets', express.static(__dirname + 'public/assets'))
 
-// let db;
-// MongoClient.connect(url, (err, database) => {
-//     if (err) {
-//         return console.log(err);
-//     }
-//     db = database;
-//     // start the express web server listening on 5000
-//     app.listen(port, () => console.info(`Listening on port ${port}`))
-// });
 
 app.get('', (req, res) => {
     res.sendFile(__dirname + '/route/index.html')
@@ -168,17 +159,6 @@ app.listen(port , () => console.info(`Listening on port ${port}`))
 
 // add a document to the DB collection recording the click event
 app.post('/clicked', (req, res) => {
-    // const click = { clickTime: new Date() };
-    // console.log(click);
-    // console.log(db);
-
-    // db.collection('clicks').save(click, (err, result) => {
-    //     if (err) {
-    //         return console.log(err);
-    //     }
-    //     console.log('click added to db');
-    //     res.sendStatus(201);
-    // });
     const url = 'mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/testinggg?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true';
     const client = new MongoClient(url);
     const dbName = "testinggg"
@@ -191,23 +171,14 @@ app.post('/clicked', (req, res) => {
              // Use the collection "people"
              const col = db.collection("people");
              // Construct a document
-             let personDocument = {
-                 "docid": "_id",
-                 "name": { "first": "KaungSett", "last": "Paing" },
-                 "birth": new Date(1912, 5, 23), // June 23, 191
-                 "work": [ "IT", "translate", "Engineer" ],
-                 "views": 1250000
-             }
+            let personDocument = {
+                 _id: "P3", name: "KSP", date: "27-12-2020", work: "IT Engineer",
+            };
              // Insert a single document, wait for promise so we can read it back
              const p = await col.insertOne(personDocument);
-             // Find one document
-             const myDoc = await col.findOne();
-             // Print to the console
-             console.log(myDoc);
             } catch (err) {
              console.log(err.stack);
          }
-
          finally {
             await client.close();
         }
