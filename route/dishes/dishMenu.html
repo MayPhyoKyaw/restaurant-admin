@@ -308,20 +308,20 @@
                                         <div class="col">
                                             <div class="form-outline">
                                                 <label class="form-label" for="form1">Dish Name</label>
-                                                <input type="text" id="name" class="form-control text-box" placeholder="Please Name here" required/>
+                                                <input type="text" id="dish_Name" class="form-control text-box" placeholder="Please Name here" required/>
                                             </div>
                                         </div>
                                         <div class="w-100"></div>
                                         <div class="col">
                                             <div class="form-outline">
                                                 <label class="form-label" for="form1">Dish Name(Myanmar Language)</label>
-                                                <input type="text" id="name" class="form-control text-box" placeholder="Please Myanmar Name here" />
+                                                <input type="text" id="lang_Name" class="form-control text-box" placeholder="Please Myanmar Name here" />
                                             </div>
                                         </div>
                                         <div class="w-100"></div>
                                         <div class="col dish-menu">
                                             <div class="form-outlined dish-menu-outline">
-                                                <select class="selectpicker dish-menu-btn" multiple title="Choose Dish Menu... " data-live-search="true">
+                                                <select class="selectpicker dish-menu-btn" id="dish_menu" multiple title="Choose Dish Menu... " data-live-search="true">
                                                     <option>Appetizers</option>
                                                     <option>Soups</option>
                                                     <option>Salads</option>
@@ -332,7 +332,7 @@
                                         </div>
                                         <div class="col meat">
                                             <div class="form-outline meat-outline">
-                                                <select class="selectpicker meat-btn" multiple title="Choose Meat... " data-live-search="true">
+                                                <select class="selectpicker meat-btn" id="meat" multiple title="Choose Meat... " data-live-search="true">
                                                     <option>Chicken</option>
                                                     <option>Pork</option>
                                                     <option>Seafood</option>
@@ -344,12 +344,12 @@
                                         <div class="col">
                                             <div class="form-outline">
                                                 <label class="form-label" for="form1">Price</label>
-                                                <input type="text" id="name" class="form-control text-box" placeholder="Please Price here" required/>
+                                                <input type="text" id="price" class="form-control text-box" placeholder="Please Price here" required/>
                                             </div>
                                         </div>
                                         <div class="col size">
                                             <div class="form-outline size-outline">
-                                                <select class="selectpicker meat-btn" multiple title="Choose Size... " data-live-search="true">
+                                                <select class="selectpicker meat-btn" id="size" multiple title="Choose Size... " data-live-search="true">
                                                     <option>Small</option>
                                                     <option>Large</option>
                                                 </select>
@@ -381,7 +381,7 @@
 
                         <!--Footer-->
                         <div class="modal-footer justify-content-center">
-                            <button type="button" class="btn btn-primary submit-button" id="submit" onclick="create_New()">
+                            <button type="button" class="btn btn-primary submit-button" id="submit_btn">
                                 <!-- <i class="fa fa-plus-circle fa-fw"></i> -->
                             </button>
                             <button type="button" class="btn btn-light cancel-button" data-dismiss="modal">

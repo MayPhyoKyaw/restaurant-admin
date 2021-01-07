@@ -361,7 +361,7 @@ div.dataTables_wrapper div.dataTables_length select {
 }
 
 .size-outline {
-    margin-top: 5px;
+    margin-top: -2px;
 }
 
 .dish-menu-btn,

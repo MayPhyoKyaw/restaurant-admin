@@ -130,6 +130,7 @@ $(document).ready(function () {
   // close cancel button to reset modal
   $("#dishMenuModal").on("hidden.bs.modal", function () {
     document.getElementById("dishMenu_form").reset();
+    $(".filter-option-inner-inner").text(document.getElementById("dish_menu").title);
     $("#preview").attr("src","https://placehold.it/720x540");
 
   })

@@ -39,19 +39,49 @@ $(document).ready(function () {
   })
 })
 
-var button = document.getElementById('create_button');
-button.addEventListener('click', function(e) {
-  console.log('button was clicked');
+var button = document.getElementById('submit_btn');
 
-  fetch('/clicked', {method: 'POST'})
-  .then(function(response) {
-    if(response.ok) {
-      console.log('clicked!!');
-      return;
-    }
-    throw new Error('Failed!!');
-  })
-  .catch(function(error) {
-    console.log(error);
-  });
+button.addEventListener('click', function (e) {
+  var data = [];
+  var dishName = document.getElementById('dish_Name').value;
+  var langName = document.getElementById('lang_Name').value;
+  var dishPrice = document.getElementById('price').value;
+  var dishMenu = $('#dish_menu').val();
+  var meat = $('#meat').val();
+  var size = $('#size').val();
+  console.log('button was clicked');
+  data.push({"name": dishName, "lang_name": langName, "price": dishPrice, "dish_menu": dishMenu, "meat": meat, "size": size});
+  console.log(data)
+
+  // fetch('/clicked', {
+  //   method: 'POST',
+  //   //make JSON body
+  //   body: JSON.stringify(_dataNew),
+  //   headers: {
+  //     'Accept': 'application/json',
+  //     'Content-Type': 'application/json;charset=UTF-8'
+  //   },
+  // })
+  fetch('/clicked', { method: 'POST'})
+    .then(function (response) {
+      console.log(response)
+      if (response.ok) {
+        console.log('clicked!!');
+        return;
+      }
+      throw new Error('Failed!!');
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 });
+
+// button.addEventListener('click', function (e) {
+//   var array = [];
+//   var dishName = document.getElementById('dish_Name').value;
+//   var langName = document.getElementById('lang_Name').value;
+//   var dishPrice = document.getElementById('price').value;
+//   array.push({"name": dishName, "lang_name": langName, "price": dishPrice})
+//   console.log(array)
+// });
+

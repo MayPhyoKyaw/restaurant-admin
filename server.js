@@ -172,7 +172,7 @@ app.post('/clicked', (req, res) => {
              const col = db.collection("people");
              // Construct a document
             let personDocument = {
-                 _id: "P3", name: "KSP", date: "27-12-2020", work: "IT Engineer",
+                 _id: "D1", name: "dish",
             };
              // Insert a single document, wait for promise so we can read it back
              const p = await col.insertOne(personDocument);
