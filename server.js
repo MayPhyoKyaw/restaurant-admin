@@ -4,28 +4,11 @@
 var http = require('http');
 const express = require('express');
 var bodyParser = require('body-parser');
-// var mongodb = require('mongodb');
-// var router = express.Router();
-// const mongoose = require('mongoose');
+
 const MongoClient = require("mongodb").MongoClient;
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-const { data } = require('jquery');
-const { response } = require('express');
-
-// const dbConnectionUrl = "mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/<dbname>?retryWrites=true&w=majority/clicks";
-
-// MongoClient.connect(dbConnectionUrl, function(err, dbInstance) {
-//     if (err) {
-//         console.log(`[MongoDB connection] ERROR: ${err}`);
-//         failureCallback(err); // this should be "caught" by the calling function
-//     } else {
-//         const dbObject = dbInstance.db("mydb");
-//         const dbCollection = dbObject.collection("customers");
-//         console.log("[MongoDB connection] SUCCESS");
-
-//         // successCallback(dbCollection);
-//     }
-// });
+// var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+// const { data } = require('jquery');
+// const { response } = require('express');
 
 // server details
 const app = express();
