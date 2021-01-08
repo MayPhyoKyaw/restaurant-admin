@@ -259,3 +259,22 @@ app.post('/dishMenu.html/edit', (req, res) => {
     }
     EditRun().catch(console.dir);
 });
+
+// get the click data from the database
+app.get('/selectDish', async (req, res) => {
+    const url = 'mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/testinggg?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true';
+    // const client = new MongoClient(url);
+    const dbName = "resturant";
+    // connect to your cluster
+    const client = await MongoClient.connect(url, { 
+        useNewUrlParser: true, 
+        useUnifiedTopology: true,
+    });
+        // specify the DB's name
+    const dbRes = client.db(dbName);
+    console.log("Connected correctly to server for selecting....");
+    dbRes.collection('dish').find().toArray((err, result) => {
+        if (err) return console.log(err);
+        res.send(result);
+    });
+});
