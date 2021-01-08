@@ -50,7 +50,7 @@ button.addEventListener('click', function (e) {
   var meat = $('#meat').val();
   var size = $('#size').val();
   console.log('button was clicked');
-  data.push({"name": dishName, "lang_name": langName, "price": dishPrice, "dish_menu": dishMenu, "meat": meat, "size": size});
+  data.push({ "name": dishName, "lang_name": langName, "price": dishPrice, "dish_menu": dishMenu, "meat": meat, "size": size });
   console.log(data)
 
   // fetch('/clicked', {
@@ -62,18 +62,31 @@ button.addEventListener('click', function (e) {
   //     'Content-Type': 'application/json;charset=UTF-8'
   //   },
   // })
-  fetch('/clicked', { method: 'POST'})
-    .then(function (response) {
-      console.log(response)
-      if (response.ok) {
-        console.log('clicked!!');
-        return;
-      }
-      throw new Error('Failed!!');
+
+    fetch('/dishMenu.html', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({a: 1, b: 'Textual content'})
     })
-    .catch(function (error) {
-      console.log(error);
-    });
+    // .then (res => res.json())
+    .then(response => console.log(response))
+
+
+  // fetch('/clicked', { method: 'POST'})
+  //   .then(function (response) {
+  //     console.log(response)
+  //     if (response.ok) {
+  //       console.log('clicked!!');
+  //       return;
+  //     }
+  //     throw new Error('Failed!!');
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
 });
 
 // button.addEventListener('click', function (e) {

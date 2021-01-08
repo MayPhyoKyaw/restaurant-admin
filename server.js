@@ -8,6 +8,9 @@ var bodyParser = require('body-parser');
 // var router = express.Router();
 // const mongoose = require('mongoose');
 const MongoClient = require("mongodb").MongoClient;
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+const { data } = require('jquery');
+const { response } = require('express');
 
 // const dbConnectionUrl = "mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/<dbname>?retryWrites=true&w=majority/clicks";
 
@@ -27,13 +30,16 @@ const MongoClient = require("mongodb").MongoClient;
 // server details
 const app = express();
 const port = 5000;
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Static Files
 app.use(express.static('public'));
 app.use('/css', express.static(__dirname + 'public/css'))
 app.use('/js', express.static(__dirname + 'public/js'))
 app.use('/assets', express.static(__dirname + 'public/assets'))
+
+app.use(express.json());       // to support JSON-encoded bodies
+app.use(express.urlencoded()); // to support URL-encoded bodies
 
 
 app.get('', (req, res) => {
@@ -124,64 +130,35 @@ app.get('/snacks.html', (req, res) => {
     res.sendFile(__dirname + '/route/snacks/snacks.html')
 })
 
-// << db setup >>
-// const db = require("./db");
-// app.use('/db', db);
-// const dbName = "mydb";
-// const collectionName = "customers";
-
-// db.initialize("mydb", "customers", function(dbCollection) { // successCallback
-//     // get all items
-//     dbCollection.find().toArray(function(err, result) {
-//         if (err) throw err;
-//           console.log(result);
-//     });
-
-//     // << db CRUD routes >>
-
-//   }, function(err) { // failureCallback
-//     throw (err);
-// });
-
 // Listen on port
-app.listen(port , () => console.info(`Listening on port ${port}`))
-
-// Connect with Mongo DB
-// const uri = "mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/<dbname>?retryWrites=true&w=majority";
-// mongoose.connect(uri, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true
-// })
-// .then(() => {
-//   console.log('MongoDB Connected…')
-// })
-// .catch(err => console.log(err))
+app.listen(port, () => console.info(`Listening on port ${port}`))
 
 // add a document to the DB collection recording the click event
-app.post('/clicked', (req, res) => {
-    const url = 'mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/testinggg?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true';
-    const client = new MongoClient(url);
-    const dbName = "testinggg"
+app.post('/dishMenu.html', (req, res) => {
+    console.log(req.body)
+    // const url = 'mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/testinggg?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true';
+    // const client = new MongoClient(url);
+    // const dbName = "testinggg"
 
-    async function run() {
-        try {
-             await client.connect();
-             console.log("Connected correctly to server");
-             const db = client.db(dbName);
-             // Use the collection "people"
-             const col = db.collection("people");
-             // Construct a document
-            let personDocument = {
-                 _id: "D1", name: "dish",
-            };
-             // Insert a single document, wait for promise so we can read it back
-             const p = await col.insertOne(personDocument);
-            } catch (err) {
-             console.log(err.stack);
-         }
-         finally {
-            await client.close();
-        }
-    }
-    run().catch(console.dir);
+    // async function run() {
+    //     try {
+    //          await client.connect();
+    //          console.log("Connected correctly to server");
+    //          const db = client.db(dbName);
+    //          // Use the collection "people"
+    //          const col = db.collection("people");
+    //          // Construct a document
+    //         let personDocument = {
+    //              _id: "D1", name: "dish",
+    //         };
+    //          // Insert a single document, wait for promise so we can read it back
+    //          const p = await col.insertOne(personDocument);
+    //         } catch (err) {
+    //          console.log(err.stack);
+    //      }
+    //      finally {
+    //         await client.close();
+    //     }
+    // }
+    // run().catch(console.dir);
 });

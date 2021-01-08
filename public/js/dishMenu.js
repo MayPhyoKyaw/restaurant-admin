@@ -54,7 +54,6 @@ $(document).ready(function () {
       selector: 'td:first-child',
     },
     rowCallback: function(row, data, index) {
-      console.log(data[6])
       if (data[6] === "Pork") {
         $(row).find('td:eq(3)').html(data[3] + '<span class="badge-pork">Pork</span>')
       }
@@ -130,7 +129,7 @@ $(document).ready(function () {
   // close cancel button to reset modal
   $("#dishMenuModal").on("hidden.bs.modal", function () {
     document.getElementById("dishMenu_form").reset();
-    $(".filter-option-inner-inner").text(document.getElementById("dish_menu").title);
+    // $(".filter-option-inner-inner").text(document.getElementById("dish_menu").title);
     $("#preview").attr("src","https://placehold.it/720x540");
 
   })
@@ -152,22 +151,5 @@ $(document).ready(function () {
     // read the image file as a data URL.
     reader.readAsDataURL(this.files[0]);
   });
-
-  // const db = require("../db");
-  // // const dbName = "mydb";
-  // // const collectionName = "customers";
-
-  // db.initialize("mydb", "customers", function(dbCollection) { // successCallback
-  //     // get all items
-  //     dbCollection.find().toArray(function(err, result) {
-  //         if (err) throw err;
-  //           console.log(result);
-  //     });
-
-  //     // << db CRUD routes >>
-
-  //   }, function(err) { // failureCallback
-  //     throw (err);
-  // });
 
 })
