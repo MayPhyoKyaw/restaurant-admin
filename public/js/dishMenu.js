@@ -45,8 +45,13 @@ $(document).ready(function () {
         "orderable": false,
         "width": "1%",
       },
-      { targets: "meat", className: "hiddenData" },
-      { targets: "size", className: "hiddenData" },
+      { targets: "dish-name-dt", width: "40%"},
+      { targets: "lang-name-dt", width: "30%"},
+      { targets: "dish-menu-dt", width: "13%"},
+      { targets: "small-price-dt", width: "18%"},
+      { targets: "large-price-dt", className: "hiddenData" },
+      { targets: "meat-dt", className: "hiddenData" },
+      { targets: "size-dt", className: "hiddenData" },
     ],
     select: {
       style: 'multi',
@@ -54,24 +59,28 @@ $(document).ready(function () {
       selector: 'td:first-child',
     },
     rowCallback: function(row, data, index) {
-      if (data[6] === "Pork") {
+      if (data[7] === "Pork") {
         $(row).find('td:eq(3)').html(data[3] + '<span class="badge-pork">Pork</span>')
       }
-      else if (data[6] === "Chicken") {
+      else if (data[7] === "Chicken") {
         $(row).find('td:eq(3)').html(data[3] + '<span class="badge-chicken">Chicken</span>')
       }
-      else if (data[6] === "Seafood") {
+      else if (data[7] === "Seafood") {
         $(row).find('td:eq(3)').html(data[3] + '<span class="badge-seafood">Seafood</span>')
       }
-      else if (data[6] === "Beef") {
+      else if (data[7] === "Beef") {
         $(row).find('td:eq(3)').html(data[3] + '<span class="badge-beef">Beef</span>')
       }
-      if(data[7] === "Small") {
-        $(row).find('td:eq(2)').html(data[2] + '<span class="badge-size-small">S</span>')
+      if(data[8] === "Small") {
+        $(row).find('td:eq(5)').html(data[5] + '<span class="badge-size-small">S</span>')
       }
-      if(data[7] === "Large") {
-        $(row).find('td:eq(2)').html(data[2] + '<span class="badge-size-large">L</span>')
+      else if(data[8] === "Large") {
+        $(row).find('td:eq(5)').html(data[5] + '<span class="badge-size-large">L</span>')
       }
+      else if(data[8] === "Small, Large") {
+        $(row).find('td:eq(5)').html(data[5] + '<span class="badge-size-small">S</span><span class="badge-size-large">L</span>')
+      }
+      console.log(data[5])
     }
   });
 
@@ -89,7 +98,7 @@ $(document).ready(function () {
   var salary = 20000000;
   $("#dataTable tr td").mouseenter(function () {
     trIndex = $(this).parent();
-    $(trIndex).find("td:last-child")
+    $(trIndex).find("td:nth-child(6)")
       .html(`
         <span>${salary}</span>
         &nbsp;&nbsp;
@@ -115,7 +124,7 @@ $(document).ready(function () {
 
   // remove button on tr mouseleave
   $("#dataTable tr td").mouseleave(function () {
-    $(trIndex).find('td:last-child').html(`${salary}`);
+    $(trIndex).find('td:nth-child(6)').html(`${salary}`);
   });
 
   // change input field style in modal

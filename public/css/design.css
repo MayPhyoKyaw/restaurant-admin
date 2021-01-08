@@ -323,6 +323,13 @@ div.dataTables_wrapper div.dataTables_length select {
 }
 
 
+/* modal dialog */
+
+.modal-dialog {
+    max-width: 655px;
+}
+
+
 /* modal input field style */
 
 .form-label {
