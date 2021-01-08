@@ -69,7 +69,7 @@ button.addEventListener('click', function (e) {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({a: 1, b: 'Textual content'})
+      body: JSON.stringify({name: dishName, lang_name: langName, price: dishPrice})
     })
     // .then (res => res.json())
     .then(response => console.log(response))

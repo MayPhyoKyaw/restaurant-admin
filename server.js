@@ -136,29 +136,32 @@ app.listen(port, () => console.info(`Listening on port ${port}`))
 // add a document to the DB collection recording the click event
 app.post('/dishMenu.html', (req, res) => {
     console.log(req.body)
-    // const url = 'mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/testinggg?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true';
-    // const client = new MongoClient(url);
-    // const dbName = "testinggg"
+    const url = 'mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/testinggg?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true';
+    const client = new MongoClient(url);
+    const dbName = "testinggg"
 
-    // async function run() {
-    //     try {
-    //          await client.connect();
-    //          console.log("Connected correctly to server");
-    //          const db = client.db(dbName);
-    //          // Use the collection "people"
-    //          const col = db.collection("people");
-    //          // Construct a document
-    //         let personDocument = {
-    //              _id: "D1", name: "dish",
-    //         };
-    //          // Insert a single document, wait for promise so we can read it back
-    //          const p = await col.insertOne(personDocument);
-    //         } catch (err) {
-    //          console.log(err.stack);
-    //      }
-    //      finally {
-    //         await client.close();
-    //     }
-    // }
-    // run().catch(console.dir);
+    async function run() {
+        try {
+             await client.connect();
+             console.log("Connected correctly to server");
+             const db = client.db(dbName);
+             // Use the collection "people"
+             const col = db.collection("people");
+             // Construct a document
+            let personDocument = {
+                 dishId: "_id",
+                 name: req.body.name,
+                 lang_name: req.body.lang_name,
+                 price: req.body.price,
+            };
+             // Insert a single document, wait for promise so we can read it back
+             const p = await col.insertOne(personDocument);
+            } catch (err) {
+             console.log(err.stack);
+         }
+         finally {
+            await client.close();
+        }
+    }
+    run().catch(console.dir);
 });
