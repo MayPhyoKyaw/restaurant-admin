@@ -44,7 +44,8 @@ var button = document.getElementById('submit_btn');
 button.addEventListener('click', function (e) {
   var dishName = document.getElementById('dish_Name').value;
   var langName = document.getElementById('lang_Name').value;
-  var dishPrice = document.getElementById('price').value;
+  var smallDishPrice = document.getElementById('small_price').value;
+  var largeDishPrice = document.getElementById('large_price').value;
   var dishMenu = $('#dish_menu').val();
   var meat = $('#meat').val();
   var size = $('#size').val();
@@ -59,7 +60,8 @@ button.addEventListener('click', function (e) {
       body: JSON.stringify({
         dish_name: dishName,
         lang_name: langName,
-        price: dishPrice,
+        small_dish_price: smallDishPrice,
+        large_dish_price: largeDishPrice,
         dish_menu: dishMenu,
         meat: meat,
         size: size,
