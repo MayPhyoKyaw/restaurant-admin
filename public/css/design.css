@@ -207,6 +207,7 @@ div.dataTables_wrapper div.dataTables_length select {
 .edit-button,
 .delete-button,
 .submit-button,
+.edit-submit-button,
 .danger-button,
 .cancel-button {
     border-radius: 8px;
@@ -218,6 +219,7 @@ div.dataTables_wrapper div.dataTables_length select {
 .edit-button:hover,
 .delete-button:hover,
 .submit-button:hover,
+.edit-submit-button:hover,
 .danger-button:hover {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
@@ -331,6 +333,10 @@ div.dataTables_wrapper div.dataTables_length select {
 
 
 /* modal input field style */
+
+#edit_dish_id {
+    display: none;
+}
 
 .form-label {
     margin-bottom: 0;

@@ -175,7 +175,7 @@
                                     <button type="button" value="Copy" class="btn btn-primary copy-button" id="copy_button" data-toggle="modal" data-target="#dishMenuConfirmation">
                                         <i class="fas fa-copy fa-fw"></i>Copy
                                     </button>
-                                    <button type="button" value="Edit" class="btn btn-primary edit-button" id="edit_button" data-toggle="modal" data-target="#dishMenuModal">
+                                    <button type="button" value="Edit" class="btn btn-primary edit-button" id="edit_button" data-toggle="modal" data-target="#edit_dishMenuModal">
                                         <i class="fas fa-pencil-alt fa-fw"></i>Edit
                                     </button>
                                     <button type="button" value="Delete" class="btn btn-primary delete-button" id="delete_button" data-toggle="modal" data-target="#dishMenuConfirmation">
@@ -195,6 +195,7 @@
                                                 <th class="large-price-dt hiddenData"></th>
                                                 <th class="meat-dt hiddenData"></th>
                                                 <th class="size-dt hiddenData"></th>
+                                                <th class="dish-id-dt hiddenData"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -208,6 +209,7 @@
                                                 <td>61</td>
                                                 <td>Pork</td>
                                                 <td>Large</td>
+                                                <td>11111</td>
                                             </tr>
                                             <tr>
                                                 <td></td>
@@ -219,6 +221,7 @@
                                                 <td>63</td>
                                                 <td>Chicken</td>
                                                 <td>Small</td>
+                                                <td>22222</td>
                                             </tr>
                                             <tr>
                                                 <td></td>
@@ -230,6 +233,7 @@
                                                 <td>66</td>
                                                 <td>Beef</td>
                                                 <td>Small, Large</td>
+                                                <td>33333</td>
                                             </tr>
                                             <tr>
                                                 <td></td>
@@ -241,6 +245,7 @@
                                                 <td>22</td>
                                                 <td>Seafood</td>
                                                 <td>Large</td>
+                                                <td>44444</td>
                                             </tr>
                                             <tr>
                                                 <td></td>
@@ -252,6 +257,7 @@
                                                 <td>33</td>
                                                 <td>Pork</td>
                                                 <td>Small</td>
+                                                <td>5ff835d9bbbc22361dfe19e3</td>
                                             </tr>
                                             <tr>
                                                 <td></td>
@@ -263,6 +269,7 @@
                                                 <td>61</td>
                                                 <td>Seafood</td>
                                                 <td>Large</td>
+                                                <td>66666</td>
                                             </tr>
                                             <tr>
                                                 <td></td>
@@ -274,6 +281,7 @@
                                                 <td>59</td>
                                                 <td>Beef</td>
                                                 <td>Small</td>
+                                                <td>77777</td>
                                             </tr>
                                             <tr>
                                                 <td></td>
@@ -285,6 +293,7 @@
                                                 <td>55</td>
                                                 <td>Chicken</td>
                                                 <td>Small</td>
+                                                <td>88888</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -295,7 +304,7 @@
                 </div>
             </main>
 
-            <!-- DishMenu create, detail and edit Data Modal -->
+            <!-- DishMenu create Data Modal -->
             <div class="modal fade" id="dishMenuModal" tabindex="-1" role="dialog" aria-labelledby="dishMenuModal" aria-hidden="true">
                 <div class="modal-dialog modal-notify modal-success" role="document">
                     <!--Content-->
@@ -316,6 +325,12 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-outline">
+                                                <span id="dish_id"></span>
+                                            </div>
+                                        </div>
+                                        <div class="w-100"></div>
+                                        <div class="col">
+                                            <div class="form-outline">
                                                 <label class="form-label" for="form1">Dish Name</label>
                                                 <input type="text" id="dish_Name" class="form-control text-box" placeholder="Please Name here" required/>
                                             </div>
@@ -330,7 +345,7 @@
                                         <div class="w-100"></div>
                                         <div class="col dish-menu">
                                             <div class="form-outlined dish-menu-outline">
-                                                <select class="selectpicker dish-menu-btn" id="dish_menu" multiple title="Choose Dish Menu... " data-live-search="true">
+                                                <select class="selectpicker dish-menu-btn" name="dishMenu" id="dish_menu" multiple title="Choose Dish Menu... " data-live-search="true">
                                                     <option>Appetizers</option>
                                                     <option>Soups</option>
                                                     <option>Salads</option>
@@ -407,7 +422,127 @@
                     <!--/.Content-->
                 </div>
             </div>
-            <!-- DishMenu create, detail and edit Data Modal-->
+            <!-- DishMenu create Modal-->
+
+            <!-- DishMenu edit Data Modal -->
+            <div class="modal fade" id="edit_dishMenuModal" tabindex="-1" role="dialog" aria-labelledby="dishMenuModal" aria-hidden="true">
+                <div class="modal-dialog modal-notify modal-success" role="document">
+                    <!--Content-->
+                    <div class="modal-content">
+                        <!--Header-->
+                        <div class="modal-header" id="modal_header">
+                            <span class="heading lead"></span>
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" class="white-text">&times;</span>
+                            </button>
+                        </div>
+
+                        <!--Body-->
+                        <div class="modal-body">
+                            <form id="dishMenu_form">
+                                <div class="container text-center">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-outline">
+                                                <span id="edit_dish_id"></span>
+                                            </div>
+                                        </div>
+                                        <div class="w-100"></div>
+                                        <div class="col">
+                                            <div class="form-outline">
+                                                <label class="form-label" for="form1">Dish Name</label>
+                                                <input type="text" id="edit_dish_Name" class="form-control text-box" placeholder="Please Name here" required/>
+                                            </div>
+                                        </div>
+                                        <div class="w-100"></div>
+                                        <div class="col">
+                                            <div class="form-outline">
+                                                <label class="form-label" for="form1">Dish Name(Myanmar Language)</label>
+                                                <input type="text" id="edit_lang_Name" class="form-control text-box" placeholder="Please Myanmar Name here" />
+                                            </div>
+                                        </div>
+                                        <div class="w-100"></div>
+                                        <div class="col dish-menu">
+                                            <div class="form-outlined dish-menu-outline">
+                                                <select class="selectpicker dish-menu-btn" name="dishMenu" id="edit_dish_menu" multiple title="Choose Dish Menu... " data-live-search="true">
+                                                    <option>Appetizers</option>
+                                                    <option>Soups</option>
+                                                    <option>Salads</option>
+                                                    <option>Curries</option>
+                                                    <option>Vegetables Dishes</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col meat">
+                                            <div class="form-outline meat-outline">
+                                                <select class="selectpicker meat-btn" id="edit_meat" multiple title="Choose Meat... " data-live-search="true">
+                                                    <option>Chicken</option>
+                                                    <option>Pork</option>
+                                                    <option>Seafood</option>
+                                                    <option>Beef</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="w-100"></div>
+                                        <div class="col">
+                                            <div class="form-outline">
+                                                <label class="form-label" for="form1">Small Price</label>
+                                                <input type="text" id="edit_small_price" class="form-control text-box" placeholder="Please Price here" required/>
+                                            </div>
+                                        </div>
+                                        <div class="col size">
+                                            <div class="form-outline size-outline">
+                                                <select class="selectpicker meat-btn" id="edit_size" multiple title="Choose Size... " data-live-search="true">
+                                                    <option>Small</option>
+                                                    <option>Large</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-outline">
+                                                <label class="form-label" for="form1">Large Price</label>
+                                                <input type="text" id="edit_large_price" class="form-control text-box" placeholder="Please Price here" required/>
+                                            </div>
+                                        </div>
+                                        <div class="w-100"></div>
+                                        <div class="col">
+                                            <div class="form-outline">
+                                                <input type="file" name="img[]" class="file" accept="image/*">
+                                                <div class="input-group my-3 upload-dish-image">
+                                                    <input type="text" class="form-control" disabled placeholder="Upload File" id="file" accept=".jpg" required/>
+                                                    <div class="input-group-append">
+                                                        <button type="button" class="browse btn btn-primary">Upload</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-outline">
+                                                <div></div>
+                                                <img src="https://placehold.it/720x540" id="preview" class="img-thumbnail">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!--Footer-->
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-primary edit-submit-button" id="edit_submit_btn">
+                                <!-- <i class="fa fa-plus-circle fa-fw"></i> -->
+                            </button>
+                            <button type="button" class="btn btn-light cancel-button" data-dismiss="modal">
+                                <i class="fas fa-times fa-fw"></i>Cancel
+                            </button>
+                        </div>
+                    </div>
+                    <!--/.Content-->
+                </div>
+            </div>
+            <!-- DishMenu edit Modal-->
 
             <!-- DishMenu delete Data Modal-->
             <div class="modal fade" id="dishMenuConfirmation" tabindex="-1" role="dialog" aria-labelledby="dishMenuConfirmation" aria-hidden="true">
