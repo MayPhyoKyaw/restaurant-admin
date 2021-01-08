@@ -42,7 +42,6 @@ $(document).ready(function () {
 var button = document.getElementById('submit_btn');
 
 button.addEventListener('click', function (e) {
-  var data = [];
   var dishName = document.getElementById('dish_Name').value;
   var langName = document.getElementById('lang_Name').value;
   var dishPrice = document.getElementById('price').value;
@@ -50,18 +49,6 @@ button.addEventListener('click', function (e) {
   var meat = $('#meat').val();
   var size = $('#size').val();
   console.log('button was clicked');
-  data.push({ "name": dishName, "lang_name": langName, "price": dishPrice, "dish_menu": dishMenu, "meat": meat, "size": size });
-  console.log(data)
-
-  // fetch('/clicked', {
-  //   method: 'POST',
-  //   //make JSON body
-  //   body: JSON.stringify(_dataNew),
-  //   headers: {
-  //     'Accept': 'application/json',
-  //     'Content-Type': 'application/json;charset=UTF-8'
-  //   },
-  // })
 
     fetch('/dishMenu.html', {
       method: 'POST',
@@ -69,7 +56,14 @@ button.addEventListener('click', function (e) {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({name: dishName, lang_name: langName, price: dishPrice})
+      body: JSON.stringify({
+        dish_name: dishName,
+        lang_name: langName,
+        price: dishPrice,
+        dish_menu: dishMenu,
+        meat: meat,
+        size: size,
+      })
     })
     // .then (res => res.json())
     .then(response => console.log(response))

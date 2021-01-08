@@ -121,7 +121,7 @@ app.post('/dishMenu.html', (req, res) => {
     console.log(req.body)
     const url = 'mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/testinggg?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true';
     const client = new MongoClient(url);
-    const dbName = "testinggg"
+    const dbName = "resturant"
 
     async function run() {
         try {
@@ -129,13 +129,16 @@ app.post('/dishMenu.html', (req, res) => {
              console.log("Connected correctly to server");
              const db = client.db(dbName);
              // Use the collection "people"
-             const col = db.collection("people");
+             const col = db.collection("dish");
              // Construct a document
             let personDocument = {
                  dishId: "_id",
-                 name: req.body.name,
-                 lang_name: req.body.lang_name,
+                 dishName: req.body.dish_name,
+                 langName: req.body.lang_name,
                  price: req.body.price,
+                 dishMenu: req.body.dish_menu,
+                 meat: req.body.meat,
+                 size: req.body.size,
             };
              // Insert a single document, wait for promise so we can read it back
              const p = await col.insertOne(personDocument);
