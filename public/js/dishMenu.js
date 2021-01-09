@@ -35,14 +35,15 @@ $(document).ready(function () {
     columns: [
       {
         data: "select",
-        render: function(type, row){
+        render: function(){
           return "<td></td>"
         }
       },
       {
         data: "fav",
-        render: function(data, type, row){
+        render: function(){
             return "<span class='star-o'></span>"
+            // console.log(type, data, row)
         },  
       },
       {data: "dishName"},
@@ -72,6 +73,8 @@ $(document).ready(function () {
       { targets: "meat-dt", className: "hiddenData" },
       { targets: "size-dt", className: "hiddenData" },
       { targets: "dish-id-dt", className: "hiddenData", searchable: false },
+      { targets: "fav"}
+      
     ],
     select: {
       style: 'multi',
@@ -114,8 +117,8 @@ $(document).ready(function () {
       data.forEach(dish => {
         console.log(dish.dishName, dish.langName, dish.smallDishPrice);
         var rowNode = myTable.row.add({
-          "select": '',
-          "fav" : '',
+          // "select": '',
+          // "fav" : '',
           "dishName" : `${dish.dishName}`,
           "langName" : `${dish.langName}`,
           "dishMenu" : `${dish.dishMenu}`,
