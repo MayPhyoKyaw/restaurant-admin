@@ -44,8 +44,6 @@ $(document).ready(function () {
         render: function(){
             return '<span class="star-o selection" id="fav"></span>'
         },
-        targets: "selection",
-        // defaultContent: "",
       },
       {data: "dishName"},
       {data: "langName"},
