@@ -42,9 +42,14 @@ $(document).ready(function () {
       {
         data: "fav",
         render: function(){
+<<<<<<< HEAD
             return "<span class='star-o'></span>"
             // console.log(type, data, row)
         },  
+=======
+            return '<span class="star-o selection" id="fav"></span>'
+        },
+>>>>>>> refs/remotes/origin/ksp-new
       },
       {data: "dishName"},
       {data: "langName"},
@@ -106,7 +111,13 @@ $(document).ready(function () {
       console.log(data[5])
     },
   });
-
+  $('#dataTable tbody').on('click', '.star-o', function() {
+    $(this).toggleClass('star-active');
+  });
+//   $('.star-o').on('click', function() {
+//     console.log("click favourite")
+//     $(this).toggleClass('star-active');
+// });
   fetch('/selectDish', {method: 'GET'})
     .then(function(response) {
       if(response.ok) return response.json();
@@ -286,4 +297,5 @@ $(document).ready(function () {
     $(this).toggleClass('star-active');
   });
   $('select').selectpicker();
+
 })
