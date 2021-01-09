@@ -42,14 +42,8 @@ $(document).ready(function () {
       {
         data: "fav",
         render: function(){
-<<<<<<< HEAD
-            return "<span class='star-o'></span>"
-            // console.log(type, data, row)
-        },  
-=======
             return '<span class="star-o selection" id="fav"></span>'
         },
->>>>>>> refs/remotes/origin/ksp-new
       },
       {data: "dishName"},
       {data: "langName"},
