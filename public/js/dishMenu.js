@@ -42,12 +42,8 @@ $(document).ready(function () {
       {
         data: "fav",
         render: function(data, type, row){
-          if(data == true)
             return "<span class='star-o'></span>"
-          else
-            return "<span class='star-o'></span>"
-        },
-        className: "selection",
+        },  
       },
       {data: "dishName"},
       {data: "langName"},
@@ -117,14 +113,16 @@ $(document).ready(function () {
       // document.getElementById('counter').innerHTML = `Button was clicked ${data.length} times`;
       data.forEach(dish => {
         console.log(dish.dishName, dish.langName, dish.smallDishPrice);
-        myTable.row.add({
+        var rowNode = myTable.row.add({
           "select": '',
-          "fav" : true,
+          "fav" : '',
           "dishName" : `${dish.dishName}`,
           "langName" : `${dish.langName}`,
           "dishMenu" : `${dish.dishMenu}`,
           "price" : `${dish.largeDishPrice}`,
-        }).draw();
+        }).draw().node();
+        // rowNode.row().column(1).nodes().to$().addClass('star-o');
+        // $( rowNode ).find('td').eq(1).addClass('star-o');
       });
     })
     .catch(function(error) {
@@ -280,4 +278,9 @@ $(document).ready(function () {
     $("#dishMenuModal").modal("hide");
     location.reload();
   })
+
+  $('#dataTable .star-o').on('click', function() {
+    $(this).toggleClass('star-active');
+  });
+  $('select').selectpicker();
 })
