@@ -41,9 +41,11 @@ $(document).ready(function () {
       },
       {
         data: "fav",
-        render: function(data, type, row){
-            return "<span class='star-o'></span>"
-        },  
+        render: function(){
+            return '<span class="star-o selection" id="fav"></span>'
+        },
+        targets: "selection",
+        // defaultContent: "",
       },
       {data: "dishName"},
       {data: "langName"},
@@ -103,7 +105,13 @@ $(document).ready(function () {
       console.log(data[5])
     },
   });
-
+  $('#dataTable tbody').on('click', '.star-o', function() {
+    $(this).toggleClass('star-active');
+  });
+//   $('.star-o').on('click', function() {
+//     console.log("click favourite")
+//     $(this).toggleClass('star-active');
+// });
   fetch('/selectDish', {method: 'GET'})
     .then(function(response) {
       if(response.ok) return response.json();
@@ -283,4 +291,5 @@ $(document).ready(function () {
     $(this).toggleClass('star-active');
   });
   $('select').selectpicker();
+
 })
