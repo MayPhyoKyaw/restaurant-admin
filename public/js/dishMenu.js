@@ -42,13 +42,14 @@ $(document).ready(function () {
       {
         data: "fav",
         render: function(){
-            return '<span class="star-o selection" id="fav"></span>'
+            return '<span class="star-o" id="fav"></span>'
         },
+        className: "selection"
       },
-      {data: "dishName"},
-      {data: "langName"},
-      {data: "dishMenu"},
-      {data: "price"},
+      {data: "dishName", className: "text"},
+      {data: "langName", className: "text"},
+      {data: "dishMenu", className: "text"},
+      {data: "price", className: "text"},
     ],
     order: [[2, 'asc']],
     columnDefs: [
@@ -72,8 +73,6 @@ $(document).ready(function () {
       { targets: "meat-dt", className: "hiddenData" },
       { targets: "size-dt", className: "hiddenData" },
       { targets: "dish-id-dt", className: "hiddenData", searchable: false },
-      { targets: "fav"}
-      
     ],
     select: {
       style: 'multi',
@@ -104,6 +103,10 @@ $(document).ready(function () {
       }
       console.log(data[5])
     },
+    createdRow: function ( row, data, index ) {
+      console.log(row);
+      $(row).addClass('hover');
+    } 
   });
   $('#dataTable tbody').on('click', '.star-o', function() {
     $(this).toggleClass('star-active');
@@ -128,9 +131,7 @@ $(document).ready(function () {
           "langName" : `${dish.langName}`,
           "dishMenu" : `${dish.dishMenu}`,
           "price" : `${dish.largeDishPrice}`,
-        }).draw().node();
-        // rowNode.row().column(1).nodes().to$().addClass('star-o');
-        // $( rowNode ).find('td').eq(1).addClass('star-o');
+        }).draw();      
       });
     })
     .catch(function(error) {
@@ -138,10 +139,14 @@ $(document).ready(function () {
     });
 
   // copy, edit and del button
-  var trIndex = null;
-  var salary = 20000000;
-  $("#dataTable tr td").mouseenter(function () {
-    trIndex = $(this).parent();
+  var salary = 2000;
+  // var rowData = myTable.row();
+  // console.log(rowData);
+  $("#dataTable tbody").on('mouseenter', '.hover', function () {
+    var trIndex = null;
+    // trIndex = $(this).parent();
+    trIndex = myTable.row(this).node();
+    console.log(trIndex);
     $(trIndex).find("td:nth-child(6)")
       .html(`
         <span>${salary}</span>
@@ -168,7 +173,9 @@ $(document).ready(function () {
   });
 
   // remove button on tr mouseleave
-  $("#dataTable tr td").mouseleave(function () {
+  $("#dataTable tbody").on('mouseleave', '.hover', function () {
+    var trIndex = null;
+    trIndex = myTable.row(this).node();
     $(trIndex).find('td:nth-child(6)').html(`${salary}`);
   });
 

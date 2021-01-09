@@ -304,6 +304,7 @@ div.dataTables_wrapper div.dataTables_length select {
     color: #dadce0;
     font-size: 25px;
     font-weight: bolder;
+    /* padding-top: 0px !important; */
 }
 
 .star-active::before {
@@ -312,6 +313,7 @@ div.dataTables_wrapper div.dataTables_length select {
     color: #3f51b5;
     font-size: 25px;
     font-weight: bolder;
+    /* padding-top: 0px !important; */
 }
 
 .select-checkbox {
@@ -320,8 +322,12 @@ div.dataTables_wrapper div.dataTables_length select {
 }
 
 .selection {
-    padding-top: 2px !important;
+    padding-top: 1px !important;
     cursor: pointer;
+}
+
+.text{
+    padding-top: 8px !important;
 }
 
 
