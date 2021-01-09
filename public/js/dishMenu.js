@@ -31,6 +31,29 @@ $(document).ready(function () {
         previous: "&laquo;",
       },
     },
+    // ajax: "data.json",
+    columns: [
+      {
+        data: "select",
+        render: function(type, row){
+          return "<td></td>"
+        }
+      },
+      {
+        data: "fav",
+        render: function(data, type, row){
+          if(data == true)
+            return "<span class='star-o'></span>"
+          else
+            return "<span class='star-o'></span>"
+        },
+        className: "selection",
+      },
+      {data: "dishName"},
+      {data: "langName"},
+      {data: "dishMenu"},
+      {data: "price"},
+    ],
     order: [[2, 'asc']],
     columnDefs: [
       {
@@ -82,8 +105,31 @@ $(document).ready(function () {
         $(row).find('td:eq(5)').html(data[5] + '<span class="badge-size-small">S</span><span class="badge-size-large">L</span>')
       }
       console.log(data[5])
-    }
+    },
   });
+
+  fetch('/selectDish', {method: 'GET'})
+    .then(function(response) {
+      if(response.ok) return response.json();
+      throw new Error('Request failed.');
+    })
+    .then(function(data) {
+      // document.getElementById('counter').innerHTML = `Button was clicked ${data.length} times`;
+      data.forEach(dish => {
+        console.log(dish.dishName, dish.langName, dish.smallDishPrice);
+        myTable.row.add({
+          "select": '',
+          "fav" : true,
+          "dishName" : `${dish.dishName}`,
+          "langName" : `${dish.langName}`,
+          "dishMenu" : `${dish.dishMenu}`,
+          "price" : `${dish.largeDishPrice}`,
+        }).draw();
+      });
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
 
   // copy, edit and del button
   var trIndex = null;
@@ -225,7 +271,13 @@ $(document).ready(function () {
         .catch(function (error) {
           console.log(error);
         });
+        $("#edit_dishMenuModal").modal("hide");
     });
   })
 
+  var createButton = document.getElementById('submit_btn');
+  createButton.addEventListener('click', function(e){
+    $("#dishMenuModal").modal("hide");
+    location.reload();
+  })
 })

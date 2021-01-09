@@ -79,49 +79,49 @@ $(document).ready(function () {
       </div>`);
   })
 
-  fetch('/selectDish', {method: 'GET'})
-    .then(function(response) {
-      if(response.ok) return response.json();
-      throw new Error('Request failed.');
-    })
-    .then(function(data) {
-      // var dishRow = $('#dataTable').DataTable({
-      //   ajax: {
-      //     url: 'text',
-      //     dataSrc: "",
-      //     columns: [
-      //       // {data: }
-      //       {data: "dishName"},
-      //       {data: "langName"},
-      //       {data: "dishMenu"},
-      //       {data: "price"},
-      //     ],
-      //   }
-      // });
-      // document.getElementById('counter').innerHTML = `Button was clicked ${data.length} times`;
-      data.forEach(dish => {
-        console.log(dish.dishName, dish.langName, dish.smallDishPrice);
-        $("#dataTable tbody").append(`
-          <tr>
-            <td></td>
-            <td class="selection"><span class="star-o"></span></td>
-            <td>${dish.dishName}</td>
-            <td>${dish.langName}</td>
-            <td>${dish.dishMenu}</td>
-            <td>${dish.largeDishPrice}</td>
-          </tr>
-        `)
-        // dishRow.row.add({
-        //   "dishName" : `${dish.dishName}`,
-        //   "langName" : `${dish.langName}`,
-        //   "dishMenu" : `${dish.dishMenu}`,
-        //   "price" : `${dish.largeDishPrice}`,
-        // }).draw();
-      });
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
+  // var dishRow = $('#dataTable').DataTable({
+  //   ajax: {
+  //     url: 'data.json',
+  //     dataSrc: "",
+  //     columns: [
+  //       // {data: }
+  //       {data: "dishName"},
+  //       {data: "langName"},
+  //       {data: "dishMenu"},
+  //       {data: "price"},
+  //     ],
+  //   }
+  // });
+  // fetch('/selectDish', {method: 'GET'})
+  //   .then(function(response) {
+  //     if(response.ok) return response.json();
+  //     throw new Error('Request failed.');
+  //   })
+  //   .then(function(data) {
+  //     // document.getElementById('counter').innerHTML = `Button was clicked ${data.length} times`;
+  //     data.forEach(dish => {
+  //       console.log(dish.dishName, dish.langName, dish.smallDishPrice);
+  //       // $("#dataTable tbody").append(`
+  //       //   <tr>
+  //       //     <td></td>
+  //       //     <td class="selection"><span class="star-o"></span></td>
+  //       //     <td>${dish.dishName}</td>
+  //       //     <td>${dish.langName}</td>
+  //       //     <td>${dish.dishMenu}</td>
+  //       //     <td>${dish.largeDishPrice}</td>
+  //       //   </tr>
+  //       // `)
+  //       dishRow.row.add({
+  //         "dishName" : `${dish.dishName}`,
+  //         "langName" : `${dish.langName}`,
+  //         "dishMenu" : `${dish.dishMenu}`,
+  //         "price" : `${dish.largeDishPrice}`,
+  //       }).draw();
+  //     });
+  //   })
+  //   .catch(function(error) {
+  //     console.log(error);
+  //   });
 })
 
 // function selectDish() {
