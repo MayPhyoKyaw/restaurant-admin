@@ -9,6 +9,20 @@ $(document).ready(function () {
 
     var button = document.getElementById('submit_btn');
 
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth()+1;
+    var year = date.getFullYear();
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+
+    if (month < 10) month = "0"+month;
+    if (day < 10) day = "0"+day;
+
+    var created = year+"/"+month+"/"+day+" "+hour+":"+minute+":"+second;
+    console.log(created);
+
     button.addEventListener('click', function (e) {
       var dishName = document.getElementById('dish_Name').value;
       var langName = document.getElementById('lang_Name').value;
@@ -35,7 +49,7 @@ $(document).ready(function () {
           dish_menu: dishMenu,
           meat: meat,
           size: size,
-          created_at: new Date(),
+          created_at: created,
         })
       })
         .then(function (response) {

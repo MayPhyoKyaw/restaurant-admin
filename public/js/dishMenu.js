@@ -60,7 +60,12 @@ $(document).ready(function () {
         render: function(data){
           console.log(data)
           var datetime = data.split(",");
-          return (`<span>Created At: ${datetime[0]}</span><br/><span>Updated At: ${datetime[1]}`)
+          if(data['updated_at'] == null){
+            return (`<span>Created At: ${datetime[0]}</span>`)
+          }
+          else{
+            return (`<span>Created At: ${datetime[0]}</span><br/><span>Updated At: ${datetime[1]}`)
+          }
         }
       },
       { targets: "small-price-dt", data: "smallDishPrice", className: "text", width: "19%" },
@@ -139,7 +144,6 @@ $(document).ready(function () {
         $(row).find('td:eq(4)').html(`<span class="badge badge-light badge-vegetables-dishes">${data['dishMenu']}</span>`)
       }
       ////
-      // $(row).find('td:eq(5)').html(`<span>Created At: ${data["created_at"]}</span><br/><span>Updated At: ${data["updated_at"]}`)
     },
     createdRow: function (row, data, index) {
       $(row).addClass('hover');
@@ -320,6 +324,19 @@ $(document).ready(function () {
 
     var button = document.getElementById('edit_submit_btn');
 
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth()+1;
+    var year = date.getFullYear();
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+
+    if (month < 10) month = "0"+month;
+    if (day < 10) day = "0"+day;
+
+    var updated = year+"/"+month+"/"+day+" "+hour+":"+minute+":"+second;
+
     button.addEventListener('click', function (e) {
       var dishId = $('#edit_dish_id').text();
       var dishName = document.getElementById('edit_dish_Name').value;
@@ -346,7 +363,7 @@ $(document).ready(function () {
           edit_dish_menu: dishMenu,
           edit_meat: meat,
           edit_size: size,
-          updated_at: new Date(),
+          updated_at: updated,
         })
       })
         .then(function (response) {
@@ -364,7 +381,7 @@ $(document).ready(function () {
     });
   })
 
-  $('#dataTable tbody').on('click', '#delete_submit_btn', function () {
+  $('#dataTable tbody').on('click', '#delete_btn', function () {
     console.log("click delete btn")
     $(this).parents('tr').toggleClass("selected")
       .siblings(".selected")
@@ -373,29 +390,33 @@ $(document).ready(function () {
     console.log(data);
     $("#delete_dish_id").append(`${data["id"]}`);
 
-    fetch('/dishMenu.html/delete', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        delete_dish_id: data["id"],
+    var button = document.getElementById('delete_submit_btn');
+
+    button.addEventListener('click', function (e) {
+      fetch('/dishMenu.html/delete', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          delete_dish_id: data["id"],
+        })
       })
+        .then(function (response) {
+          console.log(response)
+          if (response.ok) {
+            console.log('clicked!!');
+            return;
+          }
+          throw new Error('Failed!!');
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      $("#delete_dishMenuConfirmation").modal("hide");
     })
-      .then(function (response) {
-        console.log(response)
-        if (response.ok) {
-          console.log('clicked!!');
-          return;
-        }
-        throw new Error('Failed!!');
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    $("#delete_dishMenuConfirmation").modal("hide");
-  })
+  });
 
   var createButton = document.getElementById('submit_btn');
   createButton.addEventListener('click', function (e) {
