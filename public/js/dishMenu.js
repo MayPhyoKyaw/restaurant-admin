@@ -35,21 +35,29 @@ $(document).ready(function () {
     columns: [
       {
         data: "select",
-        render: function(){
+        render: function () {
           return "<td></td>"
         }
       },
       {
         data: "fav",
-        render: function(){
-            return '<span class="star-o" id="fav"></span>'
+        render: function () {
+          return '<span class="star-o" id="fav"></span>'
         },
         className: "selection"
       },
-      {data: "dishName", className: "text"},
-      {data: "langName", className: "text"},
-      {data: "dishMenu", className: "text"},
-      {data: "price", className: "text"},
+      // { data: "dishName", className: "text" },
+      // { data: "langName", className: "text" },
+      // { data: "dishMenu", className: "text" },
+      // { data: "price", className: "text" },
+      { targets: "dish-name-dt", data: "dishName", className: "text", width: "40%" },
+      { targets: "lang-name-dt", data: "langName", className: "text", width: "30%" },
+      { targets: "dish-menu-dt", data: "dishMenu", className: "text", width: "13%" },
+      { targets: "small-price-dt", data: "smallDishPrice", className: "text", width: "18%" },
+      { targets: "large-price-dt", data: "largeDishPrice", className: "hiddenData"},
+      { targets: "meat-dt", data: "meat", className: "hiddenData"},
+      { targets: "size-dt", data: "size", className: "hiddenData"},
+      { targets: "dish-id-dt", data: "id", className: "hiddenData", searchable: false },
     ],
     order: [[2, 'asc']],
     columnDefs: [
@@ -65,14 +73,14 @@ $(document).ready(function () {
         "orderable": false,
         "width": "1%",
       },
-      { targets: "dish-name-dt", width: "40%" },
-      { targets: "lang-name-dt", width: "30%" },
-      { targets: "dish-menu-dt", width: "13%" },
-      { targets: "small-price-dt", width: "18%" },
-      { targets: "large-price-dt", className: "hiddenData" },
-      { targets: "meat-dt", className: "hiddenData" },
-      { targets: "size-dt", className: "hiddenData" },
-      { targets: "dish-id-dt", className: "hiddenData", searchable: false },
+      // { targets: "dish-name-dt", width: "40%" },
+      // { targets: "lang-name-dt", width: "30%" },
+      // { targets: "dish-menu-dt", width: "13%" },
+      // { targets: "small-price-dt", width: "18%" },
+      // { targets: "large-price-dt", className: "hiddenData" },
+      // { targets: "meat-dt", className: "hiddenData" },
+      // { targets: "size-dt", className: "hiddenData" },
+      // { targets: "dish-id-dt", className: "hiddenData", searchable: false },
     ],
     select: {
       style: 'multi',
@@ -80,6 +88,7 @@ $(document).ready(function () {
       selector: 'td:first-child',
     },
     rowCallback: function (row, data, index) {
+      // console.log("Data => " + data)
       if (data[7] === "Pork") {
         $(row).find('td:eq(3)').html(data[3] + '<span class="badge-pork">Pork</span>')
       }
@@ -103,37 +112,38 @@ $(document).ready(function () {
       }
       console.log(data[5])
     },
-    createdRow: function ( row, data, index ) {
-      // console.log(row);
+    createdRow: function (row, data, index) {
       $(row).addClass('hover');
-    } 
+    }
   });
 
-  $('#dataTable tbody').on('click', '.star-o', function() {
+  $('#dataTable tbody').on('click', '.star-o', function () {
     $(this).toggleClass('star-active');
   });
 
-  fetch('/selectDish', {method: 'GET'})
-    .then(function(response) {
-      if(response.ok) return response.json();
+  fetch('/selectDish', { method: 'GET' })
+    .then(function (response) {
+      if (response.ok) return response.json();
       throw new Error('Request failed.');
     })
-    .then(function(data) {
+    .then(function (data) {
       // document.getElementById('counter').innerHTML = `Button was clicked ${data.length} times`;
       data.forEach(dish => {
-        console.log(dish.dishName, dish.langName, dish.smallDishPrice);
         var rowNode = myTable.row.add({
           // "select": '',
           // "fav" : '',
-          "dishName" : `${dish.dishName}`,
-          "langName" : `${dish.langName}`,
-          "dishMenu" : `${dish.dishMenu}`,
-          "price" : `${dish.largeDishPrice}`,
-        }).draw();   
-        
+          "dishName": `${dish.dishName}`,
+          "langName": `${dish.langName}`,
+          "dishMenu": `${dish.dishMenu}`,
+          "smallDishPrice": `${dish.smallDishPrice}`,
+          "largeDishPrice": `${dish.largeDishPrice}`,
+          "meat": `${dish.meat}`,
+          "size": `${dish.size}`,
+          "id": `${dish._id}`,
+        }).draw();
       });
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log(error);
     });
 
@@ -284,17 +294,17 @@ $(document).ready(function () {
         .catch(function (error) {
           console.log(error);
         });
-        $("#edit_dishMenuModal").modal("hide");
+      $("#edit_dishMenuModal").modal("hide");
     });
   })
 
   var createButton = document.getElementById('submit_btn');
-  createButton.addEventListener('click', function(e){
+  createButton.addEventListener('click', function (e) {
     $("#dishMenuModal").modal("hide");
     location.reload();
   })
 
-  $('#dataTable .star-o').on('click', function() {
+  $('#dataTable .star-o').on('click', function () {
     $(this).toggleClass('star-active');
   });
   $('select').selectpicker();
