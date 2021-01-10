@@ -347,7 +347,7 @@ $(document).ready(function () {
     });
   })
 
-  $('#dataTable tbody').on('click', '#delete_btn', function () {
+  $('#dataTable tbody').on('click', '#delete_submit_btn', function () {
     console.log("click delete tbn")
     $(this).parents('tr').toggleClass("selected")
       .siblings(".selected")
