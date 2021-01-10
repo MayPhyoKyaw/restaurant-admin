@@ -153,12 +153,12 @@ $(document).ready(function () {
     var trIndex = null;
     // trIndex = $(this).parent();
     trIndex = myTable.row(this).node();
-    // console.log(trIndex);
+    console.log(trIndex);
     data1 = myTable.row(this).data();
-    // console.log(data1.price);
+    console.log(data1.smallDishPrice);
     $(trIndex).find("td:nth-child(6)")
       .html(`
-        <span>${data1.price}</span>
+        <span>${data1.smallDishPrice}</span>
         &nbsp;&nbsp;
         <a href="#" id="copy_btn" value="Copy" data-toggle="modal" data-target="#dishMenuConfirmation"><span class="copy-icon"><i class="fas fa-copy fa-fw"></i></span></a>
         &nbsp;&nbsp;
@@ -186,7 +186,7 @@ $(document).ready(function () {
     var trIndex = null;
     trIndex = myTable.row(this).node();
     data1 = myTable.row(this).data()
-    $(trIndex).find('td:nth-child(6)').html(`${data1.price}`);
+    $(trIndex).find('td:nth-child(6)').html(`${data1.smallDishPrice}`);
   });
 
   // change input field style in modal
