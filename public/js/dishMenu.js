@@ -55,9 +55,9 @@ $(document).ready(function () {
       { targets: "dish-name-dt", data: "dishName", className: "text", width: "23%" },
       { targets: "lang-name-dt", data: "langName", className: "text", width: "27%" },
       { targets: "dish-menu-dt", data: "dishMenu", className: "text", width: "12%" },
-      { 
-        targets: "datetime-dt", data:"datetime", className: "text", width: "20%",
-        render: function(data){
+      {
+        targets: "datetime-dt", data: "datetime", className: "text", width: "20%",
+        render: function (data) {
           console.log(data)
           var datetime = data.split(",");
           if(data['updated_at'] == null){
@@ -69,9 +69,9 @@ $(document).ready(function () {
         }
       },
       { targets: "small-price-dt", data: "smallDishPrice", className: "text", width: "19%" },
-      { targets: "large-price-dt", data: "largeDishPrice", className: "hiddenData"},
-      { targets: "meat-dt", data: "meat", className: "hiddenData"},
-      { targets: "size-dt", data: "size", className: "hiddenData"},
+      { targets: "large-price-dt", data: "largeDishPrice", className: "hiddenData" },
+      { targets: "meat-dt", data: "meat", className: "hiddenData" },
+      { targets: "size-dt", data: "size", className: "hiddenData" },
       { targets: "dish-id-dt", data: "id", className: "hiddenData", searchable: false },
     ],
     order: [[2, 'asc']],
@@ -294,7 +294,7 @@ $(document).ready(function () {
     // }
     $('.selectpicker#edit_size').selectpicker('val', sizeSelected);
     $('.selectpicker#edit_meat').selectpicker('val', meatSelected);
-    $('.selectpicker#edit_dish_menu').selectpicker('val',data["dishMenu"]);
+    $('.selectpicker#edit_dish_menu').selectpicker('val', data["dishMenu"]);
     // $('#meat').multiselect({ selectAllValue: 'multiselect-all', enableCaseInsensitiveFiltering: true, enableFiltering: true, maxHeight: '300', buttonWidth: '235', onChange: function (element, checked) { var brands = $('#multiselect1 option:selected'); var selected = []; $(brands).each(function (index, brand) { selected.push([$(this).val()]); }); console.log(selected); } });
     console.log(data);
 
@@ -315,7 +315,7 @@ $(document).ready(function () {
     //   })
     // })
 
-    $("#cancel").on('click', function(){
+    $("#cancel").on('click', function () {
       $("#edit_size option[selected]").removeAttr("selected");
       $("#edit_meat option[selected]").removeAttr("selected");
       $("#edit_dish_menu option[selected]").removeAttr("selected")
