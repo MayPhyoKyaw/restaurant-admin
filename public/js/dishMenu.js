@@ -152,6 +152,7 @@ $(document).ready(function () {
     // trIndex = $(this).parent();
     trIndex = myTable.row(this).node();
     data1 = myTable.row(this).data();
+    console.log(data1)
     $(trIndex).find("td:nth-child(6)")
       .html(`
         <span>${data1.smallDishPrice}</span>
@@ -181,8 +182,17 @@ $(document).ready(function () {
   $("#dataTable tbody").on('mouseleave', '.hover', function () {
     var trIndex = null;
     trIndex = myTable.row(this).node();
-    data1 = myTable.row(this).data()
-    $(trIndex).find('td:nth-child(6)').html(`${data1.smallDishPrice}`);
+    data1 = myTable.row(this).data();
+
+    if (data1["size"] === "Small") {
+      $(trIndex).find('td:nth-child(6)').html(`${data1.smallDishPrice} <span class="badge-size-small">S</span>`);
+    }
+    else if (data1["size"] === "Large") {
+      $(trIndex).find('td:nth-child(6)').html(`${data1.smallDishPrice} <span class="badge-size-large">L</span>`);
+    }
+    else if (data1['size'] === "Small,Large") {
+      $(trIndex).find('td:nth-child(6)').html(`${data1.smallDishPrice} <span class="badge-size-small">S</span><span class="badge-size-large">L</span>`);
+    }
   });
 
   // change input field style in modal
