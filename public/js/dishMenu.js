@@ -88,7 +88,7 @@ $(document).ready(function () {
       selector: 'td:first-child',
     },
     rowCallback: function (row, data, index) {
-      // console.log("Data => " + data)
+      // for dish meat
       if (data["meat"] === "Pork") {
         $(row).find('td:eq(3)').html(data["langName"] + '<span class="badge-pork">Pork</span>')
       }
@@ -101,14 +101,31 @@ $(document).ready(function () {
       else if (data["meat"] === "Beef") {
         $(row).find('td:eq(3)').html(data["langName"] + '<span class="badge-beef">Beef</span>')
       }
+      // for dish size
       if (data["size"] === "Small") {
-        $(row).find('td:eq(5)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span>')
+        $(row).find('td:eq(5)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span> <br/>' + data["largeDishPrice"])
       }
       else if (data["size"] === "Large") {
-        $(row).find('td:eq(5)').html(data["smallDishPrice"] + '<span class="badge-size-large">L</span>')
+        $(row).find('td:eq(5)').html(data["smallDishPrice"] + '<br/>' + data["largeDishPrice"] + '<span class="badge-size-large">L</span> ')
       }
       else if (data['size'] === "Small,Large") {
-        $(row).find('td:eq(5)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span><span class="badge-size-large">L</span>')
+        $(row).find('td:eq(5)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span> </br>' + data["largeDishPrice"] + '<span class="badge-size-large">L</span>')
+      }
+      // for dish menu
+      if (data['dishMenu'] === "Appetizers") {
+        $(row).find('td:eq(4)').html(`<span class="badge badge-light badge-appetizers">${data['dishMenu']}</span>`)
+      }
+      else if (data['dishMenu'] === "Soups") {
+        $(row).find('td:eq(4)').html(`<span class="badge badge-light badge-soups">${data['dishMenu']}</span>`)
+      }
+      else if (data['dishMenu'] === "Salads") {
+        $(row).find('td:eq(4)').html(`<span class="badge badge-light badge-salads">${data['dishMenu']}</span>`)
+      }
+      else if (data['dishMenu'] === "Curries") {
+        $(row).find('td:eq(4)').html(`<span class="badge badge-light badge-curries">${data['dishMenu']}</span>`)
+      }
+      else if (data['dishMenu'] === "Vegetables Dishes") {
+        $(row).find('td:eq(4)').html(`<span class="badge badge-light badge-vegetables-dishes">${data['dishMenu']}</span>`)
       }
     },
     createdRow: function (row, data, index) {
@@ -152,7 +169,10 @@ $(document).ready(function () {
     // trIndex = $(this).parent();
     trIndex = myTable.row(this).node();
     data1 = myTable.row(this).data();
+<<<<<<< HEAD
     // console.log(data1);
+=======
+>>>>>>> refs/remotes/origin/ksp-new
     $(trIndex).find("td:nth-child(6)")
       .html(`
         <span>${data1.smallDishPrice}</span>
@@ -162,6 +182,8 @@ $(document).ready(function () {
         <a href="#" id="edit_btn" value="Edit" data-toggle="modal" data-target="#edit_dishMenuModal"><span class="edit-icon"><i class="far fa-edit fa-fw"></i></span></a>
         &nbsp;&nbsp;
         <a href="#" id="delete_btn" value="Delete" data-toggle="modal" data-target="#dishMenuConfirmation"><span class="delete-icon"><i class="far fa-trash-alt fa-fw"></i></span></a>
+        <br/>
+        <span>${data1.largeDishPrice}</span>
       `);
 
     // click button
@@ -185,13 +207,13 @@ $(document).ready(function () {
     data1 = myTable.row(this).data();
 
     if (data1["size"] === "Small") {
-      $(trIndex).find('td:nth-child(6)').html(`${data1.smallDishPrice} <span class="badge-size-small">S</span>`);
+      $(trIndex).find('td:nth-child(6)').html(`${data1.smallDishPrice} <span class="badge-size-small">S</span> <br/> ${data1.largeDishPrice}`);
     }
     else if (data1["size"] === "Large") {
-      $(trIndex).find('td:nth-child(6)').html(`${data1.smallDishPrice} <span class="badge-size-large">L</span>`);
+      $(trIndex).find('td:nth-child(6)').html(`${data1.smallDishPrice} <br/> ${data1.largeDishPrice} <span class="badge-size-large">L</span> `);
     }
     else if (data1['size'] === "Small,Large") {
-      $(trIndex).find('td:nth-child(6)').html(`${data1.smallDishPrice} <span class="badge-size-small">S</span><span class="badge-size-large">L</span>`);
+      $(trIndex).find('td:nth-child(6)').html(`${data1.smallDishPrice} <span class="badge-size-small">S</span> <br/> ${data1.largeDishPrice} <span class="badge-size-large">L</span>`);
     }
   });
 
