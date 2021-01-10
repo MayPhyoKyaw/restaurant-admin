@@ -55,18 +55,18 @@ $(document).ready(function () {
       { targets: "dish-name-dt", data: "dishName", className: "text", width: "23%" },
       { targets: "lang-name-dt", data: "langName", className: "text", width: "27%" },
       { targets: "dish-menu-dt", data: "dishMenu", className: "text", width: "12%" },
-      { 
-        targets: "datetime-dt", data:"datetime", className: "text", width: "20%",
-        render: function(data){
+      {
+        targets: "datetime-dt", data: "datetime", className: "text", width: "20%",
+        render: function (data) {
           console.log(data)
           var datetime = data.split(",");
           return (`<span>Created At: ${datetime[0]}</span><br/><span>Updated At: ${datetime[1]}`)
         }
       },
       { targets: "small-price-dt", data: "smallDishPrice", className: "text", width: "19%" },
-      { targets: "large-price-dt", data: "largeDishPrice", className: "hiddenData"},
-      { targets: "meat-dt", data: "meat", className: "hiddenData"},
-      { targets: "size-dt", data: "size", className: "hiddenData"},
+      { targets: "large-price-dt", data: "largeDishPrice", className: "hiddenData" },
+      { targets: "meat-dt", data: "meat", className: "hiddenData" },
+      { targets: "size-dt", data: "size", className: "hiddenData" },
       { targets: "dish-id-dt", data: "id", className: "hiddenData", searchable: false },
     ],
     order: [[2, 'asc']],
@@ -290,7 +290,7 @@ $(document).ready(function () {
     // }
     $('.selectpicker#edit_size').selectpicker('val', sizeSelected);
     $('.selectpicker#edit_meat').selectpicker('val', meatSelected);
-    $('.selectpicker#edit_dish_menu').selectpicker('val',data["dishMenu"]);
+    $('.selectpicker#edit_dish_menu').selectpicker('val', data["dishMenu"]);
     // $('#meat').multiselect({ selectAllValue: 'multiselect-all', enableCaseInsensitiveFiltering: true, enableFiltering: true, maxHeight: '300', buttonWidth: '235', onChange: function (element, checked) { var brands = $('#multiselect1 option:selected'); var selected = []; $(brands).each(function (index, brand) { selected.push([$(this).val()]); }); console.log(selected); } });
     console.log(data);
 
@@ -311,7 +311,7 @@ $(document).ready(function () {
     //   })
     // })
 
-    $("#cancel").on('click', function(){
+    $("#cancel").on('click', function () {
       $("#edit_size option[selected]").removeAttr("selected");
       $("#edit_meat option[selected]").removeAttr("selected");
       $("#edit_dish_menu option[selected]").removeAttr("selected")
@@ -364,7 +364,7 @@ $(document).ready(function () {
     });
   })
 
-  $('#dataTable tbody').on('click', '#delete_submit_btn', function () {
+  $('#dataTable tbody').on('click', '#delete_btn', function () {
     console.log("click delete btn")
     $(this).parents('tr').toggleClass("selected")
       .siblings(".selected")
@@ -373,28 +373,32 @@ $(document).ready(function () {
     console.log(data);
     $("#delete_dish_id").append(`${data["id"]}`);
 
-    fetch('/dishMenu.html/delete', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        delete_dish_id: data["id"],
+    var button = document.getElementById('delete_submit_btn');
+
+    button.addEventListener('click', function (e) {
+      fetch('/dishMenu.html/delete', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          delete_dish_id: data["id"],
+        })
       })
+        .then(function (response) {
+          console.log(response)
+          if (response.ok) {
+            console.log('clicked!!');
+            return;
+          }
+          throw new Error('Failed!!');
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      $("#delete_dishMenuConfirmation").modal("hide");
     })
-      .then(function (response) {
-        console.log(response)
-        if (response.ok) {
-          console.log('clicked!!');
-          return;
-        }
-        throw new Error('Failed!!');
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    $("#delete_dishMenuConfirmation").modal("hide");
   })
 
   var createButton = document.getElementById('submit_btn');
