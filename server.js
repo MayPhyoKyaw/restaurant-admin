@@ -266,11 +266,11 @@ app.get('/selectDish', async (req, res) => {
     // const client = new MongoClient(url);
     const dbName = "resturant";
     // connect to your cluster
-    const client = await MongoClient.connect(url, { 
-        useNewUrlParser: true, 
+    const client = await MongoClient.connect(url, {
+        useNewUrlParser: true,
         useUnifiedTopology: true,
     });
-        // specify the DB's name
+    // specify the DB's name
     const dbRes = client.db(dbName);
     console.log("Connected correctly to server for selecting....");
     dbRes.collection('dish').find().toArray((err, result) => {

@@ -50,10 +50,10 @@ $(document).ready(function () {
       // { data: "langName", className: "text" },
       // { data: "dishMenu", className: "text" },
       // { data: "price", className: "text" },
-      { targets: "dish-name-dt", data: "dishName", className: "text", width: "40%" },
+      { targets: "dish-name-dt", data: "dishName", className: "text", width: "35%" },
       { targets: "lang-name-dt", data: "langName", className: "text", width: "30%" },
       { targets: "dish-menu-dt", data: "dishMenu", className: "text", width: "13%" },
-      { targets: "small-price-dt", data: "smallDishPrice", className: "text", width: "18%" },
+      { targets: "small-price-dt", data: "smallDishPrice", className: "text", width: "23%" },
       { targets: "large-price-dt", data: "largeDishPrice", className: "hiddenData"},
       { targets: "meat-dt", data: "meat", className: "hiddenData"},
       { targets: "size-dt", data: "size", className: "hiddenData"},
@@ -89,28 +89,27 @@ $(document).ready(function () {
     },
     rowCallback: function (row, data, index) {
       // console.log("Data => " + data)
-      if (data[7] === "Pork") {
-        $(row).find('td:eq(3)').html(data[3] + '<span class="badge-pork">Pork</span>')
+      if (data["meat"] === "Pork") {
+        $(row).find('td:eq(3)').html(data["langName"] + '<span class="badge-pork">Pork</span>')
       }
-      else if (data[7] === "Chicken") {
-        $(row).find('td:eq(3)').html(data[3] + '<span class="badge-chicken">Chicken</span>')
+      else if (data["meat"] === "Chicken") {
+        $(row).find('td:eq(3)').html(data["langName"] + '<span class="badge-chicken">Chicken</span>')
       }
-      else if (data[7] === "Seafood") {
-        $(row).find('td:eq(3)').html(data[3] + '<span class="badge-seafood">Seafood</span>')
+      else if (data["meat"] === "Seafood") {
+        $(row).find('td:eq(3)').html(data["langName"] + '<span class="badge-seafood">Seafood</span>')
       }
-      else if (data[7] === "Beef") {
-        $(row).find('td:eq(3)').html(data[3] + '<span class="badge-beef">Beef</span>')
+      else if (data["meat"] === "Beef") {
+        $(row).find('td:eq(3)').html(data["langName"] + '<span class="badge-beef">Beef</span>')
       }
-      if (data[8] === "Small") {
-        $(row).find('td:eq(5)').html(data[5] + '<span class="badge-size-small">S</span>')
+      if (data["size"] === "Small") {
+        $(row).find('td:eq(5)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span>')
       }
-      else if (data[8] === "Large") {
-        $(row).find('td:eq(5)').html(data[5] + '<span class="badge-size-large">L</span>')
+      else if (data["size"] === "Large") {
+        $(row).find('td:eq(5)').html(data["smallDishPrice"] + '<span class="badge-size-large">L</span>')
       }
-      else if (data[8] === "Small, Large") {
-        $(row).find('td:eq(5)').html(data[5] + '<span class="badge-size-small">S</span><span class="badge-size-large">L</span>')
+      else if (data['size'] === "Small,Large") {
+        $(row).find('td:eq(5)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span><span class="badge-size-large">L</span>')
       }
-      console.log(data[5])
     },
     createdRow: function (row, data, index) {
       $(row).addClass('hover');
@@ -147,15 +146,12 @@ $(document).ready(function () {
       console.log(error);
     });
 
-  // var rowData = myTable.row();
-  // console.log(rowData);
+  //  hover to see action buttons
   $("#dataTable tbody").on('mouseenter', '.hover', function () {
     var trIndex = null;
     // trIndex = $(this).parent();
     trIndex = myTable.row(this).node();
-    console.log(trIndex);
     data1 = myTable.row(this).data();
-    console.log(data1.smallDishPrice);
     $(trIndex).find("td:nth-child(6)")
       .html(`
         <span>${data1.smallDishPrice}</span>
@@ -200,6 +196,7 @@ $(document).ready(function () {
   // close cancel button to reset modal
   $("#dishMenuModal, #edit_dishMenuModal").on("hidden.bs.modal", function () {
     document.getElementById("dishMenu_form").reset();
+    $("#edit_dish_id").text('');
     // $(".filter-option-inner-inner").text(document.getElementById("dish_menu").title);
     $("#preview").attr("src", "https://placehold.it/720x540");
   })
@@ -304,9 +301,10 @@ $(document).ready(function () {
     location.reload();
   })
 
-  $('#dataTable .star-o').on('click', function () {
-    $(this).toggleClass('star-active');
-  });
-  $('select').selectpicker();
+  var editButton = document.getElementById('edit_submit_btn');
+  editButton.addEventListener('click', function (e) {
+    $("#edit_dishMenuModal").modal("hide");
+    location.reload();
+  })
 
 })
