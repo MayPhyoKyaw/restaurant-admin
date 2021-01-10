@@ -88,7 +88,7 @@ $(document).ready(function () {
       selector: 'td:first-child',
     },
     rowCallback: function (row, data, index) {
-      // console.log("Data => " + data)
+      // for dish meat
       if (data["meat"] === "Pork") {
         $(row).find('td:eq(3)').html(data["langName"] + '<span class="badge-pork">Pork</span>')
       }
@@ -101,6 +101,7 @@ $(document).ready(function () {
       else if (data["meat"] === "Beef") {
         $(row).find('td:eq(3)').html(data["langName"] + '<span class="badge-beef">Beef</span>')
       }
+      // for dish size
       if (data["size"] === "Small") {
         $(row).find('td:eq(5)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span> <br/>' + data["largeDishPrice"])
       }
@@ -109,6 +110,22 @@ $(document).ready(function () {
       }
       else if (data['size'] === "Small,Large") {
         $(row).find('td:eq(5)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span> </br>' + data["largeDishPrice"] + '<span class="badge-size-large">L</span>')
+      }
+      // for dish menu
+      if (data['dishMenu'] === "Appetizers") {
+        $(row).find('td:eq(4)').html(`<span class="badge badge-light badge-appetizers">${data['dishMenu']}</span>`)
+      }
+      else if (data['dishMenu'] === "Soups") {
+        $(row).find('td:eq(4)').html(`<span class="badge badge-light badge-soups">${data['dishMenu']}</span>`)
+      }
+      else if (data['dishMenu'] === "Salads") {
+        $(row).find('td:eq(4)').html(`<span class="badge badge-light badge-salads">${data['dishMenu']}</span>`)
+      }
+      else if (data['dishMenu'] === "Curries") {
+        $(row).find('td:eq(4)').html(`<span class="badge badge-light badge-curries">${data['dishMenu']}</span>`)
+      }
+      else if (data['dishMenu'] === "Vegetables Dishes") {
+        $(row).find('td:eq(4)').html(`<span class="badge badge-light badge-vegetables-dishes">${data['dishMenu']}</span>`)
       }
     },
     createdRow: function (row, data, index) {
