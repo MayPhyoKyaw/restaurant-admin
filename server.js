@@ -247,6 +247,7 @@ app.post('/dishMenu.html/edit', (req, res) => {
                     dishMenu: req.body.edit_dish_menu,
                     meat: req.body.edit_meat,
                     size: req.body.edit_size,
+                    updated_at: req.body.updated_at,
                 },
             };
             // for update many

@@ -1,5 +1,7 @@
 // const MongoClient = require('mongodb').MongoClient;
 
+// import { render } from "pug";
+
 // Replace the uri string with your MongoDB deployment's connection string.
 // const uri = "mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/<dbname>?retryWrites=true&w=majority";
 
@@ -51,10 +53,17 @@ $(document).ready(function () {
       // { data: "dishMenu", className: "text" },
       // { data: "price", className: "text" },
       { targets: "dish-name-dt", data: "dishName", className: "text", width: "23%" },
-      { targets: "lang-name-dt", data: "langName", className: "text", width: "28%" },
+      { targets: "lang-name-dt", data: "langName", className: "text", width: "27%" },
       { targets: "dish-menu-dt", data: "dishMenu", className: "text", width: "12%" },
-      { targets: "datetime-dt", data:"datetime", className: "text", width: "20%"},
-      { targets: "small-price-dt", data: "smallDishPrice", className: "text", width: "18%" },
+      { 
+        targets: "datetime-dt", data:"datetime", className: "text", width: "20%",
+        render: function(data){
+          console.log(data)
+          var datetime = data.split(",");
+          return (`<span>Created At: ${datetime[0]}</span><br/><span>Updated At: ${datetime[1]}`)
+        }
+      },
+      { targets: "small-price-dt", data: "smallDishPrice", className: "text", width: "19%" },
       { targets: "large-price-dt", data: "largeDishPrice", className: "hiddenData"},
       { targets: "meat-dt", data: "meat", className: "hiddenData"},
       { targets: "size-dt", data: "size", className: "hiddenData"},
@@ -90,6 +99,7 @@ $(document).ready(function () {
     },
     rowCallback: function (row, data, index) {
       // for dish meat
+      console.log(data);
       if (data["meat"] === "Pork") {
         $(row).find('td:eq(3)').html(data["langName"] + '<span class="badge-pork">Pork</span>')
       }
@@ -128,6 +138,8 @@ $(document).ready(function () {
       else if (data['dishMenu'] === "Vegetables Dishes") {
         $(row).find('td:eq(4)').html(`<span class="badge badge-light badge-vegetables-dishes">${data['dishMenu']}</span>`)
       }
+      ////
+      // $(row).find('td:eq(5)').html(`<span>Created At: ${data["created_at"]}</span><br/><span>Updated At: ${data["updated_at"]}`)
     },
     createdRow: function (row, data, index) {
       $(row).addClass('hover');
@@ -146,6 +158,7 @@ $(document).ready(function () {
     .then(function (data) {
       // document.getElementById('counter').innerHTML = `Button was clicked ${data.length} times`;
       data.forEach(dish => {
+        console.log(dish.created_at)
         var rowNode = myTable.row.add({
           // "select": '',
           // "fav" : '',
@@ -157,7 +170,7 @@ $(document).ready(function () {
           "meat": `${dish.meat}`,
           "size": `${dish.size}`,
           "id": `${dish._id}`,
-          "datetime": new Date(),
+          "datetime": `${dish.created_at},${dish.updated_at}`,
         }).draw();
       });
     })
@@ -330,6 +343,7 @@ $(document).ready(function () {
           edit_dish_menu: dishMenu,
           edit_meat: meat,
           edit_size: size,
+          updated_at: new Date(),
         })
       })
         .then(function (response) {
@@ -348,7 +362,7 @@ $(document).ready(function () {
   })
 
   $('#dataTable tbody').on('click', '#delete_submit_btn', function () {
-    console.log("click delete tbn")
+    console.log("click delete btn")
     $(this).parents('tr').toggleClass("selected")
       .siblings(".selected")
       .removeClass("selected");
