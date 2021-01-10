@@ -169,10 +169,6 @@ $(document).ready(function () {
     // trIndex = $(this).parent();
     trIndex = myTable.row(this).node();
     data1 = myTable.row(this).data();
-<<<<<<< HEAD
-    // console.log(data1);
-=======
->>>>>>> refs/remotes/origin/ksp-new
     $(trIndex).find("td:nth-child(6)")
       .html(`
         <span>${data1.smallDishPrice}</span>
@@ -268,21 +264,17 @@ $(document).ready(function () {
     var sizeSelected = sizes.split(",");
     var meat = data["meat"];
     var meatSelected = meat.split(",");
-    // var size = $("select#size option:selected").val(`${data.size}`);
     console.log(sizeSelected, meatSelected);
-    for(var i in sizeSelected) {
-      var optionVal = sizeSelected[i];
-      console.log(optionVal);
-      $("select#edit_size").find("option[value="+optionVal+"]").attr("selected", "selected");
-      $('.selectpicker#edit_size').selectpicker('val',optionVal);
-      console.log($('.selectpicker#edit_size').selectpicker('val',optionVal));
-    }
-    for(var j in meatSelected){
-      var optionValM = meatSelected[j];
-      console.log(optionValM);
-      $("select#edit_meat").find("option[value="+optionValM+"]").attr("selected", "selected");
-      $('.selectpicker#edit_meat').selectpicker('val',optionValM);
-    }
+    // for(var i in sizeSelected) {
+    //   var optionVal = sizeSelected[i];
+    //   console.log(optionVal);
+    //   // $("select#edit_size").find("option[value="+optionVal+"]").attr("selected", "selected");
+    //   $('.selectpicker#edit_size').selectpicker('val', sizeSelected);
+    //   // console.log($('.selectpicker#edit_size').selectpicker('val',optionVal));
+    // }
+    $('.selectpicker#edit_size').selectpicker('val', sizeSelected);
+    $('.selectpicker#edit_meat').selectpicker('val', meatSelected);
+    $('.selectpicker#edit_dish_menu').selectpicker('val',data["dishMenu"]);
     // $('#meat').multiselect({ selectAllValue: 'multiselect-all', enableCaseInsensitiveFiltering: true, enableFiltering: true, maxHeight: '300', buttonWidth: '235', onChange: function (element, checked) { var brands = $('#multiselect1 option:selected'); var selected = []; $(brands).each(function (index, brand) { selected.push([$(this).val()]); }); console.log(selected); } });
     console.log(data);
 
@@ -306,6 +298,7 @@ $(document).ready(function () {
     $("#cancel").on('click', function(){
       $("#edit_size option[selected]").removeAttr("selected");
       $("#edit_meat option[selected]").removeAttr("selected");
+      $("#edit_dish_menu option[selected]").removeAttr("selected")
       myTable.rows().deselect();
     })
 
