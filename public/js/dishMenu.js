@@ -102,13 +102,13 @@ $(document).ready(function () {
         $(row).find('td:eq(3)').html(data["langName"] + '<span class="badge-beef">Beef</span>')
       }
       if (data["size"] === "Small") {
-        $(row).find('td:eq(5)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span>')
+        $(row).find('td:eq(5)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span> <br/>' + data["largeDishPrice"])
       }
       else if (data["size"] === "Large") {
-        $(row).find('td:eq(5)').html(data["smallDishPrice"] + '<span class="badge-size-large">L</span>')
+        $(row).find('td:eq(5)').html(data["smallDishPrice"] + '<br/>' + data["largeDishPrice"] + '<span class="badge-size-large">L</span> ')
       }
       else if (data['size'] === "Small,Large") {
-        $(row).find('td:eq(5)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span><span class="badge-size-large">L</span>')
+        $(row).find('td:eq(5)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span> </br>' + data["largeDishPrice"] + '<span class="badge-size-large">L</span>')
       }
     },
     createdRow: function (row, data, index) {
@@ -152,10 +152,10 @@ $(document).ready(function () {
     // trIndex = $(this).parent();
     trIndex = myTable.row(this).node();
     data1 = myTable.row(this).data();
-    console.log(data1)
     $(trIndex).find("td:nth-child(6)")
       .html(`
-        <span>${data1.smallDishPrice}</span>
+        <span>${data1.smallDishPrice}</span><br/>
+        <span>${data1.largeDishPrice}</span>
         &nbsp;&nbsp;
         <a href="#" id="copy_btn" value="Copy" data-toggle="modal" data-target="#dishMenuConfirmation"><span class="copy-icon"><i class="fas fa-copy fa-fw"></i></span></a>
         &nbsp;&nbsp;
@@ -185,13 +185,13 @@ $(document).ready(function () {
     data1 = myTable.row(this).data();
 
     if (data1["size"] === "Small") {
-      $(trIndex).find('td:nth-child(6)').html(`${data1.smallDishPrice} <span class="badge-size-small">S</span>`);
+      $(trIndex).find('td:nth-child(6)').html(`${data1.smallDishPrice} <span class="badge-size-small">S</span> <br/> ${data1.largeDishPrice}`);
     }
     else if (data1["size"] === "Large") {
-      $(trIndex).find('td:nth-child(6)').html(`${data1.smallDishPrice} <span class="badge-size-large">L</span>`);
+      $(trIndex).find('td:nth-child(6)').html(`${data1.smallDishPrice} <br/> ${data1.largeDishPrice} <span class="badge-size-large">L</span> `);
     }
     else if (data1['size'] === "Small,Large") {
-      $(trIndex).find('td:nth-child(6)').html(`${data1.smallDishPrice} <span class="badge-size-small">S</span><span class="badge-size-large">L</span>`);
+      $(trIndex).find('td:nth-child(6)').html(`${data1.smallDishPrice} <span class="badge-size-small">S</span> <br/> ${data1.largeDishPrice} <span class="badge-size-large">L</span>`);
     }
   });
 
