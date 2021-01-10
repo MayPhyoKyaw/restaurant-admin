@@ -380,10 +380,10 @@
                                         <div class="col meat">
                                             <div class="form-outline meat-outline">
                                                 <select class="selectpicker meat-btn" id="edit_meat" multiple title="Choose Meat... " data-live-search="true">
-                                                    <option>Chicken</option>
-                                                    <option>Pork</option>
-                                                    <option>Seafood</option>
-                                                    <option>Beef</option>
+                                                    <option value="Chicken">Chicken</option>
+                                                    <option value="Pork">Pork</option>
+                                                    <option value="Seafood">Seafood</option>
+                                                    <option value="Beef">Beef</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -397,8 +397,8 @@
                                         <div class="col size">
                                             <div class="form-outline size-outline">
                                                 <select class="selectpicker meat-btn" id="edit_size" multiple title="Choose Size... " data-live-search="true">
-                                                    <option>Small</option>
-                                                    <option>Large</option>
+                                                    <option value="Small">Small</option>
+                                                    <option value="Large">Large</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -437,7 +437,7 @@
                             <button type="button" class="btn btn-primary edit-submit-button" id="edit_submit_btn">
                                 <!-- <i class="fa fa-plus-circle fa-fw"></i> -->
                             </button>
-                            <button type="button" class="btn btn-light cancel-button" data-dismiss="modal">
+                            <button type="button" class="btn btn-light cancel-button" id="cancel" data-dismiss="modal">
                                 <i class="fas fa-times fa-fw"></i>Cancel
                             </button>
                         </div>
