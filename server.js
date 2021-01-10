@@ -142,6 +142,7 @@ app.post('/dishMenu.html', (req, res) => {
                 dishMenu: req.body.dish_menu,
                 meat: req.body.meat,
                 size: req.body.size,
+                created_at: req.body.created_at,
             };
             // Insert a single document, wait for promise so we can read it back
             const p = await col.insertOne(personDocument);

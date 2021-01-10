@@ -17,6 +17,8 @@ $(document).ready(function () {
       var dishMenu = $('#dish_menu').val();
       var meat = $('#meat').val();
       var size = $('#size').val();
+      // var createdAt = document.getElementById('datetime').value;
+      // console.log(createdAt);
       console.log('button was clicked');
 
       fetch('/dishMenu.html', {
@@ -33,6 +35,7 @@ $(document).ready(function () {
           dish_menu: dishMenu,
           meat: meat,
           size: size,
+          created_at: new Date(),
         })
       })
         .then(function (response) {

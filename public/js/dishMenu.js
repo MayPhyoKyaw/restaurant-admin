@@ -50,10 +50,11 @@ $(document).ready(function () {
       // { data: "langName", className: "text" },
       // { data: "dishMenu", className: "text" },
       // { data: "price", className: "text" },
-      { targets: "dish-name-dt", data: "dishName", className: "text", width: "35%" },
-      { targets: "lang-name-dt", data: "langName", className: "text", width: "30%" },
-      { targets: "dish-menu-dt", data: "dishMenu", className: "text", width: "13%" },
-      { targets: "small-price-dt", data: "smallDishPrice", className: "text", width: "23%" },
+      { targets: "dish-name-dt", data: "dishName", className: "text", width: "23%" },
+      { targets: "lang-name-dt", data: "langName", className: "text", width: "28%" },
+      { targets: "dish-menu-dt", data: "dishMenu", className: "text", width: "12%" },
+      { targets: "datetime-dt", data:"datetime", className: "text", width: "20%"},
+      { targets: "small-price-dt", data: "smallDishPrice", className: "text", width: "18%" },
       { targets: "large-price-dt", data: "largeDishPrice", className: "hiddenData"},
       { targets: "meat-dt", data: "meat", className: "hiddenData"},
       { targets: "size-dt", data: "size", className: "hiddenData"},
@@ -103,13 +104,13 @@ $(document).ready(function () {
       }
       // for dish size
       if (data["size"] === "Small") {
-        $(row).find('td:eq(5)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span> <br/>' + data["largeDishPrice"])
+        $(row).find('td:eq(6)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span> <br/>' + data["largeDishPrice"])
       }
       else if (data["size"] === "Large") {
-        $(row).find('td:eq(5)').html(data["smallDishPrice"] + '<br/>' + data["largeDishPrice"] + '<span class="badge-size-large">L</span> ')
+        $(row).find('td:eq(6)').html(data["smallDishPrice"] + '<br/>' + data["largeDishPrice"] + '<span class="badge-size-large">L</span> ')
       }
       else if (data['size'] === "Small,Large") {
-        $(row).find('td:eq(5)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span> </br>' + data["largeDishPrice"] + '<span class="badge-size-large">L</span>')
+        $(row).find('td:eq(6)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span> </br>' + data["largeDishPrice"] + '<span class="badge-size-large">L</span>')
       }
       // for dish menu
       if (data['dishMenu'] === "Appetizers") {
@@ -156,6 +157,7 @@ $(document).ready(function () {
           "meat": `${dish.meat}`,
           "size": `${dish.size}`,
           "id": `${dish._id}`,
+          "datetime": new Date(),
         }).draw();
       });
     })
@@ -169,14 +171,11 @@ $(document).ready(function () {
     // trIndex = $(this).parent();
     trIndex = myTable.row(this).node();
     data1 = myTable.row(this).data();
-    $(trIndex).find("td:nth-child(6)")
+    $(trIndex).find("td:nth-child(7)")
       .html(`
         <span>${data1.smallDishPrice}</span>
-        &nbsp;&nbsp;
         <a href="#" id="copy_btn" value="Copy" data-toggle="modal" data-target="#dishMenuConfirmation"><span class="copy-icon"><i class="fas fa-copy fa-fw"></i></span></a>
-        &nbsp;&nbsp;
         <a href="#" id="edit_btn" value="Edit" data-toggle="modal" data-target="#edit_dishMenuModal"><span class="edit-icon"><i class="far fa-edit fa-fw"></i></span></a>
-        &nbsp;&nbsp;
         <a href="#" id="delete_btn" value="Delete" data-toggle="modal" data-target="#delete_dishMenuConfirmation"><span class="delete-icon"><i class="far fa-trash-alt fa-fw"></i></span></a>
         <br/>
         <span>${data1.largeDishPrice}</span>
@@ -203,13 +202,13 @@ $(document).ready(function () {
     data1 = myTable.row(this).data();
 
     if (data1["size"] === "Small") {
-      $(trIndex).find('td:nth-child(6)').html(`${data1.smallDishPrice} <span class="badge-size-small">S</span> <br/> ${data1.largeDishPrice}`);
+      $(trIndex).find('td:nth-child(7)').html(`${data1.smallDishPrice} <span class="badge-size-small">S</span> <br/> ${data1.largeDishPrice}`);
     }
     else if (data1["size"] === "Large") {
-      $(trIndex).find('td:nth-child(6)').html(`${data1.smallDishPrice} <br/> ${data1.largeDishPrice} <span class="badge-size-large">L</span> `);
+      $(trIndex).find('td:nth-child(7)').html(`${data1.smallDishPrice} <br/> ${data1.largeDishPrice} <span class="badge-size-large">L</span> `);
     }
     else if (data1['size'] === "Small,Large") {
-      $(trIndex).find('td:nth-child(6)').html(`${data1.smallDishPrice} <span class="badge-size-small">S</span> <br/> ${data1.largeDishPrice} <span class="badge-size-large">L</span>`);
+      $(trIndex).find('td:nth-child(7)').html(`${data1.smallDishPrice} <span class="badge-size-small">S</span> <br/> ${data1.largeDishPrice} <span class="badge-size-large">L</span>`);
     }
   });
 
@@ -227,6 +226,7 @@ $(document).ready(function () {
     $("#edit_dish_id").text('');
     $("#delete_dish_id").text('');
     $("#preview").attr("src", "https://placehold.it/720x540");
+    myTable.rows().deselect();
   })
 
   // upload image
@@ -347,7 +347,7 @@ $(document).ready(function () {
     });
   })
 
-  $('#dataTable tbody').on('click', '#delete_btn', function () {
+  $('#dataTable tbody').on('click', '#delete_submit_btn', function () {
     console.log("click delete tbn")
     $(this).parents('tr').toggleClass("selected")
       .siblings(".selected")
