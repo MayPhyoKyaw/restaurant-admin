@@ -177,7 +177,7 @@ $(document).ready(function () {
         &nbsp;&nbsp;
         <a href="#" id="edit_btn" value="Edit" data-toggle="modal" data-target="#edit_dishMenuModal"><span class="edit-icon"><i class="far fa-edit fa-fw"></i></span></a>
         &nbsp;&nbsp;
-        <a href="#" id="delete_btn" value="Delete" data-toggle="modal" data-target="#dishMenuConfirmation"><span class="delete-icon"><i class="far fa-trash-alt fa-fw"></i></span></a>
+        <a href="#" id="delete_btn" value="Delete" data-toggle="modal" data-target="#delete_dishMenuConfirmation"><span class="delete-icon"><i class="far fa-trash-alt fa-fw"></i></span></a>
         <br/>
         <span>${data1.largeDishPrice}</span>
       `);
@@ -190,9 +190,9 @@ $(document).ready(function () {
       $(".submit-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
       $(".edit-submit-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
       $(".danger-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
-      $(".confirmation-msg").html(`<div class="text-center">
-      <p>Are you sure want to ${buttonValue}?</p>
-      </div>`);
+      // $(".confirmation-msg").html(`<div class="text-center">
+      // <p>Are you sure want to ${buttonValue}?</p>
+      // </div>`);
     });
   });
 
@@ -222,10 +222,10 @@ $(document).ready(function () {
   }
 
   // close cancel button to reset modal
-  $("#dishMenuModal, #edit_dishMenuModal").on("hidden.bs.modal", function () {
+  $("#dishMenuModal, #edit_dishMenuModal, #delete_dishMenuConfirmation").on("hidden.bs.modal", function () {
     document.getElementById("dishMenu_form").reset();
     $("#edit_dish_id").text('');
-    // $(".filter-option-inner-inner").text(document.getElementById("dish_menu").title);
+    $("#delete_dish_id").text('');
     $("#preview").attr("src", "https://placehold.it/720x540");
   })
 
@@ -347,6 +347,39 @@ $(document).ready(function () {
     });
   })
 
+  $('#dataTable tbody').on('click', '#delete_btn', function () {
+    console.log("click delete tbn")
+    $(this).parents('tr').toggleClass("selected")
+      .siblings(".selected")
+      .removeClass("selected");
+    var data = myTable.row($(this).parents('tr')).data();
+    console.log(data);
+    $("#delete_dish_id").append(`${data["id"]}`);
+
+    fetch('/dishMenu.html/delete', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        delete_dish_id: data["id"],
+      })
+    })
+      .then(function (response) {
+        console.log(response)
+        if (response.ok) {
+          console.log('clicked!!');
+          return;
+        }
+        throw new Error('Failed!!');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    $("#delete_dishMenuConfirmation").modal("hide");
+  })
+
   var createButton = document.getElementById('submit_btn');
   createButton.addEventListener('click', function (e) {
     $("#dishMenuModal").modal("hide");
@@ -356,6 +389,12 @@ $(document).ready(function () {
   var editButton = document.getElementById('edit_submit_btn');
   editButton.addEventListener('click', function (e) {
     $("#edit_dishMenuModal").modal("hide");
+    location.reload();
+  })
+
+  var editButton = document.getElementById('delete_submit_btn');
+  editButton.addEventListener('click', function (e) {
+    $("#delete_dishMenuConfirmation").modal("hide");
     location.reload();
   })
 

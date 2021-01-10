@@ -278,3 +278,35 @@ app.get('/selectDish', async (req, res) => {
         res.send(result);
     });
 });
+
+// add a document to the DB collection recording the click event
+app.post('/dishMenu.html/delete', (req, res) => {
+    console.log(req.body)
+    const url = 'mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/testinggg?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true';
+    const client = new MongoClient(url);
+    const dbName = "resturant"
+
+    async function DeleteRun() {
+        try {
+            await client.connect();
+            console.log("Connected correctly to server for deleting....");
+            const database = client.db(dbName);
+            const collection = database.collection("dish");
+            console.log(req.body.delete_dish_id)
+            // create a filter for a movie to update
+            const filter = {
+                _id: req.body.delete_dish_id,
+            };
+            // for update many
+            const result = await collection.deleteOne(filter);
+            if (result.deletedCount === 1) {
+                console.dir("Successfully deleted one document.");
+            } else {
+                console.log("No documents matched the query. Deleted 0 documents.");
+            }
+        } finally {
+            await client.close();
+        }
+    }
+    DeleteRun().catch(console.dir);
+});

@@ -178,7 +178,7 @@
                                     <button type="button" value="Edit" class="btn btn-primary edit-button" id="edit_button" data-toggle="modal" data-target="#edit_dishMenuModal">
                                         <i class="fas fa-pencil-alt fa-fw"></i>Edit
                                     </button>
-                                    <button type="button" value="Delete" class="btn btn-primary delete-button" id="delete_button" data-toggle="modal" data-target="#dishMenuConfirmation">
+                                    <button type="button" value="Delete" class="btn btn-primary delete-button" id="delete_button" data-toggle="modal" data-target="#delete_dishMenuConfirmation">
                                         <i class="fas fa-trash fa-fw"></i>Delete
                                     </button>
                                 </div>
@@ -276,11 +276,7 @@
                                         </div>
                                         <div class="col size">
                                             <div class="form-outline size-outline">
-<<<<<<< HEAD
-                                                <select class="selectpicker meat-btn" id="size" multiple title="Choose Size... " data-live-search="true">
-=======
                                                 <select class="selectpicker meat-btn" id="size" multiple title="Choose Size... ">
->>>>>>> refs/remotes/origin/ksp-new
                                                     <option value="Small">Small</option>
                                                     <option value="Large">Large</option>
                                                 </select>
@@ -459,7 +455,7 @@
             <!-- DishMenu edit Modal-->
 
             <!-- DishMenu delete Data Modal-->
-            <div class="modal fade" id="dishMenuConfirmation" tabindex="-1" role="dialog" aria-labelledby="dishMenuConfirmation" aria-hidden="true">
+            <div class="modal fade" id="delete_dishMenuConfirmation" tabindex="-1" role="dialog" aria-labelledby="dishMenuConfirmation" aria-hidden="true">
                 <div class="modal-dialog modal-notify modal-danger" role="document">
                     <!--Content-->
                     <div class="modal-content">
@@ -475,13 +471,14 @@
                         <!--Body-->
                         <div class="modal-body confirmation-msg">
                             <div class="text-center">
+                                <span id="delete_dish_id"></span>
                                 <p>Are you sure want to delete?</p>
                             </div>
                         </div>
 
                         <!--Footer-->
                         <div class="modal-footer justify-content-center">
-                            <button type="button" class="btn btn-danger danger-button" id="submit" data-dismiss="modal">
+                            <button type="button" class="btn btn-danger danger-button" id="delete_submit_btn" data-dismiss="modal">
                                 <!-- <i class="fa fa-plus-circle fa-fw"></i> -->
                             </button>
                             <button type="button" class="btn btn-light cancel-button" data-dismiss="modal">
