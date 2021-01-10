@@ -104,17 +104,15 @@ $(document).ready(function () {
       console.log(data[5])
     },
     createdRow: function ( row, data, index ) {
-      console.log(row);
+      // console.log(row);
       $(row).addClass('hover');
     } 
   });
+
   $('#dataTable tbody').on('click', '.star-o', function() {
     $(this).toggleClass('star-active');
   });
-//   $('.star-o').on('click', function() {
-//     console.log("click favourite")
-//     $(this).toggleClass('star-active');
-// });
+
   fetch('/selectDish', {method: 'GET'})
     .then(function(response) {
       if(response.ok) return response.json();
@@ -131,25 +129,26 @@ $(document).ready(function () {
           "langName" : `${dish.langName}`,
           "dishMenu" : `${dish.dishMenu}`,
           "price" : `${dish.largeDishPrice}`,
-        }).draw();      
+        }).draw();   
+        
       });
     })
     .catch(function(error) {
       console.log(error);
     });
 
-  // copy, edit and del button
-  var salary = 2000;
   // var rowData = myTable.row();
   // console.log(rowData);
   $("#dataTable tbody").on('mouseenter', '.hover', function () {
     var trIndex = null;
     // trIndex = $(this).parent();
     trIndex = myTable.row(this).node();
-    console.log(trIndex);
+    // console.log(trIndex);
+    data1 = myTable.row(this).data();
+    // console.log(data1.price);
     $(trIndex).find("td:nth-child(6)")
       .html(`
-        <span>${salary}</span>
+        <span>${data1.price}</span>
         &nbsp;&nbsp;
         <a href="#" id="copy_btn" value="Copy" data-toggle="modal" data-target="#dishMenuConfirmation"><span class="copy-icon"><i class="fas fa-copy fa-fw"></i></span></a>
         &nbsp;&nbsp;
@@ -176,7 +175,8 @@ $(document).ready(function () {
   $("#dataTable tbody").on('mouseleave', '.hover', function () {
     var trIndex = null;
     trIndex = myTable.row(this).node();
-    $(trIndex).find('td:nth-child(6)').html(`${salary}`);
+    data1 = myTable.row(this).data()
+    $(trIndex).find('td:nth-child(6)').html(`${data1.price}`);
   });
 
   // change input field style in modal
