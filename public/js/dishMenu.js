@@ -154,14 +154,15 @@ $(document).ready(function () {
     data1 = myTable.row(this).data();
     $(trIndex).find("td:nth-child(6)")
       .html(`
-        <span>${data1.smallDishPrice}</span><br/>
-        <span>${data1.largeDishPrice}</span>
+        <span>${data1.smallDishPrice}</span>
         &nbsp;&nbsp;
         <a href="#" id="copy_btn" value="Copy" data-toggle="modal" data-target="#dishMenuConfirmation"><span class="copy-icon"><i class="fas fa-copy fa-fw"></i></span></a>
         &nbsp;&nbsp;
         <a href="#" id="edit_btn" value="Edit" data-toggle="modal" data-target="#edit_dishMenuModal"><span class="edit-icon"><i class="far fa-edit fa-fw"></i></span></a>
         &nbsp;&nbsp;
         <a href="#" id="delete_btn" value="Delete" data-toggle="modal" data-target="#dishMenuConfirmation"><span class="delete-icon"><i class="far fa-trash-alt fa-fw"></i></span></a>
+        <br/>
+        <span>${data1.largeDishPrice}</span>
       `);
 
     // click button
