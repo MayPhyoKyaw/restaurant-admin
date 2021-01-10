@@ -153,9 +153,9 @@ $(document).ready(function () {
     var trIndex = null;
     // trIndex = $(this).parent();
     trIndex = myTable.row(this).node();
-    console.log(trIndex);
+    // console.log(trIndex);
     data1 = myTable.row(this).data();
-    console.log(data1.smallDishPrice);
+    // console.log(data1.smallDishPrice);
     $(trIndex).find("td:nth-child(6)")
       .html(`
         <span>${data1.smallDishPrice}</span>
@@ -228,11 +228,16 @@ $(document).ready(function () {
       .siblings(".selected")
       .removeClass("selected");
     var data = myTable.row($(this).parents('tr')).data();
+    console.log(data);
     $("#edit_dish_id").append(`${data["id"]}`)
     document.getElementById("edit_dish_Name").value = data["dishName"];
     document.getElementById("edit_lang_Name").value = data["langName"];
     document.getElementById("edit_small_price").value = data["smallDishPrice"];
     document.getElementById("edit_large_price").value = data["largeDishPrice"];
+    // document.getElementById("size").value = data["size"];
+    $("#size option[value='Small'").attr("selected", "selected");
+    // var size = $("select#size option:selected").val(`${data.size}`);
+    console.log(size)
     // $('#meat').multiselect({ selectAllValue: 'multiselect-all', enableCaseInsensitiveFiltering: true, enableFiltering: true, maxHeight: '300', buttonWidth: '235', onChange: function (element, checked) { var brands = $('#multiselect1 option:selected'); var selected = []; $(brands).each(function (index, brand) { selected.push([$(this).val()]); }); console.log(selected); } });
     console.log(data);
 
