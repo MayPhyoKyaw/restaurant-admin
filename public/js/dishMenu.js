@@ -158,7 +158,10 @@ $(document).ready(function () {
     .then(function (data) {
       // document.getElementById('counter').innerHTML = `Button was clicked ${data.length} times`;
       data.forEach(dish => {
-        console.log(dish.created_at)
+        console.log(dish);
+        // console.log(`${dish.created_at}`);
+        // var crDate = dish.created_at;
+        // console.log(`${crDate.getFullYear()}-${crDate.getMonth()+1}-${crDate.getDate()}`)
         var rowNode = myTable.row.add({
           // "select": '',
           // "fav" : '',
