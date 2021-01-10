@@ -326,7 +326,7 @@ div.dataTables_wrapper div.dataTables_length select {
     cursor: pointer;
 }
 
-.text{
+.text {
     padding-top: 8px !important;
 }
 
@@ -340,9 +340,10 @@ div.dataTables_wrapper div.dataTables_length select {
 
 /* modal input field style */
 
-#edit_dish_id {
+
+/* #edit_dish_id {
     display: none;
-}
+} */
 
 .form-label {
     margin-bottom: 0;
