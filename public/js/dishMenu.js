@@ -225,11 +225,11 @@ $(document).ready(function () {
       .siblings(".selected")
       .removeClass("selected");
     var data = myTable.row($(this).parents('tr')).data();
-    $("#edit_dish_id").append(`${data[9]}`)
-    document.getElementById("edit_dish_Name").value = data[2];
-    document.getElementById("edit_lang_Name").value = data[3];
-    document.getElementById("edit_small_price").value = data[5];
-    document.getElementById("edit_large_price").value = data[6];
+    $("#edit_dish_id").append(`${data["id"]}`)
+    document.getElementById("edit_dish_Name").value = data["dishName"];
+    document.getElementById("edit_lang_Name").value = data["langName"];
+    document.getElementById("edit_small_price").value = data["smallDishPrice"];
+    document.getElementById("edit_large_price").value = data["largeDishPrice"];
     // $('#meat').multiselect({ selectAllValue: 'multiselect-all', enableCaseInsensitiveFiltering: true, enableFiltering: true, maxHeight: '300', buttonWidth: '235', onChange: function (element, checked) { var brands = $('#multiselect1 option:selected'); var selected = []; $(brands).each(function (index, brand) { selected.push([$(this).val()]); }); console.log(selected); } });
     console.log(data);
 
