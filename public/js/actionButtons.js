@@ -85,17 +85,6 @@ $(document).ready(function () {
       </div>`);
   })
 
-  // delete data
-  $("#delete_button").click(function () {
-    var buttonValue = $(this).attr("value");
-    var header = $(".card-header").attr("value");
-    $(".heading").text(`${buttonValue} ${header}`);
-    $(".danger-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
-    // $(".confirmation-msg").html(`<div class="text-center">
-    //   <p>Are you sure want to ${buttonValue}?</p>
-    //   </div>`);
-  })
-
   // var dishRow = $('#dataTable').DataTable({
   //   ajax: {
   //     url: 'data.json',
@@ -140,7 +129,3 @@ $(document).ready(function () {
   //     console.log(error);
   //   });
 })
-
-// function selectDish() {
-
-// }

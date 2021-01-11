@@ -1,5 +1,7 @@
 // const MongoClient = require('mongodb').MongoClient;
 
+// const { type } = require("jquery");
+
 // import { render } from "pug";
 
 // Replace the uri string with your MongoDB deployment's connection string.
@@ -58,13 +60,14 @@ $(document).ready(function () {
       {
         targets: "datetime-dt", data: "datetime", className: "text", width: "20%",
         render: function (data) {
-          console.log(data)
+          // console.log(data)
           var datetime = data.split(",");
-          if(data['updated_at'] == null){
-            return (`<span>Created At: ${datetime[0]}</span>`)
+          // console.log(datetime[1]);
+          if(datetime[1] === "undefined"){
+            return (`<span><b>Created At:</b> ${datetime[0]}</span>`)
           }
           else{
-            return (`<span>Created At: ${datetime[0]}</span><br/><span>Updated At: ${datetime[1]}`)
+            return (`<span><b>Created At:</b> ${datetime[0]}</span><br/><span><b>Edited At:</b> ${datetime[1]}`)
           }
         }
       },
@@ -104,7 +107,7 @@ $(document).ready(function () {
     },
     rowCallback: function (row, data, index) {
       // for dish meat
-      console.log(data);
+      // console.log(data);
       if (data["meat"] === "Pork") {
         $(row).find('td:eq(3)').html(data["langName"] + '<span class="badge-pork">Pork</span>')
       }
@@ -162,7 +165,7 @@ $(document).ready(function () {
     .then(function (data) {
       // document.getElementById('counter').innerHTML = `Button was clicked ${data.length} times`;
       data.forEach(dish => {
-        console.log(dish);
+        // console.log(dish);
         // console.log(`${dish.created_at}`);
         // var crDate = dish.created_at;
         // console.log(`${crDate.getFullYear()}-${crDate.getMonth()+1}-${crDate.getDate()}`)
@@ -220,7 +223,7 @@ $(document).ready(function () {
     var trIndex = null;
     trIndex = myTable.row(this).node();
     data1 = myTable.row(this).data();
-
+    // console.log(trIndex);
     if (data1["size"] === "Small") {
       $(trIndex).find('td:nth-child(7)').html(`${data1.smallDishPrice} <span class="badge-size-small">S</span> <br/> ${data1.largeDishPrice}`);
     }
@@ -414,7 +417,7 @@ $(document).ready(function () {
         .catch(function (error) {
           console.log(error);
         });
-      $("#delete_dishMenuConfirmation").modal("hide");
+      // $("#delete_dishMenuConfirmation").modal("hide");
     })
   });
 
@@ -436,4 +439,184 @@ $(document).ready(function () {
     location.reload();
   })
 
+  // delete data
+  $("#delete_button").click(function () {
+    var buttonValue = $(this).attr("value");
+    var header = $(".card-header").attr("value");
+    $(".heading").text(`${buttonValue} ${header}`);
+    $(".danger-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
+    var delRowsSelected = myTable.rows('.selected').data().length;
+    $(".confirmation-msg").html(`<div class="text-center">
+      <p>Are you sure want to Delete ${delRowsSelected} selected rows?</p>
+    </div>`);
+
+    var delDATAs = myTable.rows('.selected').data();
+    // console.log(delDATAs);
+    // var delID = delDATAs.filter(delIDs => {
+    //   console.log(delIDs.id)
+    //   return (delIDs.id !== null);
+    // })
+    var dels = delDATAs.map(delids => {
+      // console.log(delids.id);
+      return delids.id
+    })
+    console.log(dels)
+    for(i=0; i<dels.length; i++){
+      console.log(dels[i])
+    }
+    function del(d){
+      var d1, i;
+      console.log(d[0], d[1], d.length)
+      for(i=0; i<d.length; i++){
+        console.log(d[i], i)
+        d1 = d[i];
+        return d1;
+      }
+    }
+    var delIDs = del(dels);
+    // console.log(delIDs)
+    // var dels = delDATAs.split(",");
+    // console.log(typeof(delDATAs));
+    // console.log(delID);
+    // console.log(delIDs[0].id, delIDs[1].id);
+    
+    var button = document.getElementById('delete_mul_submit_btn');
+
+    button.addEventListener('click', function (e) {
+      fetch('/dishMenu.html/deleteMul', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          delete_mul_dish_id: delIDs,
+        })
+      })
+        .then(function (response) {
+          console.log(response)
+          if (response.ok) {
+            console.log('clicked!!');
+            return;
+          }
+          throw new Error('Failed!!');
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      $("#deleteMul_dishMenuConfirmation").modal("hide");
+      location.reload();
+    })
+  })
+
+  $("#edit_button").click(function () {
+    var sel = myTable.rows('.selected').data().length;
+    if(sel > 1){
+      // $("#edit_dishMenuModal").modal("hide");
+      $("#editWarning").modal("show");
+      $(".warning-msg").html(`
+        <div class="text-center">
+          <p>You are selected more than one rows to edit!!!</p>
+          <p>Please Select A Row Again.</p>
+        </div>`
+      );
+    }
+    else if(sel == 0){
+      $("#editWarning").modal("show");
+      $(".warning-msg").html(`
+        <div class="text-center">
+          <p>You need to select a row to edit!!!</p>
+          <p>Please Select A Row.</p>
+        </div>`
+      );
+    }
+    else{
+      var selected = myTable.row('.selected').data();
+      console.log(selected.id);
+      $("#edit_dishMenuModal").modal("show");
+
+      $("#edit_dish_id").append(`${selected.id}`)
+      document.getElementById("edit_dish_Name").value = selected.dishName;
+      document.getElementById("edit_lang_Name").value = selected.langName;
+      document.getElementById("edit_small_price").value = selected.smallDishPrice;
+      document.getElementById("edit_large_price").value = selected.largeDishPrice;
+      // document.getElementById("size").value = data["size"];
+      var sizes = selected.size;
+      var sizeSelected = sizes.split(",");
+      var meat = selected.meat;
+      var meatSelected = meat.split(",");
+      console.log(sizeSelected, meatSelected);
+    
+      $('.selectpicker#edit_size').selectpicker('val', sizeSelected);
+      $('.selectpicker#edit_meat').selectpicker('val', meatSelected);
+      $('.selectpicker#edit_dish_menu').selectpicker('val', selected.dishMenu);
+      // $('#meat').multiselect({ selectAllValue: 'multiselect-all', enableCaseInsensitiveFiltering: true, enableFiltering: true, maxHeight: '300', buttonWidth: '235', onChange: function (element, checked) { var brands = $('#multiselect1 option:selected'); var selected = []; $(brands).each(function (index, brand) { selected.push([$(this).val()]); }); console.log(selected); } });
+      // console.log(data);
+
+      $("#cancel").on('click', function () {
+        $("#edit_size option[selected]").removeAttr("selected");
+        $("#edit_meat option[selected]").removeAttr("selected");
+        $("#edit_dish_menu option[selected]").removeAttr("selected")
+        myTable.rows().deselect();
+      })
+
+      var button = document.getElementById('edit_submit_btn');
+
+      var date = new Date();
+      var day = date.getDate();
+      var month = date.getMonth()+1;
+      var year = date.getFullYear();
+      var hour = date.getHours();
+      var minute = date.getMinutes();
+      var second = date.getSeconds();
+
+      if (month < 10) month = "0"+month;
+      if (day < 10) day = "0"+day;
+
+      var updated = year+"/"+month+"/"+day+" "+hour+":"+minute+":"+second;
+
+      button.addEventListener('click', function (e) {
+        var dishId = $('#edit_dish_id').text();
+        var dishName = document.getElementById('edit_dish_Name').value;
+        var langName = document.getElementById('edit_lang_Name').value;
+        var smallDishPrice = document.getElementById('edit_small_price').value;
+        var largeDishPrice = document.getElementById('edit_large_price').value;
+        var dishMenu = $('#edit_dish_menu').val();
+        var meat = $('#edit_meat').val();
+        var size = $('#edit_size').val();
+        console.log('button was clicked');
+
+        fetch('/dishMenu.html/edit', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            edit_dish_id: dishId,
+            edit_dish_name: dishName,
+            edit_lang_name: langName,
+            edit_small_dish_price: smallDishPrice,
+            edit_large_dish_price: largeDishPrice,
+            edit_dish_menu: dishMenu,
+            edit_meat: meat,
+            edit_size: size,
+            updated_at: updated,
+          })
+        })
+          .then(function (response) {
+            console.log(response)
+            if (response.ok) {
+              console.log('clicked!!');
+              return;
+            }
+            throw new Error('Failed!!');
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        $("#edit_dishMenuModal").modal("hide");
+      });
+    }
+  })
 })

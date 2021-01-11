@@ -14,6 +14,9 @@
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
     <link href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css" rel="stylesheet" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 
@@ -175,10 +178,10 @@
                                     <button type="button" value="Copy" class="btn btn-primary copy-button" id="copy_button" data-toggle="modal" data-target="#dishMenuConfirmation">
                                         <i class="fas fa-copy fa-fw"></i>Copy
                                     </button>
-                                    <button type="button" value="Edit" class="btn btn-primary edit-button" id="edit_button" data-toggle="modal" data-target="#edit_dishMenuModal">
+                                    <button type="button" value="Edit" class="btn btn-primary edit-button" id="edit_button" data-toggle="modal">
                                         <i class="fas fa-pencil-alt fa-fw"></i>Edit
                                     </button>
-                                    <button type="button" value="Delete" class="btn btn-primary delete-button" id="delete_button" data-toggle="modal" data-target="#delete_dishMenuConfirmation">
+                                    <button type="button" value="Delete" class="btn btn-primary delete-button" id="delete_button" data-toggle="modal" data-target="#deleteMul_dishMenuConfirmation">
                                         <i class="fas fa-trash fa-fw"></i>Delete
                                     </button>
                                 </div>
@@ -490,7 +493,71 @@
                     <!--/.Content-->
                 </div>
             </div>
+            <!-- Delete Multiple data modal-->
+            <div class="modal fade" id="deleteMul_dishMenuConfirmation" tabindex="-1" role="dialog" aria-labelledby="dishMenuConfirmation" aria-hidden="true">
+                <div class="modal-dialog modal-notify modal-danger" role="document">
+                    <!--Content-->
+                    <div class="modal-content">
+                        <!--Header-->
+                        <div class="modal-header">
+                            <span class="heading lead"></span>
+
+                            <button type="button" class="close" data-dismiss="modal" id="cancel" aria-label="Close">
+                                <span aria-hidden="true" class="white-text">&times;</span>
+                            </button>
+                        </div>
+
+                        <!--Body-->
+                        <div class="modal-body confirmation-msg">
+                            <div class="text-center">
+                                <span id="delete_dish_id"></span>
+                            </div>
+                        </div>
+
+                        <!--Footer-->
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-danger danger-button" id="delete_mul_submit_btn" data-dismiss="modal">
+                                <!-- <i class="fa fa-plus-circle fa-fw"></i> -->
+                            </button>
+                            <button type="button" class="btn btn-light cancel-button" data-dismiss="modal">
+                                <i class="fas fa-times fa-fw"></i>Cancel
+                            </button>
+                        </div>
+                    </div>
+                    <!--/.Content-->
+                </div>
+            </div>
             <!-- DishMenu delete Data Modal-->
+
+            <div class="modal fade" id="editWarning" tabindex="-1" role="dialog" aria-labelledby="selectMulWarning" aria-hidden="true">
+                <div class="modal-dialog modal-notify modal-danger" role="document">
+                    <!--Content-->
+                    <div class="modal-content">
+                        <!--Header-->
+                        <div class="modal-header">
+                            <span class="lead" style="color: burlywood; font-weight: 400;">Warning</span>
+
+                            <button type="button" class="close" data-dismiss="modal" id="cancel" aria-label="Close">
+                                <span aria-hidden="true" class="white-text">&times;</span>
+                            </button>
+                        </div>
+
+                        <!--Body-->
+                        <div class="modal-body warning-msg">
+                            <div class="text-center">
+                            </div>
+                        </div>
+
+                        <!--Footer-->
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-light cancel-button" data-dismiss="modal">
+                                <i class="fas fa-times fa-fw"></i>Cancel
+                            </button>
+                        </div>
+                    </div>
+                    <!--/.Content-->
+                </div>
+            </div>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid">
                     <div class="d-flex align-items-center justify-content-between small">
