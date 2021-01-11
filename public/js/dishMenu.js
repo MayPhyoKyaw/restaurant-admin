@@ -453,7 +453,7 @@ $(document).ready(function () {
     var delDATAs = myTable.rows('.selected').data();
     console.log(delDATAs);
     var delIDArr = [];
-    var delID = delDATAs.filter(delIDs => {
+    delDATAs.filter(delIDs => {
       console.log(delIDs.id)
       delIDArr.push(delIDs.id)
       // return (delIDs.id !== null);
@@ -484,33 +484,33 @@ $(document).ready(function () {
     // // console.log(delID);
     // // console.log(delIDs[0].id, delIDs[1].id);
 
-    // var button = document.getElementById('delete_mul_submit_btn');
+    var button = document.getElementById('delete_mul_submit_btn');
 
-    // button.addEventListener('click', function (e) {
-    //   fetch('/dishMenu.html/deleteMul', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Accept': 'application/json',
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //       delete_mul_dish_id: delIDs,
-    //     })
-    //   })
-    //     .then(function (response) {
-    //       console.log(response)
-    //       if (response.ok) {
-    //         console.log('clicked!!');
-    //         return;
-    //       }
-    //       throw new Error('Failed!!');
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    //   $("#deleteMul_dishMenuConfirmation").modal("hide");
-    //   location.reload();
-    // })
+    button.addEventListener('click', function (e) {
+      fetch('/dishMenu.html/deleteMul', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          delete_mul_dish_id: delIDArr,
+        })
+      })
+        .then(function (response) {
+          console.log(response)
+          if (response.ok) {
+            console.log('clicked!!');
+            return;
+          }
+          throw new Error('Failed!!');
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      $("#deleteMul_dishMenuConfirmation").modal("hide");
+      location.reload();
+    })
   })
 
   $("#edit_button").click(function () {
