@@ -74,7 +74,7 @@ $(document).ready(function () {
     $(".edit-submit-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
   })
 
-  // delete data
+  // copy data
   $("#copy_button").click(function () {
     var buttonValue = $(this).attr("value");
     var header = $(".card-header").attr("value");

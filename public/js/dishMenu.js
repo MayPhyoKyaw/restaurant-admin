@@ -63,10 +63,10 @@ $(document).ready(function () {
           // console.log(data)
           var datetime = data.split(",");
           // console.log(datetime[1]);
-          if(datetime[1] === "undefined"){
+          if (datetime[1] === "undefined") {
             return (`<span><b>Created At:</b> ${datetime[0]}</span>`)
           }
-          else{
+          else {
             return (`<span><b>Created At:</b> ${datetime[0]}</span><br/><span><b>Edited At:</b> ${datetime[1]}`)
           }
         }
@@ -329,16 +329,16 @@ $(document).ready(function () {
 
     var date = new Date();
     var day = date.getDate();
-    var month = date.getMonth()+1;
+    var month = date.getMonth() + 1;
     var year = date.getFullYear();
     var hour = date.getHours();
     var minute = date.getMinutes();
     var second = date.getSeconds();
 
-    if (month < 10) month = "0"+month;
-    if (day < 10) day = "0"+day;
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
 
-    var updated = year+"/"+month+"/"+day+" "+hour+":"+minute+":"+second;
+    var updated = year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
 
     button.addEventListener('click', function (e) {
       var dishId = $('#edit_dish_id').text();
@@ -451,67 +451,71 @@ $(document).ready(function () {
     </div>`);
 
     var delDATAs = myTable.rows('.selected').data();
-    // console.log(delDATAs);
-    // var delID = delDATAs.filter(delIDs => {
-    //   console.log(delIDs.id)
-    //   return (delIDs.id !== null);
+    console.log(delDATAs);
+    var delIDArr = [];
+    var delID = delDATAs.filter(delIDs => {
+      console.log(delIDs.id)
+      delIDArr.push(delIDs.id)
+      // return (delIDs.id !== null);
+    });
+    console.log(delIDArr)
+    // console.log("delID" + delID)
+    // var dels = delDATAs.map(delids => {
+    //   // console.log(delids.id);
+    //   return delids.id
     // })
-    var dels = delDATAs.map(delids => {
-      // console.log(delids.id);
-      return delids.id
-    })
-    console.log(dels)
-    for(i=0; i<dels.length; i++){
-      console.log(dels[i])
-    }
-    function del(d){
-      var d1, i;
-      console.log(d[0], d[1], d.length)
-      for(i=0; i<d.length; i++){
-        console.log(d[i], i)
-        d1 = d[i];
-        return d1;
-      }
-    }
-    var delIDs = del(dels);
-    // console.log(delIDs)
-    // var dels = delDATAs.split(",");
-    // console.log(typeof(delDATAs));
-    // console.log(delID);
-    // console.log(delIDs[0].id, delIDs[1].id);
-    
-    var button = document.getElementById('delete_mul_submit_btn');
+    // console.log("dels => " + dels)
+    // // for(i=0; i<dels.length; i++){
+    // //   console.log(dels[i])
+    // // }
+    // function del(d){
+    //   var d1, i;
+    //   console.log(d[0], d[1], d.length)
+    //   for(i=0; i<d.length; i++){
+    //     console.log(d[i], i)
+    //     d1 = d[i];
+    //     return d1;
+    //   }
+    // }
+    // var delIDs = del(dels);
+    // // console.log(delIDs)
+    // // var dels = delDATAs.split(",");
+    // // console.log(typeof(delDATAs));
+    // // console.log(delID);
+    // // console.log(delIDs[0].id, delIDs[1].id);
 
-    button.addEventListener('click', function (e) {
-      fetch('/dishMenu.html/deleteMul', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          delete_mul_dish_id: delIDs,
-        })
-      })
-        .then(function (response) {
-          console.log(response)
-          if (response.ok) {
-            console.log('clicked!!');
-            return;
-          }
-          throw new Error('Failed!!');
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      $("#deleteMul_dishMenuConfirmation").modal("hide");
-      location.reload();
-    })
+    // var button = document.getElementById('delete_mul_submit_btn');
+
+    // button.addEventListener('click', function (e) {
+    //   fetch('/dishMenu.html/deleteMul', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Accept': 'application/json',
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //       delete_mul_dish_id: delIDs,
+    //     })
+    //   })
+    //     .then(function (response) {
+    //       console.log(response)
+    //       if (response.ok) {
+    //         console.log('clicked!!');
+    //         return;
+    //       }
+    //       throw new Error('Failed!!');
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    //   $("#deleteMul_dishMenuConfirmation").modal("hide");
+    //   location.reload();
+    // })
   })
 
   $("#edit_button").click(function () {
     var sel = myTable.rows('.selected').data().length;
-    if(sel > 1){
+    if (sel > 1) {
       // $("#edit_dishMenuModal").modal("hide");
       $("#editWarning").modal("show");
       $(".warning-msg").html(`
@@ -521,7 +525,7 @@ $(document).ready(function () {
         </div>`
       );
     }
-    else if(sel == 0){
+    else if (sel == 0) {
       $("#editWarning").modal("show");
       $(".warning-msg").html(`
         <div class="text-center">
@@ -530,7 +534,7 @@ $(document).ready(function () {
         </div>`
       );
     }
-    else{
+    else {
       var selected = myTable.row('.selected').data();
       console.log(selected.id);
       $("#edit_dishMenuModal").modal("show");
@@ -546,7 +550,7 @@ $(document).ready(function () {
       var meat = selected.meat;
       var meatSelected = meat.split(",");
       console.log(sizeSelected, meatSelected);
-    
+
       $('.selectpicker#edit_size').selectpicker('val', sizeSelected);
       $('.selectpicker#edit_meat').selectpicker('val', meatSelected);
       $('.selectpicker#edit_dish_menu').selectpicker('val', selected.dishMenu);
@@ -564,16 +568,16 @@ $(document).ready(function () {
 
       var date = new Date();
       var day = date.getDate();
-      var month = date.getMonth()+1;
+      var month = date.getMonth() + 1;
       var year = date.getFullYear();
       var hour = date.getHours();
       var minute = date.getMinutes();
       var second = date.getSeconds();
 
-      if (month < 10) month = "0"+month;
-      if (day < 10) day = "0"+day;
+      if (month < 10) month = "0" + month;
+      if (day < 10) day = "0" + day;
 
-      var updated = year+"/"+month+"/"+day+" "+hour+":"+minute+":"+second;
+      var updated = year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
 
       button.addEventListener('click', function (e) {
         var dishId = $('#edit_dish_id').text();
