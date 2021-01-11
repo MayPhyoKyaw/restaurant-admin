@@ -296,12 +296,39 @@ app.post('/dishMenu.html/delete', (req, res) => {
             const collection = database.collection("dish");
             console.log(req.body.delete_dish_id)
             // create a filter for a movie to update
-            // const filter = {
-            //     _id: req.body.delete_dish_id,
-            // };
-            const filter1 = { _id : { $in: req.body.delete_dish_id }};
+            const filter = {
+                _id: req.body.delete_dish_id,
+            };
             // for update many
-            // const result = await collection.deleteOne(filter);
+            const result = await collection.deleteOne(filter);
+            if (result.deletedCount === 1) {
+                console.dir("Successfully deleted one document.");
+            } else {
+                console.log("No documents matched the query. Deleted 0 documents.");
+            }
+        } finally {
+            await client.close();
+        }
+    }
+    DeleteRun().catch(console.dir);
+});
+
+app.post('/dishMenu.html/deleteMul', (req, res) => {
+    console.log(req.body)
+    const url = 'mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/testinggg?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true';
+    const client = new MongoClient(url);
+    const dbName = "resturant"
+
+    async function DeleteRun() {
+        try {
+            await client.connect();
+            console.log("Connected correctly to server for deleting....");
+            const database = client.db(dbName);
+            const collection = database.collection("dish");
+            console.log(req.body.delete_dish_id)
+            // create a filter for a movie to update
+            const filter1 = { _id : { $in: req.body.delete_mul_dish_id }};
+            // for update many
             const result = await collection.deleteMany(filter1);
             if (result.deletedCount === 1) {
                 console.dir("Successfully deleted one document.");
