@@ -95,7 +95,7 @@ div.dataTables_wrapper div.dataTables_length select {
 
 /* badges */
 
-.badge-pork {
+.badge-Pork {
     display: inline-block;
     font-family: inherit;
     font-weight: bolder;
@@ -108,7 +108,7 @@ div.dataTables_wrapper div.dataTables_length select {
     cursor: default;
 }
 
-.badge-chicken {
+.badge-Chicken {
     display: inline-block;
     font-family: inherit;
     font-weight: bolder;
@@ -121,7 +121,7 @@ div.dataTables_wrapper div.dataTables_length select {
     cursor: default;
 }
 
-.badge-seafood {
+.badge-Seafood {
     display: inline-block;
     font-family: inherit;
     font-weight: bolder;
@@ -134,7 +134,7 @@ div.dataTables_wrapper div.dataTables_length select {
     cursor: default;
 }
 
-.badge-beef {
+.badge-Beef {
     display: inline-block;
     font-family: inherit;
     font-weight: bolder;
@@ -181,7 +181,7 @@ div.dataTables_wrapper div.dataTables_length select {
     cursor: default;
 }
 
-.badge-appetizers {
+.badge-Appetizers {
     font-weight: 600;
     font-size: 13px;
     border: 1px solid rgb(47, 92, 216);
@@ -192,7 +192,7 @@ div.dataTables_wrapper div.dataTables_length select {
     cursor: default;
 }
 
-.badge-soups {
+.badge-Soups {
     font-weight: 600;
     font-size: 13px;
     border: 1px solid rgb(221, 206, 69);
@@ -203,7 +203,7 @@ div.dataTables_wrapper div.dataTables_length select {
     cursor: default;
 }
 
-.badge-salads {
+.badge-Salads {
     font-weight: 600;
     font-size: 13px;
     border: 1px solid rgb(189, 32, 66);
@@ -214,7 +214,7 @@ div.dataTables_wrapper div.dataTables_length select {
     cursor: default;
 }
 
-.badge-curries {
+.badge-Curries {
     font-weight: 600;
     font-size: 13px;
     border: 1px solid rgb(178, 196, 81);
@@ -225,7 +225,7 @@ div.dataTables_wrapper div.dataTables_length select {
     cursor: default;
 }
 
-.badge-vegetables-dishes {
+.badge-Vegetables-dishes {
     font-weight: 600;
     font-size: 13px;
     border: 1px solid rgb(76, 189, 66);
