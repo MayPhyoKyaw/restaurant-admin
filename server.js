@@ -299,10 +299,10 @@ app.post('/dishMenu.html/delete', (req, res) => {
             const filter = {
                 _id: req.body.delete_dish_id,
             };
-            // const filter1 = { _id : { $in: req.body.delete_dish_id};
+            // const filter1 = { _id : { $in: req.body.delete_dish_id}};
             // for update many
             const result = await collection.deleteOne(filter);
-            // const result = collection.remove(filter1);
+            // const result = collection.deleteMany(filter1);
             if (result.deletedCount === 1) {
                 console.dir("Successfully deleted one document.");
             } else {
