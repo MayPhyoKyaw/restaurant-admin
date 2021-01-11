@@ -64,10 +64,10 @@ $(document).ready(function () {
           var datetime = data.split(",");
           // console.log(datetime[1]);
           if (datetime[1] === "undefined") {
-            return (`<span><b>Created At:</b> ${datetime[0]}</span>`)
+            return (`<span><i class="fas fa-plus-circle fa-fw publish-icon"></i> ${datetime[0]}</span>`)
           }
           else {
-            return (`<span><b>Created At:</b> ${datetime[0]}</span><br/><span><b>Edited At:</b> ${datetime[1]}`)
+            return (`<span><i class="fas fa-plus-circle fa-fw publish-icon"></i> ${datetime[0]}</span><br/><span><i class="fas fa-pen fa-fw publish-icon"></i> ${datetime[1]}`)
           }
         }
       },
@@ -77,7 +77,7 @@ $(document).ready(function () {
       { targets: "size-dt", data: "size", className: "hiddenData" },
       { targets: "dish-id-dt", data: "id", className: "hiddenData", searchable: false },
     ],
-    order: [[2, 'asc']],
+    order: [[5, 'desc']],
     columnDefs: [
       {
         "className": 'select-checkbox',
@@ -576,6 +576,8 @@ $(document).ready(function () {
 
       if (month < 10) month = "0" + month;
       if (day < 10) day = "0" + day;
+      if (minute < 10) minute = "0" + minute;
+      if (second < 10) second = "0" + second;
 
       var updated = year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
 

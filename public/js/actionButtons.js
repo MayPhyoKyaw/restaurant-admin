@@ -11,16 +11,18 @@ $(document).ready(function () {
 
     var date = new Date();
     var day = date.getDate();
-    var month = date.getMonth()+1;
+    var month = date.getMonth() + 1;
     var year = date.getFullYear();
     var hour = date.getHours();
     var minute = date.getMinutes();
     var second = date.getSeconds();
 
-    if (month < 10) month = "0"+month;
-    if (day < 10) day = "0"+day;
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+    if (minute < 10) minute = "0" + minute;
+    if (second < 10) second = "0" + second;
 
-    var created = year+"/"+month+"/"+day+" "+hour+":"+minute+":"+second;
+    var created = year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
     console.log(created);
 
     button.addEventListener('click', function (e) {

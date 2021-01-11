@@ -327,9 +327,9 @@ app.post('/dishMenu.html/deleteMul', (req, res) => {
             const collection = database.collection("dish");
             console.log(req.body.delete_dish_id)
             // create a filter for a movie to update
-            const filter1 = { _id : { $in: req.body.delete_mul_dish_id }};
+            const filter = { _id: { $in: req.body.delete_mul_dish_id } };
             // for update many
-            const result = await collection.deleteMany(filter1);
+            const result = await collection.deleteMany(filter);
             if (result.deletedCount === 1) {
                 console.dir("Successfully deleted one document.");
             } else {

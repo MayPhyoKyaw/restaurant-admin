@@ -187,7 +187,8 @@ div.dataTables_wrapper div.dataTables_length select {
     border: 1px solid rgb(47, 92, 216);
     color: rgb(255, 255, 255);
     background: rgb(47, 92, 216);
-    border-radius: 10px;
+    border-radius: 20px;
+    line-height: 1.4;
     cursor: default;
 }
 
@@ -197,7 +198,8 @@ div.dataTables_wrapper div.dataTables_length select {
     border: 1px solid rgb(221, 206, 69);
     color: rgb(255, 255, 255);
     background: rgb(221, 206, 69);
-    border-radius: 10px;
+    border-radius: 20px;
+    line-height: 1.4;
     cursor: default;
 }
 
@@ -207,7 +209,8 @@ div.dataTables_wrapper div.dataTables_length select {
     border: 1px solid rgb(189, 32, 66);
     color: rgb(255, 255, 255);
     background: rgb(189, 32, 66);
-    border-radius: 10px;
+    border-radius: 20px;
+    line-height: 1.4;
     cursor: default;
 }
 
@@ -217,7 +220,8 @@ div.dataTables_wrapper div.dataTables_length select {
     border: 1px solid rgb(178, 196, 81);
     color: rgb(255, 255, 255);
     background: rgb(178, 196, 81);
-    border-radius: 10px;
+    border-radius: 20px;
+    line-height: 1.4;
     cursor: default;
 }
 
@@ -227,7 +231,8 @@ div.dataTables_wrapper div.dataTables_length select {
     border: 1px solid rgb(76, 189, 66);
     color: rgb(255, 255, 255);
     background: rgb(76, 189, 66);
-    border-radius: 10px;
+    border-radius: 20px;
+    line-height: 1.4;
     cursor: default;
 }
 
@@ -248,7 +253,8 @@ div.dataTables_wrapper div.dataTables_length select {
 .fa-pencil-alt,
 .fa-trash,
 .fa-check,
-.fa-times {
+.fa-times,
+.fa-pen {
     margin-right: 5px;
 }
 
@@ -337,7 +343,8 @@ div.dataTables_wrapper div.dataTables_length select {
 
 .copy-icon,
 .edit-icon,
-.delete-icon {
+.delete-icon,
+.publish-icon {
     color: #3f51b5;
 }
 
