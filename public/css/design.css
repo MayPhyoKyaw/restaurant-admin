@@ -95,7 +95,7 @@ div.dataTables_wrapper div.dataTables_length select {
 
 /* badges */
 
-.badge-Pork {
+.Pork {
     display: inline-block;
     font-family: inherit;
     font-weight: bolder;
@@ -108,7 +108,7 @@ div.dataTables_wrapper div.dataTables_length select {
     cursor: default;
 }
 
-.badge-Chicken {
+.Chicken {
     display: inline-block;
     font-family: inherit;
     font-weight: bolder;
@@ -121,7 +121,7 @@ div.dataTables_wrapper div.dataTables_length select {
     cursor: default;
 }
 
-.badge-Seafood {
+.Seafood {
     display: inline-block;
     font-family: inherit;
     font-weight: bolder;
@@ -134,7 +134,7 @@ div.dataTables_wrapper div.dataTables_length select {
     cursor: default;
 }
 
-.badge-Beef {
+.Beef {
     display: inline-block;
     font-family: inherit;
     font-weight: bolder;

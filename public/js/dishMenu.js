@@ -1,16 +1,6 @@
-// const MongoClient = require('mongodb').MongoClient;
-
-// const { type } = require("jquery");
-
-// import { render } from "pug";
-
-// Replace the uri string with your MongoDB deployment's connection string.
-// const uri = "mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/<dbname>?retryWrites=true&w=majority";
-
 $(document).ready(function () {
 
   //select all
-  // var  DT1 = $('#dataTable').DataTable();
   $(".selectAll").on("click", function (e) {
     if ($(this).is(":checked")) {
       myTable.rows().select();
@@ -35,7 +25,6 @@ $(document).ready(function () {
         previous: "&laquo;",
       },
     },
-    // ajax: "data.json",
     columns: [
       {
         data: "select",
@@ -107,17 +96,21 @@ $(document).ready(function () {
     },
     rowCallback: function (row, data, index) {
       // for dish meat
-      console.log(data);
-
-      // console.log(data["meat"]);
+      // var meatBadge = data["meat"].replace(/,/g, ' ');
+      // $(row).find('td:eq(3)').html(data["langName"] + `<span class="badges">${meatBadge}</span>`)
+      // var replace1 = $(row).find('td:eq(3)').html().replace('<span class="badges">','');
+      // var replace2 = replace1.replace('</span>','');
+      // if (replace2.includes("Chicken")) {
+      //   console.log(replace2.split("Chicken",""))
+      // }
+      // console.log(replace2)
       var meatBadge = data["meat"].split(",");
       // console.log(meatBadge);
       meatBadge.forEach(badge => {
         // console.log(badge);
-        $(row).find('td:eq(3)').html(data["langName"] + `<span class="badge-${badge}">${badge}</span>`)
-        // $(row).find('td:eq(3)').append(`<span class="badge-${badge}">${badge}</span>`)
+          $(row).find('td:eq(3)').html((data["langName"] + `<span class="${badge}">${badge}</span>`))
       });
-      
+
       // for dish size
       if (data["size"] === "Small") {
         $(row).find('td:eq(6)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span> <br/>' + data["largeDishPrice"])
@@ -203,7 +196,7 @@ $(document).ready(function () {
     $(trIndex).find("td:nth-child(7)")
       .html(`
         <span>${data1.smallDishPrice}</span>
-        <a href="#" id="copy_btn" value="Copy" data-toggle="modal" data-target="#dishMenuConfirmation"><span class="copy-icon"><i class="fas fa-copy fa-fw"></i></span></a>
+        <a href="#" id="copy_btn" value="Copy" data-toggle="modal" data-target="#copy_dishMenuConfirmation"><span class="copy-icon"><i class="fas fa-copy fa-fw"></i></span></a>
         <a href="#" id="edit_btn" value="Edit" data-toggle="modal" data-target="#edit_dishMenuModal"><span class="edit-icon"><i class="far fa-edit fa-fw"></i></span></a>
         <a href="#" id="delete_btn" value="Delete" data-toggle="modal" data-target="#delete_dishMenuConfirmation"><span class="delete-icon"><i class="far fa-trash-alt fa-fw"></i></span></a>
         <br/>
@@ -250,7 +243,7 @@ $(document).ready(function () {
   }
 
   // close cancel button to reset modal
-  $("#dishMenuModal, #edit_dishMenuModal, #delete_dishMenuConfirmation").on("hidden.bs.modal", function () {
+  $("#dishMenuModal, #edit_dishMenuModal, #delete_dishMenuConfirmation, #copy_dishMenuConfirmation").on("hidden.bs.modal", function () {
     document.getElementById("dishMenu_form").reset();
     $("#edit_dish_id").text('');
     $("#delete_dish_id").text('');
@@ -293,7 +286,7 @@ $(document).ready(function () {
     var sizeSelected = sizes.split(",");
     var meat = data["meat"];
     var meatSelected = meat.split(",");
-    console.log(sizeSelected, meatSelected);
+    // console.log(sizeSelected, meatSelected);
     // for(var i in sizeSelected) {
     //   var optionVal = sizeSelected[i];
     //   console.log(optionVal);
@@ -305,7 +298,7 @@ $(document).ready(function () {
     $('.selectpicker#edit_meat').selectpicker('val', meatSelected);
     $('.selectpicker#edit_dish_menu').selectpicker('val', data["dishMenu"]);
     // $('#meat').multiselect({ selectAllValue: 'multiselect-all', enableCaseInsensitiveFiltering: true, enableFiltering: true, maxHeight: '300', buttonWidth: '235', onChange: function (element, checked) { var brands = $('#multiselect1 option:selected'); var selected = []; $(brands).each(function (index, brand) { selected.push([$(this).val()]); }); console.log(selected); } });
-    console.log(data);
+    // console.log(data);
 
     // fetch('/dishMenu.html', {
     //   method: 'POST',
@@ -439,8 +432,14 @@ $(document).ready(function () {
     location.reload();
   })
 
-  var editButton = document.getElementById('delete_submit_btn');
-  editButton.addEventListener('click', function (e) {
+  var deleteButton = document.getElementById('delete_submit_btn');
+  deleteButton.addEventListener('click', function (e) {
+    $("#delete_dishMenuConfirmation").modal("hide");
+    location.reload();
+  })
+
+  var copyButton = document.getElementById('copy_submit_btn');
+  copyButton.addEventListener('click', function (e) {
     $("#delete_dishMenuConfirmation").modal("hide");
     location.reload();
   })
@@ -519,6 +518,7 @@ $(document).ready(function () {
     })
   })
 
+  // click action button to make function
   $("#edit_button").click(function () {
     var sel = myTable.rows('.selected').data().length;
     if (sel > 1) {
@@ -628,6 +628,116 @@ $(document).ready(function () {
             console.log(error);
           });
         $("#edit_dishMenuModal").modal("hide");
+      });
+    }
+  })
+
+  // click copy button to make function
+  $("#copy_button").click(function () {
+    var sel = myTable.rows('.selected').data().length;
+    if (sel > 1) {
+      $("#copyWarning").modal("show");
+      $(".warning-msg").html(`
+        <div class="text-center">
+          <p>You are selected more than one rows to copy!!!</p>
+          <p>Please Select A Row Again.</p>
+        </div>`
+      );
+    }
+    else if (sel == 0) {
+      $("#copyWarning").modal("show");
+      $(".warning-msg").html(`
+        <div class="text-center">
+          <p>You need to select a row to edit!!!</p>
+          <p>Please Select A Row.</p>
+        </div>`
+      );
+    }
+    else {
+      var selected = myTable.row('.selected').data();
+      console.log(selected);
+    //   $("#copy_dishMenuModal").modal("show");
+
+    //   $("#edit_dish_id").append(`${selected.id}`)
+    //   document.getElementById("edit_dish_Name").value = selected.dishName;
+    //   document.getElementById("edit_lang_Name").value = selected.langName;
+    //   document.getElementById("edit_small_price").value = selected.smallDishPrice;
+    //   document.getElementById("edit_large_price").value = selected.largeDishPrice;
+    //   // document.getElementById("size").value = data["size"];
+    //   var sizes = selected.size;
+    //   var sizeSelected = sizes.split(",");
+    //   var meat = selected.meat;
+    //   var meatSelected = meat.split(",");
+    //   console.log(sizeSelected, meatSelected);
+
+    //   $('.selectpicker#edit_size').selectpicker('val', sizeSelected);
+    //   $('.selectpicker#edit_meat').selectpicker('val', meatSelected);
+    //   $('.selectpicker#edit_dish_menu').selectpicker('val', selected.dishMenu);
+    //   // $('#meat').multiselect({ selectAllValue: 'multiselect-all', enableCaseInsensitiveFiltering: true, enableFiltering: true, maxHeight: '300', buttonWidth: '235', onChange: function (element, checked) { var brands = $('#multiselect1 option:selected'); var selected = []; $(brands).each(function (index, brand) { selected.push([$(this).val()]); }); console.log(selected); } });
+    //   // console.log(data);
+
+      $("#cancel").on('click', function () {
+        myTable.rows().deselect();
+      })
+
+      var button = document.getElementById('copy_submit_btn');
+
+      var date = new Date();
+      var day = date.getDate();
+      var month = date.getMonth() + 1;
+      var year = date.getFullYear();
+      var hour = date.getHours();
+      var minute = date.getMinutes();
+      var second = date.getSeconds();
+
+      if (month < 10) month = "0" + month;
+      if (day < 10) day = "0" + day;
+      if (minute < 10) minute = "0" + minute;
+      if (second < 10) second = "0" + second;
+
+      var created = year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
+
+      button.addEventListener('click', function (e) {
+        // var dishId = $('#edit_dish_id').text();
+        // var dishName = document.getElementById('edit_dish_Name').value;
+        // var langName = document.getElementById('edit_lang_Name').value;
+        // var smallDishPrice = document.getElementById('edit_small_price').value;
+        // var largeDishPrice = document.getElementById('edit_large_price').value;
+        // var dishMenu = $('#edit_dish_menu').val();
+        // var meat = $('#edit_meat').val();
+        // var size = $('#edit_size').val();
+        console.log('button was clicked');
+
+        fetch('/dishMenu.html/copy', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            // copy_dish_id: dishId,
+            copy_dish_name: selected.dishName,
+            copy_lang_name: selected.langName,
+            copy_small_dish_price: selected.smallDishPrice,
+            copy_large_dish_price: selected.largeDishPrice,
+            copy_dish_menu: selected.dishMenu,
+            copy_meat: selected.meat,
+            copy_size: selected.size,
+            created_at: created,
+          })
+        })
+          .then(function (response) {
+            console.log(response)
+            if (response.ok) {
+              console.log('clicked!!');
+              return;
+            }
+            throw new Error('Failed!!');
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        $("#copy_dishMenuModal").modal("hide");
       });
     }
   })

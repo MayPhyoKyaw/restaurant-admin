@@ -313,6 +313,44 @@ app.post('/dishMenu.html/delete', (req, res) => {
     DeleteRun().catch(console.dir);
 });
 
+// add a document to the DB collection recording the click event
+app.post('/dishMenu.html/copy', (req, res) => {
+    console.log(req.body)
+    const url = 'mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/testinggg?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true';
+    const client = new MongoClient(url);
+    const dbName = "resturant"
+
+    async function CopyRun() {
+        try {
+            await client.connect();
+            console.log("Connected correctly to server for copying....");
+            const database = client.db(dbName);
+            const collection = database.collection("dish");
+            console.log(req.body.created_at)
+            // Construct a document
+            let personDocument = {
+                _id: (new ObjectId).toString(),
+                dishName: req.body.copy_dish_name,
+                langName: req.body.copy_lang_name,
+                smallDishPrice: req.body.copy_small_dish_price,
+                largeDishPrice: req.body.copy_large_dish_price,
+                dishMenu: req.body.copy_dish_menu,
+                meat: req.body.copy_meat,
+                size: req.body.copy_size,
+                created_at: req.body.created_at,
+            };
+            // Insert a single document, wait for promise so we can read it back
+            const result = await collection.insertOne(personDocument);
+        } catch (err) {
+            console.log(err.stack);
+        }
+        finally {
+            await client.close();
+        }
+    }
+    CopyRun().catch(console.dir);
+});
+
 app.post('/dishMenu.html/deleteMul', (req, res) => {
     console.log(req.body)
     const url = 'mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/testinggg?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true';
