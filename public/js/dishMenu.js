@@ -383,6 +383,7 @@ $(document).ready(function () {
     });
   })
 
+  // delete btn on datatable
   $('#dataTable tbody').on('click', '#delete_btn', function () {
     console.log("click delete btn")
     $(this).parents('tr').toggleClass("selected")
@@ -416,7 +417,68 @@ $(document).ready(function () {
         .catch(function (error) {
           console.log(error);
         });
-      // $("#delete_dishMenuConfirmation").modal("hide");
+      $("#delete_dishMenuConfirmation").modal("hide");
+    })
+  });
+
+  // copy btn on datatable
+  $('#dataTable tbody').on('click', '#copy_btn', function () {
+    console.log("click copy btn")
+    $(this).parents('tr').toggleClass("selected")
+      .siblings(".selected")
+      .removeClass("selected");
+    var data = myTable.row($(this).parents('tr')).data();
+    console.log(data);
+    // $("#delete_dish_id").append(`${data["id"]}`);
+
+    var button = document.getElementById('copy_submit_btn');
+
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+    if (minute < 10) minute = "0" + minute;
+    if (second < 10) second = "0" + second;
+
+    var created = year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
+
+    button.addEventListener('click', function (e) {
+      fetch('/dishMenu.html/copy', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          // delete_dish_id: data["id"],
+            copy_dish_name: data["dishName"],
+            copy_lang_name: data["langName"],
+            copy_small_dish_price: data["smallDishPrice"],
+            copy_large_dish_price: data["largeDishPrice"],
+            copy_dish_menu: data["dishMenu"],
+            copy_meat: data["meat"],
+            copy_size: data["size"],
+            created_at: created,
+        })
+      })
+        .then(function (response) {
+          console.log(response)
+          if (response.ok) {
+            console.log('clicked!!');
+            return;
+          }
+          throw new Error('Failed!!');
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      $("#copy_dishMenuConfirmation").modal("hide");
     })
   });
 
@@ -656,25 +718,6 @@ $(document).ready(function () {
     else {
       var selected = myTable.row('.selected').data();
       console.log(selected);
-    //   $("#copy_dishMenuModal").modal("show");
-
-    //   $("#edit_dish_id").append(`${selected.id}`)
-    //   document.getElementById("edit_dish_Name").value = selected.dishName;
-    //   document.getElementById("edit_lang_Name").value = selected.langName;
-    //   document.getElementById("edit_small_price").value = selected.smallDishPrice;
-    //   document.getElementById("edit_large_price").value = selected.largeDishPrice;
-    //   // document.getElementById("size").value = data["size"];
-    //   var sizes = selected.size;
-    //   var sizeSelected = sizes.split(",");
-    //   var meat = selected.meat;
-    //   var meatSelected = meat.split(",");
-    //   console.log(sizeSelected, meatSelected);
-
-    //   $('.selectpicker#edit_size').selectpicker('val', sizeSelected);
-    //   $('.selectpicker#edit_meat').selectpicker('val', meatSelected);
-    //   $('.selectpicker#edit_dish_menu').selectpicker('val', selected.dishMenu);
-    //   // $('#meat').multiselect({ selectAllValue: 'multiselect-all', enableCaseInsensitiveFiltering: true, enableFiltering: true, maxHeight: '300', buttonWidth: '235', onChange: function (element, checked) { var brands = $('#multiselect1 option:selected'); var selected = []; $(brands).each(function (index, brand) { selected.push([$(this).val()]); }); console.log(selected); } });
-    //   // console.log(data);
 
       $("#cancel").on('click', function () {
         myTable.rows().deselect();
@@ -698,14 +741,6 @@ $(document).ready(function () {
       var created = year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
 
       button.addEventListener('click', function (e) {
-        // var dishId = $('#edit_dish_id').text();
-        // var dishName = document.getElementById('edit_dish_Name').value;
-        // var langName = document.getElementById('edit_lang_Name').value;
-        // var smallDishPrice = document.getElementById('edit_small_price').value;
-        // var largeDishPrice = document.getElementById('edit_large_price').value;
-        // var dishMenu = $('#edit_dish_menu').val();
-        // var meat = $('#edit_meat').val();
-        // var size = $('#edit_size').val();
         console.log('button was clicked');
 
         fetch('/dishMenu.html/copy', {
@@ -715,7 +750,6 @@ $(document).ready(function () {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            // copy_dish_id: dishId,
             copy_dish_name: selected.dishName,
             copy_lang_name: selected.langName,
             copy_small_dish_price: selected.smallDishPrice,
@@ -737,7 +771,7 @@ $(document).ready(function () {
           .catch(function (error) {
             console.log(error);
           });
-        $("#copy_dishMenuModal").modal("hide");
+        $("#copy_dishMenuConfirmation").modal("hide");
       });
     }
   })
