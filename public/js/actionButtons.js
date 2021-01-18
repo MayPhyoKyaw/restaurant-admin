@@ -28,11 +28,11 @@ $(document).ready(function () {
     button.addEventListener('click', function (e) {
       var dishName = document.getElementById('dish_Name').value;
       var langName = document.getElementById('lang_Name').value;
-      var smallDishPrice = document.getElementById('small_price').value;
-      var largeDishPrice = document.getElementById('large_price').value;
+      // var smallDishPrice = document.getElementById('small_price').value;
+      // var largeDishPrice = document.getElementById('large_price').value;
       var dishMenu = $('#dish_menu').val();
       var meat = $('#meat').val();
-      var size = $('#size').val();
+      // var size = $('#size').val();
       // var createdAt = document.getElementById('datetime').value;
       // console.log(createdAt);
       console.log('button was clicked');
@@ -46,11 +46,11 @@ $(document).ready(function () {
         body: JSON.stringify({
           dish_name: dishName,
           lang_name: langName,
-          small_dish_price: smallDishPrice,
-          large_dish_price: largeDishPrice,
+          // small_dish_price: smallDishPrice,
+          // large_dish_price: largeDishPrice,
           dish_menu: dishMenu,
           meat: meat,
-          size: size,
+          // size: size,
           created_at: created,
         })
       })
@@ -72,8 +72,8 @@ $(document).ready(function () {
   $("#edit_button").click(function () {
     var buttonValue = $(this).attr("value");
     var header = $(".card-header").attr("value");
-    $(".heading").text(`${buttonValue} ${header}`);
-    $(".edit-submit-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
+    // $(".heading").text(`${buttonValue} ${header}`);
+    // $(".edit-submit-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
   })
 
   // copy data

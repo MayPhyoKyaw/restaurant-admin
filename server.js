@@ -137,11 +137,11 @@ app.post('/dishMenu.html', (req, res) => {
                 _id: (new ObjectId).toString(),
                 dishName: req.body.dish_name,
                 langName: req.body.lang_name,
-                smallDishPrice: req.body.small_dish_price,
-                largeDishPrice: req.body.large_dish_price,
+                // smallDishPrice: req.body.small_dish_price,
+                // largeDishPrice: req.body.large_dish_price,
                 dishMenu: req.body.dish_menu,
                 meat: req.body.meat,
-                size: req.body.size,
+                // size: req.body.size,
                 created_at: req.body.created_at,
             };
             // Insert a single document, wait for promise so we can read it back
@@ -154,40 +154,6 @@ app.post('/dishMenu.html', (req, res) => {
         }
     }
     CreateRun().catch(console.dir);
-
-    // async function EditRun() {
-    //     try {
-    //         await client.connect();
-    //         console.log("Connected correctly to server for editting....");
-    //         const database = client.db(dbName);
-    //         const collection = database.collection("dish");
-    //         console.log(req.body.edit_dish_id)
-    //         // create a filter for a movie to update
-    //         const filter = {
-    //             _id: "5ff83266cd006232c90c4e61",
-    //         };
-    //         // update a document
-    //         const updateDoc = {
-    //             $set: {
-    //                 dishName: req.body.edit_dish_name,
-    //                 langName: req.body.edit_lang_name,
-    //                 smallDishPrice: req.body.edit_small_dish_price,
-    //                 largeDishPrice: req.body.edit_large_dish_price,
-    //                 dishMenu: req.body.edit_dish_menu,
-    //                 meat: req.body.edit_meat,
-    //                 size: req.body.edit_size,
-    //             },
-    //         };
-    //         // for update many
-    //         const result = await collection.updateMany(filter, updateDoc);
-    //         console.log(
-    //             `${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`,
-    //         );
-    //     } finally {
-    //         await client.close();
-    //     }
-    // }
-    // EditRun().catch(console.dir);
 });
 
 // add a document to the DB collection recording the click event
@@ -196,35 +162,6 @@ app.post('/dishMenu.html/edit', (req, res) => {
     const url = 'mongodb+srv://ksp:ksp123@cluster0.tqggl.mongodb.net/testinggg?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true';
     const client = new MongoClient(url);
     const dbName = "resturant"
-
-    // async function CreateRun() {
-    //     try {
-    //         await client.connect();
-    //         console.log("Connected correctly to server for creating....");
-    //         const db = client.db(dbName);
-    //         // Use the collection "people"
-    //         const col = db.collection("dish");
-    //         // Construct a document
-    //         let personDocument = {
-    //             _id: (new ObjectId).toString(),
-    //             dishName: req.body.dish_name,
-    //             langName: req.body.lang_name,
-    //             smallDishPrice: req.body.small_dish_price,
-    //             largeDishPrice: req.body.large_dish_price,
-    //             dishMenu: req.body.dish_menu,
-    //             meat: req.body.meat,
-    //             size: req.body.size,
-    //         };
-    //         // Insert a single document, wait for promise so we can read it back
-    //         const p = await col.insertOne(personDocument);
-    //     } catch (err) {
-    //         console.log(err.stack);
-    //     }
-    //     finally {
-    //         await client.close();
-    //     }
-    // }
-    // CreateRun().catch(console.dir);
 
     async function EditRun() {
         try {
@@ -242,11 +179,11 @@ app.post('/dishMenu.html/edit', (req, res) => {
                 $set: {
                     dishName: req.body.edit_dish_name,
                     langName: req.body.edit_lang_name,
-                    smallDishPrice: req.body.edit_small_dish_price,
-                    largeDishPrice: req.body.edit_large_dish_price,
+                    // smallDishPrice: req.body.edit_small_dish_price,
+                    // largeDishPrice: req.body.edit_large_dish_price,
                     dishMenu: req.body.edit_dish_menu,
                     meat: req.body.edit_meat,
-                    size: req.body.edit_size,
+                    // size: req.body.edit_size,
                     updated_at: req.body.updated_at,
                 },
             };
@@ -332,11 +269,11 @@ app.post('/dishMenu.html/copy', (req, res) => {
                 _id: (new ObjectId).toString(),
                 dishName: req.body.copy_dish_name,
                 langName: req.body.copy_lang_name,
-                smallDishPrice: req.body.copy_small_dish_price,
-                largeDishPrice: req.body.copy_large_dish_price,
+                // smallDishPrice: req.body.copy_small_dish_price,
+                // largeDishPrice: req.body.copy_large_dish_price,
                 dishMenu: req.body.copy_dish_menu,
                 meat: req.body.copy_meat,
-                size: req.body.copy_size,
+                // size: req.body.copy_size,
                 created_at: req.body.created_at,
             };
             // Insert a single document, wait for promise so we can read it back

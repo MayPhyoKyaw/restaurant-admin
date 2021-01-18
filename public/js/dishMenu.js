@@ -43,11 +43,11 @@ $(document).ready(function () {
       // { data: "langName", className: "text" },
       // { data: "dishMenu", className: "text" },
       // { data: "price", className: "text" },
-      { targets: "dish-name-dt", data: "dishName", className: "text", width: "23%" },
-      { targets: "lang-name-dt", data: "langName", className: "text", width: "27%" },
-      { targets: "dish-menu-dt", data: "dishMenu", className: "text", width: "12%" },
+      { targets: "dish-name-dt", data: "dishName", className: "text", width: "30%" },
+      { targets: "lang-name-dt", data: "langName", className: "text", width: "35%" },
+      { targets: "dish-menu-dt", data: "dishMenu", className: "text", width: "11%" },
       {
-        targets: "datetime-dt", data: "datetime", className: "text", width: "20%",
+        targets: "datetime-dt", data: "datetime", className: "text", width: "15%",
         render: function (data) {
           // console.log(data)
           var datetime = data.split(",");
@@ -60,10 +60,11 @@ $(document).ready(function () {
           }
         }
       },
-      { targets: "small-price-dt", data: "smallDishPrice", className: "text", width: "19%" },
-      { targets: "large-price-dt", data: "largeDishPrice", className: "hiddenData" },
+      { targets: "action-btn-dt", data: null, width: "8%", orderable: false, searchable: false, defaultContent: "" },
+      // { targets: "small-price-dt", data: "smallDishPrice", className: "text", width: "19%" },
+      // { targets: "large-price-dt", data: "largeDishPrice", className: "hiddenData" },
       { targets: "meat-dt", data: "meat", className: "hiddenData" },
-      { targets: "size-dt", data: "size", className: "hiddenData" },
+      // { targets: "size-dt", data: "size", className: "hiddenData" },
       { targets: "dish-id-dt", data: "id", className: "hiddenData", searchable: false },
     ],
     order: [[5, 'desc']],
@@ -108,19 +109,19 @@ $(document).ready(function () {
       // console.log(meatBadge);
       meatBadge.forEach(badge => {
         // console.log(badge);
-          $(row).find('td:eq(3)').html((data["langName"] + `<span class="${badge}">${badge}</span>`))
+        $(row).find('td:eq(3)').html((data["langName"] + `<span class="${badge}">${badge}</span>`))
       });
 
-      // for dish size
-      if (data["size"] === "Small") {
-        $(row).find('td:eq(6)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span> <br/>' + data["largeDishPrice"])
-      }
-      else if (data["size"] === "Large") {
-        $(row).find('td:eq(6)').html(data["smallDishPrice"] + '<br/>' + data["largeDishPrice"] + '<span class="badge-size-large">L</span> ')
-      }
-      else if (data['size'] === "Small,Large") {
-        $(row).find('td:eq(6)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span> </br>' + data["largeDishPrice"] + '<span class="badge-size-large">L</span>')
-      }
+      // // for dish size
+      // if (data["size"] === "Small") {
+      //   $(row).find('td:eq(6)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span> <br/>' + data["largeDishPrice"])
+      // }
+      // else if (data["size"] === "Large") {
+      //   $(row).find('td:eq(6)').html(data["smallDishPrice"] + '<br/>' + data["largeDishPrice"] + '<span class="badge-size-large">L</span> ')
+      // }
+      // else if (data['size'] === "Small,Large") {
+      //   $(row).find('td:eq(6)').html(data["smallDishPrice"] + '<span class="badge-size-small">S</span> </br>' + data["largeDishPrice"] + '<span class="badge-size-large">L</span>')
+      // }
       // var sizeBadge = data["size"].split(",");
       // sizeBadge.forEach(sizebadge => {
       //   $(row).find('td:eq(3)').append(`<span class="badge-${sizebadge}>S</span>`)
@@ -143,6 +144,7 @@ $(document).ready(function () {
       // }
       var dMmenuBadge = data["dishMenu"].split(",");
       dMmenuBadge.forEach(dbadge => {
+        console.log(dbadge)
         $(row).find('td:eq(4)').html(`<span class="badge badge-light badge-${dbadge}">${dbadge}</span>`)
       })
       ////
@@ -174,10 +176,10 @@ $(document).ready(function () {
           "dishName": `${dish.dishName}`,
           "langName": `${dish.langName}`,
           "dishMenu": `${dish.dishMenu}`,
-          "smallDishPrice": `${dish.smallDishPrice}`,
-          "largeDishPrice": `${dish.largeDishPrice}`,
+          // "smallDishPrice": `${dish.smallDishPrice}`,
+          // "largeDishPrice": `${dish.largeDishPrice}`,
           "meat": `${dish.meat}`,
-          "size": `${dish.size}`,
+          // "size": `${dish.size}`,
           "id": `${dish._id}`,
           "datetime": `${dish.created_at},${dish.updated_at}`,
         }).draw();
@@ -193,14 +195,15 @@ $(document).ready(function () {
     // trIndex = $(this).parent();
     trIndex = myTable.row(this).node();
     data1 = myTable.row(this).data();
+    var publishDateTime = data1.datetime.split(",")
+    console.log(publishDateTime[0])
+    console.log(publishDateTime[1])
     $(trIndex).find("td:nth-child(7)")
       .html(`
-        <span>${data1.smallDishPrice}</span>
         <a href="#" id="copy_btn" value="Copy" data-toggle="modal" data-target="#copy_dishMenuConfirmation"><span class="copy-icon"><i class="fas fa-copy fa-fw"></i></span></a>
         <a href="#" id="edit_btn" value="Edit" data-toggle="modal" data-target="#edit_dishMenuModal"><span class="edit-icon"><i class="far fa-edit fa-fw"></i></span></a>
         <a href="#" id="delete_btn" value="Delete" data-toggle="modal" data-target="#delete_dishMenuConfirmation"><span class="delete-icon"><i class="far fa-trash-alt fa-fw"></i></span></a>
         <br/>
-        <span>${data1.largeDishPrice}</span>
       `);
 
     // click button
@@ -222,16 +225,21 @@ $(document).ready(function () {
     var trIndex = null;
     trIndex = myTable.row(this).node();
     data1 = myTable.row(this).data();
+    var publishDateTime = data1.datetime.split(",")
+    console.log(publishDateTime[0])
+    console.log(publishDateTime[1])
+
+    $(trIndex).find('td:nth-child(7)').html(``);
     // console.log(trIndex);
-    if (data1["size"] === "Small") {
-      $(trIndex).find('td:nth-child(7)').html(`${data1.smallDishPrice} <span class="badge-size-small">S</span> <br/> ${data1.largeDishPrice}`);
-    }
-    else if (data1["size"] === "Large") {
-      $(trIndex).find('td:nth-child(7)').html(`${data1.smallDishPrice} <br/> ${data1.largeDishPrice} <span class="badge-size-large">L</span> `);
-    }
-    else if (data1['size'] === "Small,Large") {
-      $(trIndex).find('td:nth-child(7)').html(`${data1.smallDishPrice} <span class="badge-size-small">S</span> <br/> ${data1.largeDishPrice} <span class="badge-size-large">L</span>`);
-    }
+    // if (data1["size"] === "Small") {
+    //   $(trIndex).find('td:nth-child(7)').html(`${data1.smallDishPrice} <span class="badge-size-small">S</span> <br/> ${data1.largeDishPrice}`);
+    // }
+    // else if (data1["size"] === "Large") {
+    //   $(trIndex).find('td:nth-child(7)').html(`${data1.smallDishPrice} <br/> ${data1.largeDishPrice} <span class="badge-size-large">L</span> `);
+    // }
+    // else if (data1['size'] === "Small,Large") {
+    //   $(trIndex).find('td:nth-child(7)').html(`${data1.smallDishPrice} <span class="badge-size-small">S</span> <br/> ${data1.largeDishPrice} <span class="badge-size-large">L</span>`);
+    // }
   });
 
   // change input field style in modal
@@ -279,11 +287,11 @@ $(document).ready(function () {
     $("#edit_dish_id").append(`${data["id"]}`)
     document.getElementById("edit_dish_Name").value = data["dishName"];
     document.getElementById("edit_lang_Name").value = data["langName"];
-    document.getElementById("edit_small_price").value = data["smallDishPrice"];
-    document.getElementById("edit_large_price").value = data["largeDishPrice"];
+    // document.getElementById("edit_small_price").value = data["smallDishPrice"];
+    // document.getElementById("edit_large_price").value = data["largeDishPrice"];
     // document.getElementById("size").value = data["size"];
-    var sizes = data["size"];
-    var sizeSelected = sizes.split(",");
+    // var sizes = data["size"];
+    // var sizeSelected = sizes.split(",");
     var meat = data["meat"];
     var meatSelected = meat.split(",");
     // console.log(sizeSelected, meatSelected);
@@ -294,7 +302,7 @@ $(document).ready(function () {
     //   $('.selectpicker#edit_size').selectpicker('val', sizeSelected);
     //   // console.log($('.selectpicker#edit_size').selectpicker('val',optionVal));
     // }
-    $('.selectpicker#edit_size').selectpicker('val', sizeSelected);
+    // $('.selectpicker#edit_size').selectpicker('val', sizeSelected);
     $('.selectpicker#edit_meat').selectpicker('val', meatSelected);
     $('.selectpicker#edit_dish_menu').selectpicker('val', data["dishMenu"]);
     // $('#meat').multiselect({ selectAllValue: 'multiselect-all', enableCaseInsensitiveFiltering: true, enableFiltering: true, maxHeight: '300', buttonWidth: '235', onChange: function (element, checked) { var brands = $('#multiselect1 option:selected'); var selected = []; $(brands).each(function (index, brand) { selected.push([$(this).val()]); }); console.log(selected); } });
@@ -318,7 +326,7 @@ $(document).ready(function () {
     // })
 
     $("#cancel").on('click', function () {
-      $("#edit_size option[selected]").removeAttr("selected");
+      // $("#edit_size option[selected]").removeAttr("selected");
       $("#edit_meat option[selected]").removeAttr("selected");
       $("#edit_dish_menu option[selected]").removeAttr("selected")
       myTable.rows().deselect();
@@ -336,6 +344,8 @@ $(document).ready(function () {
 
     if (month < 10) month = "0" + month;
     if (day < 10) day = "0" + day;
+    if (minute < 10) minute = "0" + minute;
+    if (second < 10) second = "0" + second;
 
     var updated = year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
 
@@ -343,11 +353,11 @@ $(document).ready(function () {
       var dishId = $('#edit_dish_id').text();
       var dishName = document.getElementById('edit_dish_Name').value;
       var langName = document.getElementById('edit_lang_Name').value;
-      var smallDishPrice = document.getElementById('edit_small_price').value;
-      var largeDishPrice = document.getElementById('edit_large_price').value;
+      // var smallDishPrice = document.getElementById('edit_small_price').value;
+      // var largeDishPrice = document.getElementById('edit_large_price').value;
       var dishMenu = $('#edit_dish_menu').val();
       var meat = $('#edit_meat').val();
-      var size = $('#edit_size').val();
+      // var size = $('#edit_size').val();
       console.log('button was clicked');
 
       fetch('/dishMenu.html/edit', {
@@ -360,11 +370,11 @@ $(document).ready(function () {
           edit_dish_id: dishId,
           edit_dish_name: dishName,
           edit_lang_name: langName,
-          edit_small_dish_price: smallDishPrice,
-          edit_large_dish_price: largeDishPrice,
+          // edit_small_dish_price: smallDishPrice,
+          // edit_large_dish_price: largeDishPrice,
           edit_dish_menu: dishMenu,
           edit_meat: meat,
-          edit_size: size,
+          // edit_size: size,
           updated_at: updated,
         })
       })
@@ -457,14 +467,14 @@ $(document).ready(function () {
         },
         body: JSON.stringify({
           // delete_dish_id: data["id"],
-            copy_dish_name: data["dishName"],
-            copy_lang_name: data["langName"],
-            copy_small_dish_price: data["smallDishPrice"],
-            copy_large_dish_price: data["largeDishPrice"],
-            copy_dish_menu: data["dishMenu"],
-            copy_meat: data["meat"],
-            copy_size: data["size"],
-            created_at: created,
+          copy_dish_name: data["dishName"],
+          copy_lang_name: data["langName"],
+          // copy_small_dish_price: data["smallDishPrice"],
+          // copy_large_dish_price: data["largeDishPrice"],
+          copy_dish_menu: data["dishMenu"],
+          copy_meat: data["meat"],
+          // copy_size: data["size"],
+          created_at: created,
         })
       })
         .then(function (response) {
@@ -610,23 +620,23 @@ $(document).ready(function () {
       $("#edit_dish_id").append(`${selected.id}`)
       document.getElementById("edit_dish_Name").value = selected.dishName;
       document.getElementById("edit_lang_Name").value = selected.langName;
-      document.getElementById("edit_small_price").value = selected.smallDishPrice;
-      document.getElementById("edit_large_price").value = selected.largeDishPrice;
+      // document.getElementById("edit_small_price").value = selected.smallDishPrice;
+      // document.getElementById("edit_large_price").value = selected.largeDishPrice;
       // document.getElementById("size").value = data["size"];
-      var sizes = selected.size;
-      var sizeSelected = sizes.split(",");
+      // var sizes = selected.size;
+      // var sizeSelected = sizes.split(",");
       var meat = selected.meat;
       var meatSelected = meat.split(",");
-      console.log(sizeSelected, meatSelected);
+      console.log(meatSelected);
 
-      $('.selectpicker#edit_size').selectpicker('val', sizeSelected);
+      // $('.selectpicker#edit_size').selectpicker('val', sizeSelected);
       $('.selectpicker#edit_meat').selectpicker('val', meatSelected);
       $('.selectpicker#edit_dish_menu').selectpicker('val', selected.dishMenu);
       // $('#meat').multiselect({ selectAllValue: 'multiselect-all', enableCaseInsensitiveFiltering: true, enableFiltering: true, maxHeight: '300', buttonWidth: '235', onChange: function (element, checked) { var brands = $('#multiselect1 option:selected'); var selected = []; $(brands).each(function (index, brand) { selected.push([$(this).val()]); }); console.log(selected); } });
       // console.log(data);
 
       $("#cancel").on('click', function () {
-        $("#edit_size option[selected]").removeAttr("selected");
+        // $("#edit_size option[selected]").removeAttr("selected");
         $("#edit_meat option[selected]").removeAttr("selected");
         $("#edit_dish_menu option[selected]").removeAttr("selected")
         myTable.rows().deselect();
@@ -653,11 +663,11 @@ $(document).ready(function () {
         var dishId = $('#edit_dish_id').text();
         var dishName = document.getElementById('edit_dish_Name').value;
         var langName = document.getElementById('edit_lang_Name').value;
-        var smallDishPrice = document.getElementById('edit_small_price').value;
-        var largeDishPrice = document.getElementById('edit_large_price').value;
+        // var smallDishPrice = document.getElementById('edit_small_price').value;
+        // var largeDishPrice = document.getElementById('edit_large_price').value;
         var dishMenu = $('#edit_dish_menu').val();
         var meat = $('#edit_meat').val();
-        var size = $('#edit_size').val();
+        // var size = $('#edit_size').val();
         console.log('button was clicked');
 
         fetch('/dishMenu.html/edit', {
@@ -670,11 +680,11 @@ $(document).ready(function () {
             edit_dish_id: dishId,
             edit_dish_name: dishName,
             edit_lang_name: langName,
-            edit_small_dish_price: smallDishPrice,
-            edit_large_dish_price: largeDishPrice,
+            // edit_small_dish_price: smallDishPrice,
+            // edit_large_dish_price: largeDishPrice,
             edit_dish_menu: dishMenu,
             edit_meat: meat,
-            edit_size: size,
+            // edit_size: size,
             updated_at: updated,
           })
         })
@@ -752,11 +762,11 @@ $(document).ready(function () {
           body: JSON.stringify({
             copy_dish_name: selected.dishName,
             copy_lang_name: selected.langName,
-            copy_small_dish_price: selected.smallDishPrice,
-            copy_large_dish_price: selected.largeDishPrice,
+            // copy_small_dish_price: selected.smallDishPrice,
+            // copy_large_dish_price: selected.largeDishPrice,
             copy_dish_menu: selected.dishMenu,
             copy_meat: selected.meat,
-            copy_size: selected.size,
+            // copy_size: selected.size,
             created_at: created,
           })
         })
