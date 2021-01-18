@@ -126,22 +126,6 @@ $(document).ready(function () {
       // sizeBadge.forEach(sizebadge => {
       //   $(row).find('td:eq(3)').append(`<span class="badge-${sizebadge}>S</span>`)
       // })
-      // for dish menu
-      // if (data['dishMenu'] === "Appetizers") {
-      //   $(row).find('td:eq(4)').html(`<span class="badge badge-light badge-appetizers">${data['dishMenu']}</span>`)
-      // }
-      // else if (data['dishMenu'] === "Soups") {
-      //   $(row).find('td:eq(4)').html(`<span class="badge badge-light badge-soups">${data['dishMenu']}</span>`)
-      // }
-      // else if (data['dishMenu'] === "Salads") {
-      //   $(row).find('td:eq(4)').html(`<span class="badge badge-light badge-salads">${data['dishMenu']}</span>`)
-      // }
-      // else if (data['dishMenu'] === "Curries") {
-      //   $(row).find('td:eq(4)').html(`<span class="badge badge-light badge-curries">${data['dishMenu']}</span>`)
-      // }
-      // else if (data['dishMenu'] === "Vegetables Dishes") {
-      //   $(row).find('td:eq(4)').html(`<span class="badge badge-light badge-vegetables-dishes">${data['dishMenu']}</span>`)
-      // }
       var dMmenuBadge = data["dishMenu"].split(",");
       dMmenuBadge.forEach(dbadge => {
         console.log(dbadge)
@@ -166,7 +150,6 @@ $(document).ready(function () {
     .then(function (data) {
       // document.getElementById('counter').innerHTML = `Button was clicked ${data.length} times`;
       data.forEach(dish => {
-        // console.log(dish);
         // console.log(`${dish.created_at}`);
         // var crDate = dish.created_at;
         // console.log(`${crDate.getFullYear()}-${crDate.getMonth()+1}-${crDate.getDate()}`)
@@ -195,15 +178,11 @@ $(document).ready(function () {
     // trIndex = $(this).parent();
     trIndex = myTable.row(this).node();
     data1 = myTable.row(this).data();
-    var publishDateTime = data1.datetime.split(",")
-    console.log(publishDateTime[0])
-    console.log(publishDateTime[1])
     $(trIndex).find("td:nth-child(7)")
       .html(`
         <a href="#" id="copy_btn" value="Copy" data-toggle="modal" data-target="#copy_dishMenuConfirmation"><span class="copy-icon"><i class="fas fa-copy fa-fw"></i></span></a>
         <a href="#" id="edit_btn" value="Edit" data-toggle="modal" data-target="#edit_dishMenuModal"><span class="edit-icon"><i class="far fa-edit fa-fw"></i></span></a>
         <a href="#" id="delete_btn" value="Delete" data-toggle="modal" data-target="#delete_dishMenuConfirmation"><span class="delete-icon"><i class="far fa-trash-alt fa-fw"></i></span></a>
-        <br/>
       `);
 
     // click button
@@ -214,9 +193,6 @@ $(document).ready(function () {
       $(".submit-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
       $(".edit-submit-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
       $(".danger-button").html(`<i class="fas fa-check fa-fw"></i>${buttonValue}`);
-      // $(".confirmation-msg").html(`<div class="text-center">
-      // <p>Are you sure want to ${buttonValue}?</p>
-      // </div>`);
     });
   });
 
@@ -225,9 +201,6 @@ $(document).ready(function () {
     var trIndex = null;
     trIndex = myTable.row(this).node();
     data1 = myTable.row(this).data();
-    var publishDateTime = data1.datetime.split(",")
-    console.log(publishDateTime[0])
-    console.log(publishDateTime[1])
 
     $(trIndex).find('td:nth-child(7)').html(``);
     // console.log(trIndex);
