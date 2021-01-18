@@ -78,6 +78,7 @@ $(document).ready(function () {
 
   // copy data
   $("#copy_button").click(function () {
+    $("#copy_dishMenuConfirmation").modal("hide");
     var buttonValue = $(this).attr("value");
     var header = $(".card-header").attr("value");
     $(".heading").text(`${buttonValue} ${header}`);

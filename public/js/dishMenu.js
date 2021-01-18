@@ -128,7 +128,6 @@ $(document).ready(function () {
       // })
       var dMmenuBadge = data["dishMenu"].split(",");
       dMmenuBadge.forEach(dbadge => {
-        console.log(dbadge)
         $(row).find('td:eq(4)').html(`<span class="badge badge-light badge-${dbadge}">${dbadge}</span>`)
       })
       ////
@@ -586,6 +585,7 @@ $(document).ready(function () {
       );
     }
     else {
+      $("#edit_dishMenuModal").modal("show");
       var selected = myTable.row('.selected').data();
       console.log(selected.id);
       $("#edit_dishMenuModal").modal("show");
@@ -681,6 +681,7 @@ $(document).ready(function () {
   $("#copy_button").click(function () {
     var sel = myTable.rows('.selected').data().length;
     if (sel > 1) {
+      console.log("test2")
       $("#copyWarning").modal("show");
       $(".warning-msg").html(`
         <div class="text-center">
@@ -690,6 +691,8 @@ $(document).ready(function () {
       );
     }
     else if (sel == 0) {
+      console.log("No select row");
+      $("#copy_dishMenuConfirmation").modal("hide");
       $("#copyWarning").modal("show");
       $(".warning-msg").html(`
         <div class="text-center">
@@ -699,6 +702,8 @@ $(document).ready(function () {
       );
     }
     else {
+      $("#copy_dishMenuConfirmation").modal("show");
+      console.log("test1")
       var selected = myTable.row('.selected').data();
       console.log(selected);
 
