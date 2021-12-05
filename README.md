@@ -1,2 +1,2 @@
-# ksp-mpk-admin
+# restaurant-admin
 Resturant Project admin
